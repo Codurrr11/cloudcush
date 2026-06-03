@@ -1,122 +1,109 @@
 <footer class="site-footer">
+
+  <!-- Decorative background image: product showcase layer -->
+  <img
+    src="assets/images/footer-bg.png"
+    alt=""
+    class="footer-bg-image"
+    aria-hidden="true"
+    draggable="false"
+    loading="lazy"
+    decoding="async"
+  >
+  <!-- Gradient veil: sits above image, preserves text readability -->
+  <div class="footer-bg-veil" aria-hidden="true"></div>
+
   <div class="container">
 
-    <!-- Top Part: Links columns and Newsletter -->
-    <div class="footer-top">
-
-      <!-- Left side: 3-column Links & Large Branding -->
-      <div class="footer-left-wrapper">
-        <div class="footer-links-grid">
-
-          <!-- Column 1: Shop -->
-          <div>
-            <h3 class="footer-col-title">Shop</h3>
-            <ul class="footer-links-list">
-              <li><a href="javascript:void(0);" class="footer-link">Newborn Diapers</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Active Baby Diapers</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Overnight Protection</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Sensitive Skin Diapers</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Toddler Fit Diapers</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Trial Pack Options</a></li>
-            </ul>
-          </div>
-
-          <!-- Column 2: Explore -->
-          <div>
-            <h3 class="footer-col-title">Explore</h3>
-            <ul class="footer-links-list">
-              <li><a href="about.php" class="footer-link">Why CloudCush</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">The Philosophy</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">The Journal</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">CloudCush Care Plan</a></li>
-            </ul>
-          </div>
-
-          <!-- Column 3: Support -->
-          <div>
-            <h3 class="footer-col-title">Support</h3>
-            <ul class="footer-links-list">
-              <li><a href="javascript:void(0);" class="footer-link">FAQs</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">User Guide</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Logistics & Tracking</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Contact Us</a></li>
-              <li><a href="javascript:void(0);" class="footer-link">Product Registration</a></li>
-            </ul>
-          </div>
-
+    <!-- 1. HERO FOOTER TOP (Giant Editorial Branding) -->
+    <div class="footer-hero-top">
+      <div class="footer-huge-brand-wrap">
+        <div class="footer-logo-brand-container">
+          <h2 class="footer-huge-brand"><span class="typing-text"></span><span class="typing-cursor">|</span></h2>
         </div>
+      </div>
+      <div class="footer-slogan-wrap">
+        <p class="footer-slogan">comfort designed for tiny humans.</p>
+        <span class="footer-slogan-sub">Crafted for softer beginnings.</span>
+      </div>
+    </div>
 
-        <!-- Huge typography branding -->
-        <a href="./" class="footer-logo-container">
-          <img src="assets/images/logo.png" alt="cloudcush" class="footer-logo-img">
-        </a>
+    <!-- 2 & 3. CREATIVE LINK LAYOUT & BRAND STORY BLOCK -->
+    <div class="footer-main-grid">
+
+      <!-- Column 1: Brand Story Block -->
+      <div class="footer-story-block">
+        <img src="assets/images/logo.png" alt="CloudCush Logo" class="footer-big-logo">
+        <p class="footer-story-text">
+          CloudCush is a luxury baby-care brand redefining newborn routine comfort. We believe in pure, organic, and dermatologically certified materials designed to protect your baby's delicate skin barrier from day one.
+        </p>
+        <span class="footer-story-location">Rajasthan, India</span>
       </div>
 
-      <!-- Right side: Dark Brown Newsletter Card -->
-      <div class="footer-right-wrapper">
-        <div class="dispatch-card">
+      <!-- Column 2: staggered links (Shop) -->
+      <div class="footer-nav-block footer-nav-shop">
+        <h3 class="footer-nav-title">Shop</h3>
+        <ul class="footer-nav-list">
+          <li><a href="diaper.php" class="footer-nav-link-item">Newborn Diapers</a></li>
+          <li><a href="diaper.php" class="footer-nav-link-item">Active Baby Diapers</a></li>
+          <li><a href="diaper.php" class="footer-nav-link-item">Overnight Protection</a></li>
+          <li><a href="diaper.php" class="footer-nav-link-item">Sensitive Skin Diapers</a></li>
+          <li><a href="diaper.php" class="footer-nav-link-item">Trial Packs</a></li>
+        </ul>
+      </div>
 
-          <div class="dispatch-header">
-            <h3 class="dispatch-title">The Dispatch</h3>
-            <p class="dispatch-desc">Timely. Helpful. Thoughtful. Insights as steady as their growth.</p>
-          </div>
+      <!-- Column 3: staggered links (Explore) -->
+      <div class="footer-nav-block footer-nav-explore">
+        <h3 class="footer-nav-title">Explore</h3>
+        <ul class="footer-nav-list">
+          <li><a href="about.php" class="footer-nav-link-item">Why CloudCush</a></li>
+          <li><a href="about.php" class="footer-nav-link-item">Our Philosophy</a></li>
+          <li><a href="blog.php" class="footer-nav-link-item">The Journal</a></li>
+          <li><a href="diaper-guide.php" class="footer-nav-link-item">Care Plan</a></li>
+        </ul>
+      </div>
 
-          <form class="dispatch-form" action="javascript:void(0);" method="POST">
-            <div class="form-group">
-              <label class="form-label" for="email">Email Address</label>
-              <input class="form-input" type="email" id="email" placeholder="Enter your email" required>
-            </div>
+      <!-- Column 4: Support & Socials -->
+      <div class="footer-nav-block footer-nav-support">
+        <h3 class="footer-nav-title">Support</h3>
+        <ul class="footer-nav-list">
+          <li><a href="faq.php" class="footer-nav-link-item">FAQs</a></li>
+          <li><a href="diaper-guide.php" class="footer-nav-link-item">Diaper Guide</a></li>
+          <li><a href="faq.php" class="footer-nav-link-item">Logistics & Tracking</a></li>
+          <li><a href="faq.php" class="footer-nav-link-item">Contact Care</a></li>
+        </ul>
 
-            <div class="form-group">
-              <label class="form-label" for="milestone">Growth Milestone</label>
-              <input class="form-input" type="text" id="milestone" placeholder="DD/MM/YYYY">
-            </div>
-
-            <p class="form-note">*For age-based recommendations and birthday-month gifts.</p>
-
-            <button type="submit" class="btn-pill-white">Secure Access | -10%</button>
-          </form>
-
-          <p class="dispatch-footer-note">
-            Subscribing confirms your agreement to our <a href="javascript:void(0);">Privacy Policy</a> and <a href="javascript:void(0);">Terms & Conditions</a>.
-          </p>
-
-          <!-- Social Networks Links -->
-          <div class="dispatch-socials">
-            <a href="javascript:void(0);" class="social-link" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
-            <a href="javascript:void(0);" class="social-link" aria-label="YouTube"><i class="ri-youtube-line"></i></a>
-            <a href="javascript:void(0);" class="social-link" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
-          </div>
-
+        <!-- 4. SOCIAL SECTION -->
+        <div class="footer-social-wrap">
+          <a href="javascript:void(0);" class="footer-social-icon" aria-label="Instagram"><i class="ri-instagram-line"></i></a>
+          <a href="javascript:void(0);" class="footer-social-icon" aria-label="YouTube"><i class="ri-youtube-line"></i></a>
+          <a href="javascript:void(0);" class="footer-social-icon" aria-label="Facebook"><i class="ri-facebook-line"></i></a>
         </div>
       </div>
 
     </div>
 
-    <!-- Bottom Part: Copyright, legal items, and payment card vectors -->
-    <div class="footer-bottom">
-      <div class="footer-bottom-links">
-        <div class="copyright">
-          &copy; 2026, CloudCush. Crafted in Kota, Rajasthan, India.
-        </div>
-        <div class="footer-legal-links">
-          <a href="javascript:void(0);" class="legal-link">Shipping & Delivery</a>
-          <a href="javascript:void(0);" class="legal-link">Return & Refund</a>
-          <a href="javascript:void(0);" class="legal-link">Warranty Policy</a>
-          <a href="javascript:void(0);" class="legal-link">Terms and Conditions</a>
-          <a href="javascript:void(0);" class="legal-link">Privacy Policy</a>
-          <a href="javascript:void(0);" class="legal-link">Orders & Payment Policy</a>
+    <!-- 5. BOTTOM BAR -->
+    <div class="footer-bottom-bar">
+      <div class="footer-bottom-info">
+        <span class="footer-copyright">&copy; 2026, CloudCush. Crafted for softer beginnings.</span>
+        <div class="footer-legal-links-wrap">
+          <a href="javascript:void(0);" class="footer-policy-link">Shipping & Delivery</a>
+          <a href="javascript:void(0);" class="footer-policy-link">Return & Refund</a>
+          <a href="javascript:void(0);" class="footer-policy-link">Warranty</a>
+          <a href="javascript:void(0);" class="footer-policy-link">Terms & Conditions</a>
+          <a href="javascript:void(0);" class="footer-policy-link">Privacy Policy</a>
         </div>
       </div>
 
       <!-- Payment icon badges -->
-      <div class="payment-methods">
-        <img class="payment-icon" src="https://cdn-icons-png.flaticon.com/512/349/349221.png" alt="Visa">
-        <img class="payment-icon" src="https://cdn-icons-png.flaticon.com/512/349/349228.png" alt="Mastercard">
-        <img class="payment-icon" src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="Paypal">
-        <img class="payment-icon" src="https://cdn-icons-png.flaticon.com/512/349/349230.png" alt="Amex">
-        <img class="payment-icon" src="https://cdn-icons-png.flaticon.com/512/196/196565.png" alt="Apple Pay">
-        <img class="payment-icon" src="https://cdn-icons-png.flaticon.com/512/6124/6124998.png" alt="Google Pay">
+      <div class="footer-payment-methods">
+        <img class="footer-payment-icon" src="https://cdn-icons-png.flaticon.com/512/349/349221.png" alt="Visa">
+        <img class="footer-payment-icon" src="https://cdn-icons-png.flaticon.com/512/349/349228.png" alt="Mastercard">
+        <img class="footer-payment-icon" src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="Paypal">
+        <img class="footer-payment-icon" src="https://cdn-icons-png.flaticon.com/512/349/349230.png" alt="Amex">
+        <img class="footer-payment-icon" src="https://cdn-icons-png.flaticon.com/512/196/196565.png" alt="Apple Pay">
+        <img class="footer-payment-icon" src="https://cdn-icons-png.flaticon.com/512/6124/6124998.png" alt="Google Pay">
       </div>
     </div>
 

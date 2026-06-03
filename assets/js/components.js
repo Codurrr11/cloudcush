@@ -428,5 +428,56 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  /* =============================================================================
+     FAQ CATEGORY SWITCHER — Smooth Interactive Tab Filtering
+     ============================================================================= */
+  const faqCategoryItems = document.querySelectorAll('.faq-category-item');
+  const faqAccordionGroups = document.querySelectorAll('.faq-accordion-group');
+  
+  if (faqCategoryItems.length > 0 && faqAccordionGroups.length > 0) {
+    faqCategoryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const category = item.getAttribute('data-category');
+        
+        // Remove active state from all items and set current as active
+        faqCategoryItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+
+        // Close all currently open accordion panels globally first to avoid layout jerks
+        document.querySelectorAll('.faq-item.is-open').forEach(openItem => {
+          openItem.classList.remove('is-open');
+          const trigger = openItem.querySelector('.faq-trigger');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        });
+
+        // Toggle visibility of the correct category groups
+        faqAccordionGroups.forEach(group => {
+          if (group.getAttribute('data-category') === category) {
+            // Show current group
+            group.style.display = 'flex';
+            group.style.flexDirection = 'column';
+            
+            // GSAP entrance reveal for the child accordion items
+            if (typeof gsap !== 'undefined') {
+              gsap.fromTo(group.querySelectorAll('.faq-item'), 
+                { opacity: 0, y: 15 },
+                { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power2.out', clearProps: 'all' }
+              );
+            }
+          } else {
+            // Hide other groups
+            group.style.display = 'none';
+          }
+        });
+
+        // Trigger ScrollTrigger refresh in case heights changed
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+      });
+    });
+  }
 });
+
 
