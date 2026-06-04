@@ -8,8 +8,7 @@
     aria-hidden="true"
     draggable="false"
     loading="lazy"
-    decoding="async"
-  >
+    decoding="async">
   <!-- Gradient veil: sits above image, preserves text readability -->
   <div class="footer-bg-veil" aria-hidden="true"></div>
 
@@ -44,11 +43,11 @@
       <div class="footer-nav-block footer-nav-shop">
         <h3 class="footer-nav-title">Shop</h3>
         <ul class="footer-nav-list">
-          <li><a href="diaper.php" class="footer-nav-link-item">Newborn Diapers</a></li>
-          <li><a href="diaper.php" class="footer-nav-link-item">Active Baby Diapers</a></li>
-          <li><a href="diaper.php" class="footer-nav-link-item">Overnight Protection</a></li>
-          <li><a href="diaper.php" class="footer-nav-link-item">Sensitive Skin Diapers</a></li>
-          <li><a href="diaper.php" class="footer-nav-link-item">Trial Packs</a></li>
+          <li><a href="products.php" class="footer-nav-link-item">Newborn Diapers</a></li>
+          <li><a href="products.php" class="footer-nav-link-item">Active Baby Diapers</a></li>
+          <li><a href="products.php" class="footer-nav-link-item">Overnight Protection</a></li>
+          <li><a href="products.php" class="footer-nav-link-item">Sensitive Skin Diapers</a></li>
+          <li><a href="products.php" class="footer-nav-link-item">Single Packs</a></li>
         </ul>
       </div>
 
@@ -130,9 +129,17 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/about.js"></script>
 <script src="assets/js/animations.js"></script>
+<script src="assets/js/blog-carousel.js"></script>
 <script src="assets/js/components.js"></script>
 <script src="assets/js/diaper.js"></script>
 <script src="assets/js/product-details.js"></script>
+
+<?php if (!empty($use_diaper_showcase)): ?>
+  <!-- ─── 3D Diaper Showcase (Three.js + GSAP) ──────────────────────────── -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="assets/js/diaper-three.js"></script>
+  <script src="assets/js/diaper-showcase.js"></script>
+<?php endif; ?>
 
 </body>
 

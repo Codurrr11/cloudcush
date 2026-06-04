@@ -2,6 +2,36 @@
    CloudCush Responsive Styles
    ========================================================================== */
 
+/* -- Large desktop: 1440px and above -------------------------------------- */
+/* On wider screens the section container is wider, so recalculate card sizes.
+   The container is capped at 1440px, so at 1440px+: container = 1440px.
+   With 80px padding each side = 160px. Two 28px gaps = 56px.
+   Card width = (1440 - 160 - 56) / 3 = 408px. Our clamp already caps at 520px. */
+@media (min-width: 1440px) {
+  .core-collection-section {
+    padding: 140px 0 120px;
+  }
+
+  .collection-card {
+    /* On 1440px+ the container is max-width capped, so use a fixed comfortable size */
+    flex: 0 0 clamp(360px, calc((min(100vw, 1440px) - 160px - 56px) / 3), 520px);
+    height: clamp(480px, 32vw, 560px);
+  }
+
+  .cc-header {
+    margin-bottom: 64px;
+  }
+}
+
+/* -- Ultra-wide: 2560px and above ----------------------------------------- */
+@media (min-width: 2560px) {
+  .collection-card {
+    /* At 2560px+, use a generous fixed size — container is capped anyway */
+    flex: 0 0 480px;
+    height: 560px;
+  }
+}
+
 @media (max-width: 1200px) {
   /* --- Grouped Segment --- */
   .story-card {
@@ -34,8 +64,9 @@
 @media (max-width: 1100px) {
   /* --- Grouped Segment --- */
   .collection-card {
-    flex: 0 0 calc((100% - 28px) / 2);
-    height: 460px;
+    /* 2 cards with one 28px gap: (viewport - 2×40px padding - 1×28px gap) / 2 */
+    flex: 0 0 clamp(200px, calc((100vw - 108px) / 2), 600px);
+    height: clamp(380px, 38vw, 480px);
   }
 
   .core-collection-section {
@@ -334,43 +365,154 @@
   }
 
   /* --- Grouped Segment --- */
-  .catnavStage {
-    display: block;
+    .catnav-stage {
+    display: flex;
+    flex-direction: column;
     height: auto;
-    overflow: visible;
+    overflow: hidden;
+    padding: 48px 0;
+    gap: 24px;
   }
 
-  .catnavLeft {
-    padding: 48px 24px 24px;
+  .catnav-left {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    border-right: none;
+    align-items: center;
+    width: 100%;
+  }
+
+  .catnav-nav-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .catnav-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+    padding: 4px 20px;
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+  }
+
+  .catnav-list::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  .catnav-item {
+    flex: 0 0 auto;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    background-color: var(--white);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .catnav-item.active {
+    background-color: var(--primary);
+    color: var(--white) !important;
+    border-color: var(--primary);
+    opacity: 1;
+  }
+
+  .catnav-item.active .catnav-item-label {
+    color: var(--white) !important;
+  }
+
+  .catnav-item-num {
+    font-size: 9px;
+    margin-bottom: 0;
+    color: inherit;
+  }
+
+  .catnav-item-label {
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-body);
+    color: inherit;
+  }
+
+  .catnav-item-progress {
     display: none;
-    /* hide nav on mobile â€” panels stack below */
   }
 
-  .catnavRight {
+  .catnav-right {
     position: relative;
-    height: auto;
+    height: 105vw;
+    min-height: 380px;
+    max-height: 480px;
+    width: 100%;
+    overflow: hidden;
   }
 
-  .catnavPanel {
-    position: relative;
+  .catnav-panel {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    display: block;
+    transform: none !important;
+  }
+
+  .catnav-panel.active {
     opacity: 1 !important;
     pointer-events: auto;
-    transform: none !important;
-    height: 80vw;
-    min-height: 320px;
-    margin-bottom: 2px;
   }
 
-  .catnavPanelContent {
+  .catnav-panel-media {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .catnav-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .catnav-panel-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: none;
+    padding: 24px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 25px rgba(52, 73, 102, 0.1);
+    transform: translateY(15px);
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+
+  .catnav-panel.active .catnav-panel-content {
     opacity: 1 !important;
-    transform: none !important;
-    bottom: 32px;
-    left: 24px;
-    right: 24px;
+    transform: translateY(0) !important;
   }
 
-  .catnavProgress {
-    display: none;
+  .catnav-panel-title {
+    font-size: 1.35rem;
+  }
+
+  .catnav-panel-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .catnav-panel-cta {
+    font-size: 12px;
+    padding: 10px 22px;
   }
 
   /* --- Grouped Segment --- */
@@ -392,8 +534,9 @@
   }
 
   .collection-card {
+    /* Single card: viewport minus horizontal padding (28px each side) */
     flex: 0 0 calc(100vw - 56px);
-    height: 440px;
+    height: clamp(380px, 80vw, 480px);
   }
 
   /* CTA always visible on mobile â€” no hover on touch */
@@ -814,39 +957,102 @@
     max-height: 100%;
   }
 
-  /* Trial Section Mobile overrides */
-  .trial-section {
+  /* Sizing Atelier Section Laptop overrides (1200px and below) */
+  .atelier-section {
     padding: 100px 0;
   }
 
-  .trial-grid {
-    grid-template-columns: 1fr;
-    gap: 60px;
-    text-align: center;
+  .atelier-header {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 30px;
+    margin-bottom: 60px;
   }
 
-  .trial-col-left {
-    align-items: center;
-    text-align: center;
-    padding-right: 0;
-    gap: 28px;
+  .atelier-meta {
+    grid-column: span 2;
   }
 
-  .trial-title {
-    letter-spacing: -1.2px;
-  }
-
-  .trial-desc {
-    max-width: 100%;
-  }
-
-  .trial-form {
-    max-width: 100%;
+  .atelier-canvas {
+    grid-template-columns: 1fr 1.15fr;
     gap: 40px;
   }
 
-  .trial-select-arrow {
-    bottom: 12px;
+  .atelier-showcase-col {
+    height: 440px;
+  }
+
+  .atelier-glow-backdrop {
+    width: 320px;
+    height: 320px;
+  }
+
+  .atelier-img {
+    max-width: 55%;
+    max-height: 70%;
+  }
+
+  .atelier-tag {
+    gap: 8px;
+  }
+
+  .tag-top-left,
+  .tag-bottom-left,
+  .tag-center-left {
+    left: 10px;
+    right: 70%;
+  }
+
+  .tag-top-right,
+  .tag-bottom-right {
+    left: 70%;
+    right: 10px;
+  }
+
+  .tag-content {
+    max-width: 140px;
+  }
+
+  .tag-title {
+    font-size: 11.5px;
+  }
+
+  .tag-desc {
+    font-size: 10px;
+  }
+
+  .atelier-engine-col {
+    padding-left: 10px;
+    gap: 36px;
+    max-width: 520px;
+    width: 100%;
+  }
+
+  .atelier-watermark {
+    font-size: 6rem;
+    top: -30px;
+  }
+
+  .atelier-stages {
+    gap: 24px;
+  }
+
+  .btn-text {
+    font-size: 1.2rem;
+  }
+
+
+
+  .point-label {
+    font-size: 10px;
+  }
+
+  .atelier-rec-display {
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  .atelier-reassurance {
+    gap: 16px;
   }
 
   .floating-widget {
@@ -1752,5 +1958,201 @@
 
   .story-specs span {
     padding: 4px 12px !important;
+  }
+}
+
+/* -- Sizing Atelier Tablet & Mobile overrides (991px and below) ---------------- */
+@media (max-width: 991px) {
+  .atelier-section {
+    padding: 80px 0;
+  }
+
+  .atelier-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto 50px auto;
+    text-align: left;
+  }
+
+  .atelier-meta {
+    grid-column: span 1;
+  }
+
+  .atelier-canvas {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .atelier-showcase-col {
+    height: 480px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .atelier-glow-backdrop {
+    width: 300px;
+    height: 300px;
+  }
+
+  .atelier-variant {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .atelier-img {
+    height: 240px;
+    max-height: 240px;
+    object-fit: contain;
+    margin-top: 20px;
+  }
+
+  .atelier-tag {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    width: auto;
+    max-width: none;
+    flex-direction: row !important;
+    align-items: flex-start;
+    gap: 12px;
+    pointer-events: auto;
+  }
+
+  .atelier-tag .tag-dot {
+    position: relative;
+    width: 24px;
+    height: 1px;
+    background-color: var(--accent-gold);
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .atelier-tag .tag-dot::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 5px;
+    height: 5px;
+    border-top: 1px solid var(--accent-gold);
+    border-right: 1px solid var(--accent-gold);
+    left: auto;
+  }
+
+  .atelier-tag.tag-top-left,
+  .atelier-tag.tag-bottom-left,
+  .atelier-tag.tag-center-left {
+    top: 290px;
+  }
+
+  .atelier-tag.tag-bottom-right,
+  .atelier-tag.tag-top-right {
+    top: 380px;
+  }
+
+  .atelier-tag .tag-content {
+    text-align: left !important;
+    max-width: none;
+  }
+
+  .tag-title {
+    font-size: 13px;
+  }
+
+  .tag-desc {
+    font-size: 11px;
+  }
+
+  .atelier-engine-col {
+    padding-left: 0;
+    gap: 40px;
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .atelier-watermark {
+    font-size: 4.8rem;
+    top: -24px;
+    left: 0;
+  }
+
+  .atelier-stages {
+    gap: 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 8px;
+    width: calc(100% + 48px);
+    margin: 0 -24px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .atelier-stages::-webkit-scrollbar {
+    display: none;
+  }
+
+  .atelier-stage-btn {
+    flex-shrink: 0;
+  }
+
+  .btn-text {
+    font-size: 1.15rem;
+  }
+
+  .point-label {
+    font-size: 9.5px;
+  }
+
+  .atelier-rec-display {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .atelier-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .atelier-reassurance {
+    justify-content: center;
+    gap: 16px;
+  }
+
+  /* Reposition and scale down baby doodles to avoid overlap and noise */
+  .doodle {
+    opacity: 0.06;
+  }
+  .doodle-star-1 {
+    top: 5%;
+    right: 5%;
+  }
+  .doodle-spark-1 {
+    display: none;
+  }
+  .doodle-smile-1 {
+    bottom: 5%;
+    right: 5%;
+  }
+  .doodle-cloud-1 {
+    top: 15%;
+    left: 2%;
+  }
+  .doodle-heart-1 {
+    bottom: 2%;
+    left: 4%;
   }
 }

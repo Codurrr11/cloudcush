@@ -26,7 +26,7 @@
   <!-- 2. SCROLL PINNED TIMELINE EXPERIENCE -->
   <section class="guide-timeline-section" id="guideTimelineSection">
     <div class="container guide-timeline-container">
-      
+
       <!-- Left: Navigation Timeline (Sticky on Desktop) -->
       <aside class="guide-timeline-nav">
         <div class="timeline-line">
@@ -178,7 +178,7 @@
         <h2 class="metrics-title">Dermatological Standards. Proven Results.</h2>
       </div>
       <div class="metrics-grid">
-        
+
         <!-- Metric 1 -->
         <div class="metric-card">
           <div class="metric-icon"><i class="ri-time-line"></i></div>
@@ -218,7 +218,7 @@
   <!-- 4. PINNED VISUAL STORY SECTION (APPLE-STYLE LAYER STORY) -->
   <section class="visual-story-section" id="visualStorySection">
     <div class="container visual-story-grid">
-      
+
       <!-- Left: Sticky Diaper Image Layering -->
       <div class="visual-story-sticky">
         <div class="sticky-media-inner">
@@ -239,7 +239,7 @@
 
       <!-- Right: Scrolling Explanatory Blocks -->
       <div class="visual-story-scrollable">
-        
+
         <!-- Block 1 -->
         <div class="visual-story-block" data-story="1">
           <span class="story-badge">Layer One</span>
@@ -310,10 +310,10 @@
         <span class="cta-eyebrow">Designed for peaceful nights</span>
         <h2 class="cta-title">Softness that lasts, safety you can trust.</h2>
         <p class="cta-desc">
-          Begin your baby's comfort journey with our Trial Pack options. Experience the premium CloudCush difference today.
+          Begin your baby's comfort journey with our diaper options. Experience the premium CloudCush difference today.
         </p>
         <div class="cta-actions">
-          <a href="diaper.php" class="btn-pill-white">Explore Trial Pack</a>
+          <a href="products.php" class="btn-pill-white">Explore Diapers</a>
           <a href="about.php" class="btn-pill-outline-white">Why CloudCush</a>
         </div>
       </div>

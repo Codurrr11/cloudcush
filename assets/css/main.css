@@ -88,7 +88,7 @@
 
   /* Layout & Spacing */
   --max-width: 1600px;
-  --header-height: 110px;
+  --header-height: 95px;
   --announcement-height: 42px;
 
   /* Transitions */
@@ -174,7 +174,6 @@ svg {
 .pediatrician-quote {
   font-style: oblique;
 }
-
 
 button,
 input,
@@ -1108,7 +1107,7 @@ body {
 }
 
 .site-header.is-scrolled {
-  height: 90px;
+  height: 75px;
   background-color: rgba(245, 244, 242, 0.95);
   backdrop-filter: blur(10px);
 }
@@ -1153,7 +1152,7 @@ body {
 }
 
 .logo-img {
-  height: 125px;
+  height: 100px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -1164,7 +1163,7 @@ body {
 }
 
 .site-header.is-scrolled .logo-img {
-  height: 82px;
+  height: 70px;
   margin-top: 0;
   filter: drop-shadow(0 2px 5px rgba(45, 62, 82, 0.03));
 }
@@ -1560,261 +1559,6 @@ body {
 }
 
 /* Tablet responsiveness: collapse columns on smaller screens */
-
-/* ==========================================================================
-   GIFTING DROPDOWN MENU STYLES
-   ========================================================================== */
-
-/* The Gifting Menu Panel */
-.gifting-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100vw;
-  background-color: #faf9f6;
-  /* Soft premium cream background */
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 20px 40px rgba(99, 80, 80, 0.05);
-  /* Soft warm shadow */
-  border-radius: 0 0 24px 24px;
-  z-index: 998;
-  display: none;
-  /* Controlled dynamically by GSAP */
-  overflow: hidden;
-}
-
-/* Container inside Gifting Menu */
-.gifting-menu-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  padding: 48px 0;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Gifting Cards styling */
-.gifting-card {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-decoration: none;
-  background: #fff;
-  padding: 24px;
-  border-radius: 16px;
-  border: 1px solid rgba(99, 80, 80, 0.04);
-  box-shadow: 0 4px 12px rgba(99, 80, 80, 0.02);
-  transition:
-    transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-    box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.gifting-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(99, 80, 80, 0.06);
-}
-
-.gifting-card-img-wrap {
-  position: relative;
-  aspect-ratio: 16/10;
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: var(--border);
-}
-
-.gifting-card-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.gifting-card:hover .gifting-card-img-wrap img {
-  transform: scale(1.04);
-}
-
-.gifting-card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  text-align: left;
-}
-
-.gifting-card-title {
-  font-size: var(--fs-h4);
-  font-weight: 600;
-  color: var(--primary-dark);
-  transition: var(--transition);
-}
-
-.gifting-card:hover .gifting-card-title {
-  color: var(--primary);
-}
-
-.gifting-card-desc {
-  font-size: var(--fs-body-sm);
-  font-weight: 400;
-  color: var(--text-light);
-  line-height: 1.4;
-}
-
-/* ==========================================================================
-   MOBILE GIFTING ACCORDION STYLES
-   ========================================================================== */
-.mobile-gifting-card {
-  width: 90%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: #fff;
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  text-decoration: none;
-  border: 1px solid rgba(99, 80, 80, 0.04);
-}
-
-.mobile-gifting-card img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.mobile-gifting-info {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  text-align: left;
-}
-
-.mobile-gifting-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--primary);
-}
-
-.mobile-gifting-desc {
-  font-size: 12px;
-  color: var(--text-light);
-  line-height: 1.3;
-}
-
-/* Tablet & Mobile responsiveness */
-
-/* ==========================================================================
-   DISCOVER DROPDOWN MENU STYLES
-   ========================================================================== */
-.discover-nav-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  height: var(--header-height);
-  /* Matches header height dynamically */
-  margin-right: 20px;
-  /* Spacing between Discover and action icons */
-  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.site-header.is-scrolled .discover-nav-wrapper {
-  height: 90px;
-  /* Synchronized with scrolled header height */
-}
-
-/* Hide default underline effect on Discover link when active or hovered to prevent double lines */
-#navDiscover:hover::after,
-#navDiscover.is-active::after {
-  transform: scaleX(0) !important;
-}
-
-.discover-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: #faf9f6;
-  /* Soft premium cream background */
-  border: 1px solid var(--border);
-  border-top: none;
-  /* Seamlessly merges with the header's bottom border */
-  box-shadow: 0 16px 40px rgba(99, 80, 80, 0.07);
-  /* Deep premium soft warm shadow */
-  border-radius: 0 0 16px 16px;
-  /* Flat top corners, rounded bottom to match header extension look */
-  padding: 16px;
-  /* Spacious, well-proportioned container padding */
-  min-width: 240px;
-  /* Spacious width for clean text presentation */
-  z-index: 997;
-  display: none;
-  /* Controlled dynamically by GSAP */
-  margin-top: 0;
-  /* Perfectly flush with the header's bottom border */
-}
-
-/* Thick premium brand brown bar aligned exactly under the Discover link hover area */
-.discover-menu::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  /* Flush on the top border of the dropdown box */
-  left: 0;
-  /* Align flush with outer left border */
-  width: 0;
-  /* Starts at 0 width for the slide-in animation */
-  height: 4px;
-  /* Thick luxury accent line */
-  background-color: var(--primary);
-  /* Brand warm brown */
-  z-index: 2;
-  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  /* Smooth width animation */
-}
-
-/* Active Nav UX: When the dropdown is open or wrapper hovered, expand the accent bar width smoothly */
-#navDiscover.is-active + .discover-menu::before,
-.discover-nav-wrapper:hover .discover-menu::before {
-  width: 76px;
-  /* Matches the exact width of the Discover link on desktop */
-}
-
-.discover-links-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  /* Clean spacing between items */
-}
-
-.discover-links-list li {
-  width: 100%;
-}
-
-.discover-links-list li a {
-  font-size: 15px;
-  /* Premium minimal typography */
-  font-weight: 500;
-  color: var(--text-light);
-  /* Soft muted brown default state */
-  text-decoration: none;
-  display: block;
-  padding: 10px 16px;
-  /* Spacious hover background padding */
-  border-radius: 8px;
-  /* Smooth rounded hover block */
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.discover-links-list li a:hover {
-  color: var(--primary-dark);
-  /* Rich dark brown on hover */
-  background-color: rgba(99, 80, 80, 0.04);
-  /* Soft warm hover background */
-  transform: translateX(6px);
-  /* Elegant x-axis shift animation */
-}
 
 /* =========================
    HERO SECTIONS
@@ -4518,17 +4262,17 @@ body {
   /* Fade in from top so image appears in lower half of footer only */
   -webkit-mask-image: linear-gradient(
     to bottom,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.6) 40%,
-    rgba(0,0,0,1) 70%,
-    rgba(0,0,0,1) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
   );
   mask-image: linear-gradient(
     to bottom,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,0.6) 40%,
-    rgba(0,0,0,1) 70%,
-    rgba(0,0,0,1) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 1) 70%,
+    rgba(0, 0, 0, 1) 100%
   );
   transform: none;
 }
@@ -4545,9 +4289,9 @@ body {
     to bottom,
     var(--bg) 0%,
     var(--bg) 30%,
-    rgba(247,245,240,0.75) 55%,
-    rgba(247,245,240,0.35) 75%,
-    rgba(247,245,240,0.08) 100%
+    rgba(247, 245, 240, 0.75) 55%,
+    rgba(247, 245, 240, 0.35) 75%,
+    rgba(247, 245, 240, 0.08) 100%
   );
 }
 
@@ -4613,8 +4357,13 @@ body {
 }
 
 @keyframes footerCursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .footer-slogan-wrap {
@@ -4725,7 +4474,7 @@ body {
 }
 
 .footer-nav-link-item::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -4958,131 +4707,745 @@ body {
    3. Trial Pack Section Styling
    ========================================================================== */
 
-.trial-section {
+.atelier-section {
   position: relative;
   z-index: 10;
   background-color: var(--white);
-  padding: 160px 0;
+  padding: 120px 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-.trial-grid {
+.atelier-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  padding: 0 24px;
+}
+
+/* Asymmetric Editorial Header Block */
+.atelier-header {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 120px;
-  align-items: flex-start;
-  width: 100%;
+  grid-template-columns: 24fr 42fr 34fr;
+  gap: 30px;
+  align-items: start;
+  margin-bottom: 80px;
 }
 
-.trial-col {
-  display: flex;
-  flex-direction: column;
-}
-
-.trial-col-left {
-  gap: 36px;
-  padding-right: 40px;
-}
-
-.trial-title {
-  font-family: var(--font-heading);
-  font-size: var(--fs-h2);
-  font-weight: 600;
-  color: var(--primary);
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin: 0;
-}
-
-.trial-desc {
+.atelier-meta {
   font-family: var(--font-body);
-  font-size: var(--fs-body);
-  font-weight: 300;
-  color: var(--text-light);
-  line-height: 1.75;
-  max-width: 480px;
-  margin: 0;
-  letter-spacing: -0.1px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.6;
 }
 
-.trial-desc strong {
+.atelier-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.2vw, 3.2rem);
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin: 0;
+  max-width: 620px;
+}
+
+.atelier-title em {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-gold);
+}
+
+.atelier-desc {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--text-light);
+  line-height: 1.65;
+  margin: 0;
+  padding-top: 6px;
+  max-width: 480px;
+}
+
+.atelier-canvas {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+}
+
+/* Floating Child Doodles */
+.doodle-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.doodle {
+  position: absolute;
+  color: var(--accent-blue);
+  opacity: 0.15;
+  stroke-width: 1.2;
+  fill: none;
+  animation: floatDoodle 15s infinite ease-in-out;
+  transition: opacity 0.3s ease;
+}
+
+.doodle-cloud-1 {
+  width: 90px;
+  height: auto;
+  top: 12%;
+  left: 6%;
+  animation-duration: 18s;
+}
+
+.doodle-star-1 {
+  width: 28px;
+  height: auto;
+  top: 25%;
+  right: 8%;
+  animation-duration: 12s;
+  animation-delay: -2s;
+}
+
+.doodle-heart-1 {
+  width: 26px;
+  height: auto;
+  bottom: 15%;
+  left: 8%;
+  animation-duration: 14s;
+  animation-delay: -4s;
+}
+
+.doodle-smile-1 {
+  width: 32px;
+  height: auto;
+  bottom: 22%;
+  right: 12%;
+  animation-duration: 16s;
+  animation-delay: -1s;
+}
+
+.doodle-spark-1 {
+  width: 24px;
+  height: auto;
+  top: 8%;
+  right: 28%;
+  animation-duration: 10s;
+  animation-delay: -3s;
+}
+
+@keyframes floatDoodle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+/* Left Column: Floating Product Showcase */
+.atelier-showcase-col {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+
+.atelier-glow-backdrop {
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(
+    circle,
+    rgba(238, 234, 225, 0.5) 0%,
+    rgba(238, 234, 225, 0) 70%
+  );
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.atelier-diaper-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.atelier-variant {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.atelier-variant.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.atelier-img {
+  max-height: 75%;
+  max-width: 75%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(52, 73, 102, 0.06));
+}
+
+/* Floating callout tags around diaper */
+.atelier-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.atelier-tag:hover {
+  transform: translateY(-3px);
+}
+
+.tag-dot {
+  position: relative;
+  width: 36px;
+  height: 1px;
+  background-color: var(--accent-gold);
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.tag-dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-top: 1px solid var(--accent-gold);
+  border-right: 1px solid var(--accent-gold);
+}
+
+.tag-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  max-width: 170px;
+  pointer-events: auto;
+  background: rgba(253, 251, 247, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(52, 73, 102, 0.08);
+  padding: 12px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(52, 73, 102, 0.03);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.atelier-tag:hover .tag-content {
+  border-color: rgba(229, 169, 59, 0.3);
+  box-shadow: 0 6px 24px rgba(229, 169, 59, 0.08);
+}
+
+.tag-title {
+  font-family: var(--font-heading);
+  font-size: 13px;
   font-weight: 600;
   color: var(--primary);
 }
 
-.trial-form {
+.tag-desc {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text-light);
+  line-height: 1.4;
+}
+
+/* Custom position tweaks for floating labels to look art-directed */
+.tag-top-left {
+  top: 20%;
+  left: 15px;
+  right: 70%;
+  flex-direction: row-reverse;
+}
+.tag-top-left .tag-content {
+  text-align: right;
+}
+.tag-top-left .tag-dot::after {
+  right: -2px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tag-bottom-left {
+  bottom: 20%;
+  left: 15px;
+  right: 70%;
+  flex-direction: row-reverse;
+}
+.tag-bottom-left .tag-content {
+  text-align: right;
+}
+.tag-bottom-left .tag-dot::after {
+  right: -2px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tag-center-left {
+  top: 36%;
+  left: 15px;
+  right: 70%;
+  flex-direction: row-reverse;
+}
+.tag-center-left .tag-content {
+  text-align: right;
+}
+.tag-center-left .tag-dot::after {
+  right: -2px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.tag-top-right {
+  top: 22%;
+  left: 70%;
+  right: 15px;
+  flex-direction: row;
+}
+.tag-top-right .tag-content {
+  text-align: left;
+}
+.tag-top-right .tag-dot::after {
+  left: -2px;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.tag-bottom-right {
+  bottom: 18%;
+  left: 70%;
+  right: 15px;
+  flex-direction: row;
+}
+.tag-bottom-right .tag-content {
+  text-align: left;
+}
+.tag-bottom-right .tag-dot::after {
+  left: -2px;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+/* Right Column: Sizing Engine */
+.atelier-engine-col {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 40px;
+  padding-left: 20px;
   max-width: 520px;
   width: 100%;
+  margin-left: auto;
 }
 
-.trial-form-group {
+/* Large faded background watermark name */
+.atelier-watermark-wrap {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+}
+
+.atelier-watermark {
+  font-family: var(--font-heading);
+  font-size: 7.5rem;
+  font-weight: 900;
+  color: rgba(52, 73, 102, 0.022);
+  letter-spacing: -2px;
+  line-height: 1;
+  text-transform: uppercase;
+  display: block;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Stage Selector Tabs */
+.atelier-stages {
+  display: flex;
+  gap: 32px;
+  z-index: 2;
+  position: relative;
+}
+
+.atelier-stage-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+  cursor: pointer;
+  text-align: left;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.btn-num {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  opacity: 0.5;
+  letter-spacing: 1px;
+  transition: opacity 0.3s ease;
+}
+
+.btn-text {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--primary);
+  opacity: 0.35;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.btn-text::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--accent-gold);
+  transition: width 0.3s ease;
+}
+
+.atelier-stage-btn.active .btn-num {
+  opacity: 1;
+}
+
+.atelier-stage-btn.active .btn-text {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.atelier-stage-btn.active .btn-text::after {
+  width: 100%;
+}
+
+.atelier-stage-btn:hover:not(.active) .btn-text {
+  opacity: 0.7;
+}
+
+/* Weight Thread Slider */
+.weight-thread-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.weight-thread-title {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.weight-thread-line {
+  position: relative;
+  height: 1px;
+  background-color: var(--border);
+  width: calc(100% - 40px);
+  margin: 24px auto 12px auto;
+}
+
+.weight-thread-progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--accent-gold);
+  width: 25%;
+}
+
+.weight-thread-ring {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--accent-gold);
+  background-color: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(229, 169, 59, 0.2);
+  z-index: 5;
+}
+
+.weight-thread-points {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.weight-point {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background-color: var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.weight-point::after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  cursor: pointer;
+}
+
+.weight-point.active {
+  background-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(229, 169, 59, 0.15);
+}
+
+/* Set absolute left positions based on percentage values for thread points */
+.weight-point[data-percent="0"] {
+  left: 0%;
+}
+.weight-point[data-percent="25"] {
+  left: 25%;
+}
+.weight-point[data-percent="50"] {
+  left: 50%;
+}
+.weight-point[data-percent="75"] {
+  left: 75%;
+}
+.weight-point[data-percent="100"] {
+  left: 100%;
+}
+
+.point-label {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-light);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.weight-point.active .point-label {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.weight-point:hover:not(.active) {
+  background-color: var(--primary);
+}
+
+/* Recommended Diaper Info */
+.atelier-rec-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  z-index: 2;
+  position: relative;
+}
+
+.atelier-rec-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.atelier-rec-eyebrow {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.atelier-rec-name {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.atelier-rec-size {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--text-light);
+  margin-top: 4px;
+  display: block;
+}
+
+.atelier-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.atelier-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--accent-gold);
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.atelier-cta:hover::after {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.cta-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.atelier-cta:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Sensation Profile Metrics */
+.atelier-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.atelier-metrics-title {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.atelier-metric-row {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.trial-form-label {
+.atelier-metric-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.25vw, 1.3rem);
-  font-weight: 400;
-  color: var(--text-light);
-  letter-spacing: -0.2px;
-  margin: 0;
 }
 
-.trial-select-wrapper {
-  position: relative;
-  border-bottom: 1.5px solid var(--primary);
-  padding-bottom: 6px;
-  display: flex;
-  align-items: center;
-  width: 100%;
+.atelier-metric-label {
+  color: var(--primary);
+  font-weight: 500;
 }
 
-.trial-select {
-  width: 100%;
-  border: none;
-  background: transparent;
+.atelier-metric-value {
   font-family: var(--font-heading);
-  font-size: clamp(1.4rem, 2vw, 2.2rem);
-  font-weight: 500;
+  font-size: 1.15rem;
   color: var(--primary);
-  padding: 8px 0;
-  outline: none;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  font-weight: 600;
 }
 
-.trial-select option {
-  font-weight: 500;
-  font-size: 16px;
-  background-color: var(--white);
-  color: var(--primary);
+.atelier-metric-track {
+  height: 2px;
+  background-color: rgba(52, 73, 102, 0.08);
+  position: relative;
+  overflow: hidden;
 }
 
-.trial-select-arrow {
-  position: absolute;
-  right: 0;
-  bottom: 18px;
-  color: var(--primary);
-  pointer-events: none;
+.atelier-metric-bar {
+  height: 100%;
+  background-color: var(--accent-gold);
+}
+
+/* Reassurance row */
+.atelier-reassurance {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  z-index: 2;
+  position: relative;
+}
+
+.reassurance-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  transition: var(--transition);
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 500;
 }
 
-.trial-select:focus + .trial-select-arrow {
-  transform: rotate(180deg);
-}
-
-.trial-submit-wrapper {
-  margin-top: 8px;
+.reassurance-icon {
+  font-size: 14px;
+  color: var(--accent-gold);
 }
 
 .btn-outline-pill {
@@ -5345,248 +5708,300 @@ body {
 /* â”€â”€ Mobile â€” static layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 /* ==========================================================================
-   5. Category Navigation Pinned Scroll Section
+   5. Category Navigation Pinned Scroll Section (Diaper Showcase)
    ========================================================================== */
 
-/* â”€â”€ Outer section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .catnav-section {
   position: relative;
   z-index: 14;
   background-color: var(--bg);
+  overflow: hidden;
 }
 
-/* â”€â”€ Pinned stage â€” full viewport, overflow hidden â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.catnavStage {
+/* Desktop layout stage - full viewport height grid */
+.catnav-stage {
   position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg);
   display: grid;
-  grid-template-columns: 42% 58%;
+  grid-template-columns: 38% 62%;
 }
 
-/* â”€â”€ LEFT: Vertical category nav â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.catnavLeft {
+/* LEFT SIDE: Vertical Category list with interactive progress */
+.catnav-left {
   position: relative;
   display: flex;
-  align-items: center;
-  padding: 0 0 0 clamp(32px, 5vw, 80px);
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 clamp(40px, 6vw, 100px);
   z-index: 10;
   background-color: var(--bg);
+  border-right: 1px solid var(--border);
 }
 
-.catnavList {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.catnav-nav-header {
+  margin-bottom: clamp(30px, 4vh, 60px);
 }
 
-/* Each category tab */
-.catnavItem {
+.catnav-section-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
   display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 16px 0;
+  margin-bottom: 8px;
+}
+
+.catnav-section-title {
   font-family: var(--font-heading);
   font-size: var(--fs-h2);
   font-weight: 500;
-  letter-spacing: -1.5px;
-  line-height: 1.1;
   color: var(--primary);
-  opacity: 0.22;
-  transition:
-    opacity 0.55s cubic-bezier(0.25, 1, 0.5, 1),
-    color 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.catnav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Button tab item styling */
+.catnav-item {
+  display: flex;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 0;
+  color: var(--primary);
+  opacity: 0.3;
+  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   text-align: left;
   outline: none;
-  will-change: opacity;
-  -webkit-tap-highlight-color: transparent;
+  position: relative;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  width: fit-content;
 }
 
-/* Active state â€” full visibility, slightly heavier */
-.catnavItem.active {
+/* active tab state - highlight title */
+.catnav-item.active {
   opacity: 1;
+}
+
+.catnav-item:not(.active):hover {
+  opacity: 0.65;
+}
+
+.catnav-item-num {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.catnav-item-label {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
   font-weight: 500;
+  line-height: 1.15;
+  color: var(--primary);
 }
 
-/* Hover on non-active â€” gentle lift */
-.catnavItem:not(.active):hover {
-  opacity: 0.45;
+/* Custom progress track underneath the label */
+.catnav-item-progress {
+  width: 120px;
+  height: 2px;
+  background-color: var(--border);
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
 }
 
-/* â”€â”€ RIGHT: Editorial image panels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.catnavRight {
+.catnav-item-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary);
+  transform-origin: left center;
+  transition: none;
+}
+
+.catnav-item.active .catnav-item-progress-bar {
+  background-color: var(--accent-gold);
+}
+
+/* RIGHT SIDE: Immersive Viewport with overlapping floating details */
+.catnav-right {
   position: relative;
   height: 100%;
   overflow: hidden;
 }
 
-/* Each panel: absolute, full size, layered */
-.catnavPanel {
+.catnav-panel {
   position: absolute;
   inset: 0;
   opacity: 0;
   pointer-events: none;
-  will-change: opacity, transform;
-  backface-visibility: hidden;
-  transform: translate3d(0, 0, 0);
+  will-change: opacity;
+  display: block;
 }
 
-.catnavPanel.active {
+.catnav-panel.active {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Image wrapper */
-.catnavPanelImg {
+/* Media layout containing baby image */
+.catnav-panel-media {
   position: absolute;
   inset: 0;
   overflow: hidden;
 }
 
-.catnavPanelImg img {
+.catnav-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
   display: block;
-  pointer-events: none;
   will-change: transform;
-  transform: translate3d(0, 0, 0) scale(1.04);
-  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(1.1);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.catnavPanel.active .catnavPanelImg img {
-  transform: translate3d(0, 0, 0) scale(1);
+.catnav-panel.active .catnav-img {
+  transform: scale(1);
 }
 
-/* Gradient overlay â€” bottom left where content lives */
-.catnavPanelOverlay {
+/* Cinematic overlay blending the frame elements */
+.catnav-media-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(245, 244, 242, 0.72) 0%,
-    rgba(245, 244, 242, 0.2) 50%,
-    transparent 100%
+    to bottom,
+    rgba(247, 245, 240, 0.05) 0%,
+    rgba(247, 245, 240, 0.3) 50%,
+    rgba(247, 245, 240, 0.8) 100%
   );
   pointer-events: none;
 }
 
-/* Content positioned bottom-left over the image */
-.catnavPanelContent {
+/* Floating Content Card - Luxury layout styling */
+.catnav-panel-content {
   position: absolute;
-  bottom: 56px;
-  left: 52px;
-  right: 52px;
+  bottom: clamp(40px, 6vh, 80px);
+  left: clamp(40px, 6vw, 80px);
+  right: clamp(40px, 6vw, 80px);
+  max-width: 460px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 219, 208, 0.8);
+  border-radius: 20px;
+  padding: clamp(30px, 4vh, 45px) clamp(30px, 4vw, 45px);
+  box-shadow:
+    0 15px 35px rgba(52, 73, 102, 0.08),
+    0 5px 15px rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  will-change: opacity, transform;
-  transform: translate3d(0, 20px, 0);
+  gap: 16px;
   opacity: 0;
+  transform: translateY(30px);
   transition:
-    opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1) 0.1s,
-    transform 0.65s cubic-bezier(0.25, 1, 0.5, 1) 0.1s;
+    opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s,
+    transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+  will-change: opacity, transform;
 }
 
-.catnavPanel.active .catnavPanelContent {
+.catnav-panel.active .catnav-panel-content {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: translateY(0);
 }
 
-.catnavPanelEyebrow {
+.catnav-panel-eyebrow {
   font-family: var(--font-body);
-  font-size: clamp(0.7rem, 0.85vw, 0.85rem);
-  font-weight: 500;
-  color: var(--text-light);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent-gold);
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
-.catnavPanelTitle {
+.catnav-panel-title {
   font-family: var(--font-heading);
   font-size: var(--fs-h3);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--primary);
-  line-height: 1.08;
-  letter-spacing: -1.5px;
   margin: 0;
+  line-height: 1.2;
 }
 
-.catnavPanelDesc {
+.catnav-panel-desc {
   font-family: var(--font-body);
-  font-size: var(--fs-body);
-  font-weight: 300;
+  font-size: var(--fs-body-sm);
   color: var(--text-light);
-  line-height: 1.75;
-  max-width: 400px;
+  line-height: 1.6;
   margin: 0;
 }
 
-.catnavPanelCta {
+/* Premium pill action button */
+.catnav-panel-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 50px;
   font-family: var(--font-body);
+  font-weight: 500;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
   text-decoration: none;
-  letter-spacing: 0.5px;
-  padding-bottom: 2px;
-  border-bottom: 1px solid var(--primary);
-  width: fit-content;
   transition:
-    opacity 0.3s ease,
-    gap 0.3s ease;
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  width: fit-content;
+  margin-top: 4px;
+  box-shadow: 0 4px 10px rgba(52, 73, 102, 0.15);
 }
 
-.catnavPanelCta::after {
-  content: "â†’";
-  font-size: 12px;
+.catnav-panel-cta::after {
+  content: "→";
+  font-size: 14px;
   transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.catnavPanelCta:hover {
-  opacity: 0.65;
+.catnav-panel-cta:hover {
+  background-color: var(--accent-gold);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(229, 169, 59, 0.25);
 }
 
-.catnavPanelCta:hover::after {
+.catnav-panel-cta:hover::after {
   transform: translateX(4px);
 }
 
-/* â”€â”€ Thin progress bar at bottom â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.catnavProgress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--border);
-  z-index: 20;
-  grid-column: 1 / -1;
-}
-
-.catnavProgressBar {
-  height: 100%;
-  width: 0%;
-  background-color: var(--primary);
-  transform-origin: left center;
-  will-change: width;
-  transition: none;
-}
-
-/* â”€â”€ Mobile â€” stacked vertical layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-
 /* ==========================================================================
-   6. Core Collection Product Section â€” Premium Carousel
+   6. Core Collection Product Section — Premium Carousel
    ========================================================================== */
 
-/* â”€â”€ Outer Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Outer Section ─────────────────────────────────────────────────────────── */
 .core-collection-section {
   position: relative;
   z-index: 13;
@@ -5596,7 +6011,7 @@ body {
   overflow: hidden;
 }
 
-/* â”€â”€ Header Row (title + nav arrows) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Header Row (title + nav arrows) ───────────────────────────────────────── */
 .cc-header {
   display: flex;
   align-items: flex-end;
@@ -5616,7 +6031,7 @@ body {
   text-align: left;
 }
 
-/* â”€â”€ Carousel Navigation Buttons â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Carousel Navigation Buttons ───────────────────────────────────────────── */
 .cc-nav {
   display: flex;
   align-items: center;
@@ -5666,68 +6081,58 @@ body {
   pointer-events: none;
 }
 
-/* â”€â”€ Carousel Viewport â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Carousel Viewport ─────────────────────────────────────────────────────── */
+/* Contains the scrollable track. Overflow hidden clips cards that scroll off.
+   cursor: grab only on desktop; touch devices inherit default. */
 .cc-viewport {
   overflow: hidden;
   cursor: grab;
   -webkit-user-select: none;
   user-select: none;
+  /* Prevent card hover transforms from clipping at viewport edge */
+  padding-bottom: 2px;
 }
 
 .cc-viewport:active {
   cursor: grabbing;
 }
 
-/* â”€â”€ Carousel Track â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ── Carousel Track ────────────────────────────────────────────────────────── */
+/* align-items: stretch ensures all cards have identical rendered height.
+   will-change + backface-visibility give GPU compositing on the GSAP x-translate. */
 .cc-track {
   display: flex;
   gap: 28px;
-  /* Align items to the top so all fixed-height cards stay flush */
-  align-items: flex-start;
+  align-items: stretch; /* all cards same height — critical for hover maths */
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
 }
-
-/* ==========================================================================
-   PRODUCT CARD â€” Fixed-height with absolutely positioned layers
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   Architecture (all children use position:absolute inside the card):
-
-     â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â† card (fixed 480px, position:relative, overflow:hidden)
-     â”‚  .collection-image-wrap           â”‚  â† abs: top:0, left:0, right:0, height:58%  (GSAP â†’ 100%)
-     â”‚    img.collection-image           â”‚     object-fit:cover, scale animation
-     â”‚â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚
-     â”‚  .collection-info                 â”‚  â† abs: top:58%, left:0, right:0, bottom:0
-     â”‚    .collection-badge (SVG)        â”‚     GSAP â†’ opacity:0 on hover
-     â”‚    .collection-rating             â”‚
-     â”‚    h3, p.desc, p.price            â”‚
-     â”‚â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”‚
-     â”‚  .collection-cta-wrap             â”‚  â† abs: bottom:0, full width, z-index:10
-     â”‚    a.collection-cta-btn (pill)    â”‚     GSAP â†’ opacity:1, y:0 on hover
-     â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
-   ========================================================================== */
-
-/* â”€â”€ Card container â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Card container ----------------------------------------------------------- */
 .collection-card {
-  /* Carousel sizing */
-  flex: 0 0 calc((100% - 56px) / 3);
-  /* 3 cards desktop */
+  /* Viewport-anchored flex-basis. Uses 100vw, not 100% of the track,
+     which changes with GSAP x-translate causing layout chaos at 1920px+.
+     Formula: (viewport - 2x60px padding - 2x28px gap) / 3 = (100vw - 176px) / 3
+     clamp prevents runaway card sizes on ultra-wide monitors. */
+  flex: 0 0 clamp(240px, calc((100vw - 176px) / 3), 520px);
   min-width: 0;
 
   /* Positioning context for all absolute children */
   position: relative;
-  height: 500px;
-  /* fixed height â€” the key to this effect */
+  /* Viewport-proportional height keeps aspect ratio across all display widths */
+  height: clamp(420px, 34vw, 560px);
   overflow: hidden;
   border-radius: 20px;
   background-color: var(--white);
   box-sizing: border-box;
 
+  /* GPU compositing. isolation: isolate gives each card its own stacking
+     context, preventing z-index interference between cards at 2560px+. */
   will-change: transform, box-shadow;
   backface-visibility: hidden;
+  isolation: isolate;
 
-  /* Entry animation start state (GSAP will animate to final) */
+  /* Entry animation start state - GSAP ScrollTrigger animates to final state */
   opacity: 0;
   transform: translateY(50px);
 
@@ -5735,24 +6140,38 @@ body {
   transition: box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* â”€â”€ Image Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-/* Starts at 58% card height. GSAP animates to 100% on hover. */
+/* -- Card Link Wrapper -------------------------------------------------------- */
+/* Absolute overlay covering the entire card, positioning content inside it */
+.collection-card-link-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2; /* Sits below collection-cta-wrap (10) but covers background */
+  outline: none;
+}
+
+/* -- Image Wrapper ------------------------------------------------------------ */
+/* Starts at 58% card height. GSAP animates to 100% on hover.
+   translateZ(0) forces a GPU layer, preventing subpixel reflow at large sizes. */
 .collection-image-wrap {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 58%;
-  /* GSAP target on hover: 100% */
+  height: 58%; /* GSAP target on hover: 100% */
   overflow: hidden;
-  border-radius: 0;
-  /* card clips with its own border-radius */
   background-color: #f5f4f2;
   z-index: 1;
   will-change: height;
+  transform: translateZ(0);
 }
 
-/* â”€â”€ Product image â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- Product image ------------------------------------------------------------ */
 .collection-image {
   width: 100%;
   height: 100%;
@@ -5760,28 +6179,35 @@ body {
   object-position: center center;
   display: block;
   pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
   will-change: transform;
-  transform: scale(1.06);
-  /* slight zoom-out on hover via GSAP */
-  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: scale(1.06); /* slight zoom-out on hover via GSAP */
 }
 
-/* â”€â”€ Info Block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-/* Starts below the image (top:58%). GSAP fades this out on hover. */
+/* -- Info Block --------------------------------------------------------------- */
+/* Starts below image (top: 58%). GSAP fades to opacity 0 on hover.
+   pointer-events: none by default prevents the invisible overlap from blocking
+   the CTA button clicks on large screens (1920px+, 2560px+). */
 .collection-info {
   position: absolute;
-  top: 58%;
-  /* matches image-wrap height */
+  top: 58%; /* matches image-wrap initial height */
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 18px 24px 20px;
+  padding: 16px 22px 24px; /* 24px bottom gives price clear space from card edge */
   display: flex;
   flex-direction: column;
   background-color: var(--white);
   box-sizing: border-box;
   z-index: 2;
   will-change: opacity;
+  pointer-events: none; /* avoids blocking CTA - managed by GSAP + CSS :not(:hover) */
+}
+
+/* Re-enable pointer events on info content when card is not hovered */
+.collection-card:not(:hover) .collection-info {
+  pointer-events: auto;
 }
 
 /* â”€â”€ OEKO-TEX Badge (in info flow) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -5833,6 +6259,11 @@ body {
   letter-spacing: -0.2px;
   margin: 0 0 6px 0;
   flex-shrink: 0;
+  /* Ellipsis after 2 lines — prevents long titles from pushing price off-card */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* â”€â”€ Description â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -5844,6 +6275,11 @@ body {
   margin: 0 0 8px 0;
   font-weight: 300;
   flex-shrink: 0;
+  /* Ellipsis after 2 lines — prevents long descriptions from collapsing the price row */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* â”€â”€ Price â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -5857,31 +6293,34 @@ body {
   flex-shrink: 0;
 }
 
-/* â”€â”€ CTA Reveal Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-/* Absolutely pinned to the BOTTOM of the card. Always in the DOM but
-   invisible (opacity:0, y:+20px). GSAP reveals on hover. */
+/* -- CTA Reveal Wrapper ------------------------------------------------------- */
+/* Pinned to the bottom of the card at all times.
+   Default: invisible (opacity:0, shifted down 20px). GSAP reveals on mouseenter.
+   z-index 10 sits above image-wrap (1) and info (2). */
 .collection-cta-wrap {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 10;
-  padding: 20px 24px 26px;
+  padding: 20px 22px 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Default invisible state â€” GSAP animates in */
+  /* Default invisible state - GSAP controls opacity and y transform */
   opacity: 0;
   transform: translateY(20px);
   will-change: opacity, transform;
+  /* CSS fallback: pointer-events managed by JS GSAP timeline AND :hover */
   pointer-events: none;
 }
 
+/* Enable button clicks when card is hovered (CSS backup for GSAP onStart) */
 .collection-card:hover .collection-cta-wrap {
   pointer-events: auto;
 }
 
-/* â”€â”€ CTA Pill Button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* -- CTA Pill Button ---------------------------------------------------------- */
 .collection-cta-btn {
   display: inline-flex;
   align-items: center;
@@ -5893,30 +6332,39 @@ body {
   background-color: rgba(255, 255, 255, 0.96);
   border: 1.5px solid rgba(226, 222, 218, 0.7);
   border-radius: 50px;
-  padding: 13px 28px;
+  padding: 12px 26px;
   text-decoration: none;
   letter-spacing: 0.3px;
   white-space: nowrap;
   cursor: pointer;
+  /* position:relative + z-index ensures button renders above the glass blur */
+  position: relative;
+  z-index: 1;
+  /* Strong shadow gives the pill depth against the product image behind it */
   box-shadow:
-    0 6px 24px rgba(99, 80, 80, 0.14),
+    0 6px 24px rgba(99, 80, 80, 0.16),
     0 1px 4px rgba(99, 80, 80, 0.08);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .collection-cta-btn:hover {
   background-color: var(--primary);
   color: var(--white);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(99, 80, 80, 0.25);
-  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(99, 80, 80, 0.28);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.collection-cta-btn:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 4px 16px rgba(99, 80, 80, 0.2);
 }
 
 /* â”€â”€ Dot indicators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -9401,4 +9849,421 @@ body {
 .cta-actions .btn-pill-outline-white:hover {
   background-color: rgba(255, 255, 255, 0.12);
   transform: translateY(-2.5px);
+}
+
+/* ==========================================================================
+   THE JOURNAL — Premium Editorial Blog Carousel
+   ========================================================================== */
+.blog-carousel-section {
+  position: relative;
+  z-index: 13;
+  background-color: #faf9f7; /* Cozy Glowing Ivory Milk tint */
+  padding: 120px 0 100px;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+}
+
+.blog-carousel-container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 4%;
+  box-sizing: border-box;
+}
+
+/* Header layout */
+.blog-carousel-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 56px;
+  gap: 24px;
+}
+
+.blog-carousel-title-group {
+  max-width: 600px;
+}
+
+.blog-carousel-eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.blog-carousel-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 600;
+  color: var(--primary);
+  margin: 0 0 12px;
+  letter-spacing: -0.8px;
+  line-height: 1.15;
+}
+
+.blog-carousel-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.2vw, 1.125rem);
+  color: var(--text-light);
+  margin: 0;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Nav arrows */
+.blog-carousel-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.blog-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background-color: var(--white);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  font-size: 18px;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(45, 62, 82, 0.02);
+}
+
+.blog-nav-btn:hover {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 62, 82, 0.08);
+}
+
+.blog-nav-btn:active {
+  transform: translateY(0);
+}
+
+/* Viewport and Track */
+.blog-carousel-viewport {
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  padding: 16px 0 40px; /* Top/bottom padding allows card hover scale/shadow travel */
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.blog-carousel-viewport:active {
+  cursor: grabbing;
+}
+
+.blog-carousel-track {
+  display: flex;
+  gap: 32px;
+  width: max-content;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Blog Cards */
+.blog-carousel-card {
+  position: relative;
+  flex: 0 0 380px;
+  height: 480px;
+  background-color: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(45, 62, 82, 0.02);
+  border: 1.5px solid rgba(226, 222, 218, 0.5);
+  transition:
+    border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, box-shadow, border-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-anchor {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.blog-card-media {
+  position: relative;
+  width: 100%;
+  height: 58%;
+  overflow: hidden;
+  will-change: height;
+}
+
+.blog-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  will-change: transform;
+  transform: scale(1.06);
+}
+
+.blog-card-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(28, 45, 66, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+.blog-card-read-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.96);
+  border: 1.5px solid rgba(226, 222, 218, 0.7);
+  border-radius: 50px;
+  padding: 12px 26px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  box-shadow:
+    0 6px 24px rgba(99, 80, 80, 0.16),
+    0 1px 4px rgba(99, 80, 80, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.blog-card-read-tag:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(99, 80, 80, 0.28);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.blog-card-read-tag:active {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 4px 16px rgba(99, 80, 80, 0.2);
+}
+
+/* Card details flow */
+.blog-card-details {
+  position: absolute;
+  top: 58%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  box-sizing: border-box;
+  z-index: 2;
+  will-change: opacity;
+  pointer-events: none;
+}
+
+.blog-carousel-card:not(:hover) .blog-card-details {
+  pointer-events: auto;
+}
+
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+}
+
+.blog-card-category {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-gold);
+}
+
+.blog-card-dot {
+  color: var(--text-light);
+  font-size: 8px;
+}
+
+.blog-card-read {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.blog-card-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--primary);
+  margin: 0 0 8px 0;
+  transition: color 0.3s ease;
+  /* limit title to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.7em;
+}
+
+.blog-card-excerpt {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-light);
+  margin: 0 0 16px 0;
+  font-weight: 300;
+  /* limit description to 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  border-top: 1px solid rgba(226, 222, 218, 0.4);
+  padding-top: 16px;
+}
+
+.blog-card-date {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.blog-card-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.3s ease;
+}
+
+.blog-card-cta i {
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+/* Card Hover Interactions */
+.blog-carousel-card:hover {
+  box-shadow: 0 20px 40px rgba(45, 62, 82, 0.08);
+  border-color: rgba(226, 222, 218, 0.9);
+}
+
+.blog-carousel-card:hover .blog-card-title {
+  color: var(--primary-light);
+}
+
+/* Dots styling */
+.blog-carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.blog-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--border);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  border: none;
+}
+
+.blog-dot.active {
+  background-color: var(--primary);
+  transform: scale(1.25);
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* Responsive constraints */
+@media (max-width: 1024px) {
+  .blog-carousel-section {
+    padding: 80px 0 70px;
+  }
+  .blog-carousel-header {
+    margin-bottom: 40px;
+  }
+  .blog-carousel-track {
+    gap: 24px;
+  }
+  .blog-carousel-card {
+    flex: 0 0 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-carousel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .blog-carousel-nav {
+    display: none; /* Hide navigation buttons on mobile, swipe is default */
+  }
+  .blog-carousel-card {
+    flex: 0 0 280px;
+  }
+  .blog-card-details {
+    padding: 20px 18px;
+  }
+}
+
+/* Touch devices support - ensure CTA buttons are always visible on touchscreen devices */
+@media (hover: none), (pointer: coarse) {
+  .collection-cta-wrap {
+    opacity: 1 !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
 }

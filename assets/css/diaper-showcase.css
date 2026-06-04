@@ -1,0 +1,370 @@
+/* =============================================================================
+   CloudCush — diaper-showcase.css  v7 — Apple Product Storytelling
+   Full-viewport 3D canvas. Minimal floating text left / right.
+   Typography: thin rule + compact heading + body only.
+   ============================================================================= */
+
+/* ─── Section ─────────────────────────────────────────────────────────────── */
+.cc-showcase {
+  position: relative;
+  background: #f7f5f0;
+  overflow: hidden;
+}
+
+/* ─── Scroll Track ────────────────────────────────────────────────────────── */
+.cc-showcase__track {
+  position: relative;
+  /* height set by JS */
+}
+
+/* ─── Pinned sticky pane ──────────────────────────────────────────────────── */
+.cc-showcase__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ─── Canvas wrap — fills entire sticky pane ─────────────────────────────── */
+.cc-showcase__canvas-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Ambient glow — behind canvas */
+.cc-showcase__canvas-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 55% 55% at 50% 50%,
+    rgba(142, 177, 217, 0.10) 0%,
+    transparent 70%
+  );
+  z-index: 0;
+  animation: cc-glow-breathe 8s ease-in-out infinite;
+}
+
+@keyframes cc-glow-breathe {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1.0; transform: scale(1.08); }
+}
+
+/* Three.js canvas */
+.cc-showcase__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  z-index: 1;
+  /* No background — section bg (#f7f5f0) shows through alpha channel */
+}
+.cc-showcase__canvas:active { cursor: grabbing; }
+
+/* ─── Soft gradient masks — ensure text readability over 3D model ─────────── */
+/* Left vignette — active when left-layout text is showing */
+.cc-showcase__sticky::before,
+.cc-showcase__sticky::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 38%;
+  pointer-events: none;
+  z-index: 8;
+  opacity: 0.82;
+  transition: opacity 0.6s ease;
+}
+
+.cc-showcase__sticky::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(247, 245, 240, 0.92) 0%,
+    rgba(247, 245, 240, 0.55) 48%,
+    transparent 100%
+  );
+}
+
+.cc-showcase__sticky::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(247, 245, 240, 0.92) 0%,
+    rgba(247, 245, 240, 0.55) 48%,
+    transparent 100%
+  );
+}
+
+/* ─── Loading state ───────────────────────────────────────────────────────── */
+.cc-showcase__loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: #f7f5f0;
+  transition: opacity 0.70s ease;
+}
+
+.cc-showcase__loader.cc-loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cc-showcase__loader-ring {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid rgba(122, 168, 212, 0.22);
+  border-top-color: #7aa8d4;
+  border-radius: 50%;
+  animation: cc-spin 0.80s linear infinite;
+}
+
+@keyframes cc-spin { to { transform: rotate(360deg); } }
+
+/* ─── Header ──────────────────────────────────────────────────────────────── */
+.cc-showcase__header {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 25;
+  padding: clamp(1.8rem, 3.2vh, 2.8rem) clamp(2.5rem, 5.5vw, 7rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.cc-showcase__eyebrow {
+  font-family: "Roboto Slab", serif;
+  font-size: clamp(0.52rem, 0.72vw, 0.64rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8eb1d4;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ─── Progress Bar ────────────────────────────────────────────────────────── */
+.cc-showcase__progress-bar {
+  width: clamp(52px, 7vw, 90px);
+  height: 1px;
+  background: rgba(52, 73, 102, 0.09);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.cc-showcase__progress-fill {
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #8eb1d9, #2e4264);
+  transition: width 0.20s ease;
+}
+
+/* ─── Text overlay — above canvas, fills sticky pane ─────────────────────── */
+.cc-showcase__text-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* ─── Stages container ────────────────────────────────────────────────────── */
+.cc-showcase__stages {
+  position: relative;
+  height: 100%;
+}
+
+/* ─── Single stage ────────────────────────────────────────────────────────── */
+.cc-showcase__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  /* will-change for blur-fade GPU compositing */
+  will-change: opacity, transform, filter;
+  transition: visibility 0s 0.45s;
+}
+
+.cc-showcase__stage.cc-active {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+/* Left layout: content is aligned left, padded on left */
+.cc-showcase__stage[data-layout="left"] {
+  justify-content: flex-start;
+  padding-left: clamp(2.8rem, 5.5vw, 7.5rem);
+}
+
+/* Right layout: content is aligned right, padded on right */
+.cc-showcase__stage[data-layout="right"] {
+  justify-content: flex-end;
+  padding-right: clamp(2.8rem, 5.5vw, 7.5rem);
+}
+
+/* ─── Stage inner — the floating minimal text block ──────────────────────── */
+.cc-showcase__stage-inner {
+  display: flex;
+  flex-direction: column;
+  width: calc(50vw - clamp(2.8rem, 5.5vw, 7.5rem) - 100px);
+  max-width: 420px;
+  pointer-events: auto;
+}
+
+/* ─── Feature title — compact, bold, with pointer line ───────────────────── */
+.cc-showcase__stage-title {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(1.05rem, 1.35vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1c2d42;
+  letter-spacing: -0.015em;
+  margin: 0 0 0.85rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  white-space: nowrap;
+}
+
+/* Title text wrapper */
+.cc-showcase__stage-title-text {
+  flex-shrink: 0;
+}
+
+/* Horizontal line pointing to the center */
+.cc-showcase__pointer-line {
+  flex-grow: 1;
+  height: 1px;
+  background: rgba(52, 73, 102, 0.22);
+  position: relative;
+  min-width: 25px;
+  transform-origin: left center;
+}
+
+.cc-showcase__stage[data-layout="right"] .cc-showcase__pointer-line {
+  transform-origin: right center;
+}
+
+/* Pointer dot pseudo-element at the center-facing end of the line */
+.cc-showcase__stage[data-layout="left"] .cc-showcase__pointer-line::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  background: rgba(52, 73, 102, 0.6);
+  border-radius: 50%;
+}
+
+.cc-showcase__stage[data-layout="right"] .cc-showcase__pointer-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  background: rgba(52, 73, 102, 0.6);
+  border-radius: 50%;
+}
+
+/* ─── Supporting body text ────────────────────────────────────────────────── */
+.cc-showcase__stage-desc {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(0.80rem, 0.90vw, 0.88rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: #5a6e7a;
+  max-width: 280px;
+  margin: 0;
+}
+
+/* ─── Section divider ─────────────────────────────────────────────────────── */
+.cc-showcase__divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(52, 73, 102, 0.08) 28%,
+    rgba(52, 73, 102, 0.08) 72%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+/* ─── Responsive: tablet ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  /* On tablet, stack: canvas top half, text bottom half */
+  .cc-showcase__sticky {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cc-showcase__canvas-wrap {
+    position: relative;
+    height: 55vh;
+    flex-shrink: 0;
+  }
+
+  .cc-showcase__text-overlay {
+    position: relative;
+    height: 45vh;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  .cc-showcase__stages { height: 100%; }
+
+  /* Override L/R layout — center text on tablet */
+  .cc-showcase__stage[data-layout="left"],
+  .cc-showcase__stage[data-layout="right"] {
+    justify-content: center;
+    padding: 0 2.5rem;
+  }
+
+  .cc-showcase__stage-inner {
+    width: 100% !important;
+    max-width: 480px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .cc-showcase__pointer-line {
+    display: none !important;
+  }
+
+  /* Hide gradient masks on tablet */
+  .cc-showcase__sticky::before,
+  .cc-showcase__sticky::after { display: none; }
+
+  .cc-showcase__stage-desc { max-width: none; }
+}
+
+/* ─── Responsive: mobile ──────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .cc-showcase__canvas-wrap { height: 50vh; }
+  .cc-showcase__text-overlay { height: 50vh; }
+
+  .cc-showcase__stage[data-layout="left"],
+  .cc-showcase__stage[data-layout="right"] {
+    padding: 0 1.5rem;
+  }
+}

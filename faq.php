@@ -214,7 +214,7 @@
               </button>
               <div class="faq-panel">
                 <div class="faq-panel-inner">
-                  <p>We want you and your little one to be completely happy. We offer a 15-day return policy on unopened, fully sealed diaper packs. Due to safety and sanitation standards, we cannot accept returns on opened packs. If you are ordering CloudCush for the first time, we highly recommend our Trial Packs to test sizing before buying larger quantities.</p>
+                  <p>We want you and your little one to be completely happy. We offer a 15-day return policy on unopened, fully sealed diaper packs. Due to safety and sanitation standards, we cannot accept returns on opened packs. If you are ordering CloudCush for the first time, we highly recommend our Single Packs to test sizing before buying larger quantities.</p>
                 </div>
               </div>
             </div>

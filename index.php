@@ -95,68 +95,239 @@
         </div>
     </section>
 
-    <!-- Trial Pack Selection Section -->
-    <section class="trial-section">
-        <div class="container trial-grid">
+    <!-- Sizing Atelier Section (Premium Sizing & Sensation Atelier) -->
+    <section class="atelier-section" id="diaperSelectorSection">
 
-            <!-- Left Column: Editorial Headings & Description -->
-            <div class="trial-col trial-col-left">
-                <h2 class="trial-title">Fit Right.<br>Sleep Dry.</h2>
-                <p class="trial-desc">
-                    Find the perfect fit and grab your <strong>exclusive trial pack</strong> to experience <strong>12-hour dryness</strong>.
+        <!-- Floating Baby Doodles -->
+        <div class="doodle-container" aria-hidden="true">
+            <!-- Hand-drawn Cloud -->
+            <svg class="doodle doodle-cloud-1" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,40 Q10,35 15,25 Q20,15 35,20 Q45,10 60,15 Q75,10 80,25 Q90,35 80,45 Q70,55 50,50 Q30,55 20,40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            <!-- Hand-drawn Star -->
+            <svg class="doodle doodle-star-1" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,5 L24,15 L35,16 L27,23 L29,34 L20,28 L11,34 L13,23 L5,16 L16,15 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" />
+            </svg>
+            <!-- Hand-drawn Heart -->
+            <svg class="doodle doodle-heart-1" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,12 C18,7 10,7 10,13 C10,21 20,28 20,28 C20,28 30,21 30,13 C30,7 22,7 20,12 Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            <!-- Hand-drawn Smile -->
+            <svg class="doodle doodle-smile-1" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                <circle cx="15" cy="17" r="1.5" fill="currentColor" />
+                <circle cx="25" cy="17" r="1.5" fill="currentColor" />
+                <path d="M13,24 Q20,31 27,24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+            <!-- Hand-drawn Spark -->
+            <svg class="doodle doodle-spark-1" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,10 L20,30 M10,20 L30,20 M13,13 L27,27 M13,27 L27,13" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+        </div>
+
+        <div class="atelier-container">
+
+            <!-- Asymmetric Header Block -->
+            <div class="atelier-header">
+                <span class="atelier-meta">02 / SIZING &amp; SENSATION</span>
+                <h2 class="atelier-title">Tailored to their stage, <br><em>crafted for their skin.</em></h2>
+                <p class="atelier-desc">
+                    Every milestone demands unique care. Map your baby’s stage or weight to discover our custom organic diaper variants, designed to protect skin health from first crawls to deep nights.
                 </p>
             </div>
 
-            <!-- Right Column: Minimal Form Options -->
-            <div class="trial-col trial-col-right">
-                <form class="trial-form" action="javascript:void(0);" method="POST">
+            <div class="atelier-canvas">
 
-                    <!-- Dropdown 1 -->
-                    <div class="trial-form-group">
-                        <label class="trial-form-label" for="baby-weight">My baby currently weighs</label>
-                        <div class="trial-select-wrapper">
-                            <select class="trial-select" id="baby-weight" required>
-                                <option value="<3 kg">&lt;3 kg</option>
-                                <option value="3-5 kg">3-5 kg</option>
-                                <option value="5-8 kg">5-8 kg</option>
-                                <option value="8-11 kg">8-11 kg</option>
-                                <option value="11+ kg">11+ kg</option>
-                            </select>
-                            <div class="trial-select-arrow">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
+                <!-- Left: Floating Product Showcase with Glowing Backdrop -->
+                <div class="atelier-showcase-col">
+                    <div class="atelier-glow-backdrop"></div>
+                    <div class="atelier-diaper-viewport">
+
+                        <!-- Newborn Variant Visuals -->
+                        <div class="atelier-variant active" data-variant="newborn">
+                            <img src="assets/images/home-swiper-diaper-compress.webp_v=1778306352.png" alt="CloudCush TinyHug Newborn" class="atelier-img">
+
+                            <!-- Floating Editorial Callouts -->
+                            <div class="atelier-tag tag-top-left">
+                                <span class="tag-dot"></span>
+                                <div class="tag-content">
+                                    <span class="tag-title">Umbilical Care Cutout</span>
+                                    <span class="tag-desc">Contours around the belly button for friction-free newborn healing.</span>
+                                </div>
+                            </div>
+                            <div class="atelier-tag tag-bottom-right">
+                                <span class="tag-dot"></span>
+                                <div class="tag-content">
+                                    <span class="tag-title">Organic Topsheet</span>
+                                    <span class="tag-desc">Dermatologically tested plant-based liner, gentle as a mother’s touch.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Active Fit Variant Visuals -->
+                        <div class="atelier-variant" data-variant="activefit">
+                            <img src="assets/images/home-swiper-nursery-compress.webp_v=1778306352.png" alt="CloudCush FlexFit Active" class="atelier-img">
+
+                            <!-- Floating Editorial Callouts -->
+                            <div class="atelier-tag tag-top-right">
+                                <span class="tag-dot"></span>
+                                <div class="tag-content">
+                                    <span class="tag-title">360° Comfort Stretch</span>
+                                    <span class="tag-desc">High-elastic waistband that moves with active crawls, leaving zero marks.</span>
+                                </div>
+                            </div>
+                            <div class="atelier-tag tag-bottom-left">
+                                <span class="tag-dot"></span>
+                                <div class="tag-content">
+                                    <span class="tag-title">3D Leak Protection</span>
+                                    <span class="tag-desc">Double-layer side hydrophobic barriers to contain all high-motion play.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Overnight Variant Visuals -->
+                        <div class="atelier-variant" data-variant="overnight">
+                            <img src="assets/images/home-swiper-outing-accessories-compress.webp_v=1778306352.png" alt="CloudCush Overnight Protection" class="atelier-img">
+
+                            <!-- Floating Editorial Callouts -->
+                            <div class="atelier-tag tag-center-left">
+                                <span class="tag-dot"></span>
+                                <div class="tag-content">
+                                    <span class="tag-title">12-Hour Dry Lock</span>
+                                    <span class="tag-desc">Japanese SAP core that absorbs 10x its weight for uninterrupted sleep.</span>
+                                </div>
+                            </div>
+                            <div class="atelier-tag tag-bottom-right">
+                                <span class="tag-dot"></span>
+                                <div class="tag-content">
+                                    <span class="tag-title">Airflow Micropores</span>
+                                    <span class="tag-desc">Perforated outer backsheet that expels heat and humidity instantly.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right: Sizing Engine Column -->
+                <div class="atelier-engine-col">
+
+                    <!-- Watermark Watermark background name -->
+                    <div class="atelier-watermark-wrap">
+                        <span class="atelier-watermark" id="recWatermark">TINYHUG</span>
+                    </div>
+
+                    <!-- Stage Selector Tabs (Awwwards Style) -->
+                    <div class="atelier-stages">
+                        <button class="atelier-stage-btn active" data-tab="newborn">
+                            <span class="btn-num">01</span>
+                            <span class="btn-text">Newborn Care</span>
+                        </button>
+                        <button class="atelier-stage-btn" data-tab="activefit">
+                            <span class="btn-num">02</span>
+                            <span class="btn-text">Active Fit</span>
+                        </button>
+                        <button class="atelier-stage-btn" data-tab="overnight">
+                            <span class="btn-num">03</span>
+                            <span class="btn-text">Overnight</span>
+                        </button>
+                    </div>
+
+                    <!-- Weight Thread (Minimalist line selector) -->
+                    <div class="weight-thread-wrapper">
+                        <span class="weight-thread-title">Select Baby's Weight</span>
+                        <div class="weight-thread-line" id="weightThreadLine">
+                            <div class="weight-thread-progress" id="weightThreadProgress"></div>
+                            <div class="weight-thread-ring" id="weightThreadRing"></div>
+                            <div class="weight-thread-points">
+                                <span class="weight-point" data-weight="xs" data-percent="0">
+                                    <span class="point-label">&lt;3 kg</span>
+                                </span>
+                                <span class="weight-point active" data-weight="s" data-percent="25">
+                                    <span class="point-label">3-5 kg</span>
+                                </span>
+                                <span class="weight-point" data-weight="m" data-percent="50">
+                                    <span class="point-label">5-8 kg</span>
+                                </span>
+                                <span class="weight-point" data-weight="l" data-percent="75">
+                                    <span class="point-label">8-11 kg</span>
+                                </span>
+                                <span class="weight-point" data-weight="xl" data-percent="100">
+                                    <span class="point-label">11+ kg</span>
+                                </span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Dropdown 2 -->
-                    <div class="trial-form-group">
-                        <label class="trial-form-label" for="baby-age">He/She is _ months (Optional)</label>
-                        <div class="trial-select-wrapper">
-                            <select class="trial-select" id="baby-age">
-                                <option value="<1 month">&lt;1 month</option>
-                                <option value="1-2 months">1-2 months</option>
-                                <option value="2-3 months">2-3 months</option>
-                                <option value="3-6 months">3-6 months</option>
-                                <option value="6+ months">6+ months</option>
-                            </select>
-                            <div class="trial-select-arrow">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                </svg>
+                    <!-- Recommended Choice Panel -->
+                    <div class="atelier-rec-display">
+                        <div class="atelier-rec-info">
+                            <span class="atelier-rec-eyebrow">Atelier Recommendation</span>
+                            <h3 class="atelier-rec-name" id="recDiaperName">CloudCush TinyHug</h3>
+                            <span class="atelier-rec-size" id="recDiaperSize">Size S (3-5 kg)</span>
+                        </div>
+                        <a href="product-details.php" class="atelier-cta" id="recDiaperCta">
+                            <span class="cta-label">Explore Variant</span>
+                            <svg class="cta-arrow" viewBox="0 0 24 24">
+                                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Comfort Sensation Metrics -->
+                    <div class="atelier-metrics">
+                        <span class="atelier-metrics-title">Sensation Profile</span>
+
+                        <div class="atelier-metric-row">
+                            <div class="atelier-metric-meta">
+                                <span class="atelier-metric-label">Absorbency Capacity</span>
+                                <span class="atelier-metric-value" id="valAbsorbency">80%</span>
+                            </div>
+                            <div class="atelier-metric-track">
+                                <div class="atelier-metric-bar" id="barAbsorbency" style="width: 80%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="atelier-metric-row">
+                            <div class="atelier-metric-meta">
+                                <span class="atelier-metric-label">Elasticity &amp; Stretch</span>
+                                <span class="atelier-metric-value" id="valStretch">60%</span>
+                            </div>
+                            <div class="atelier-metric-track">
+                                <div class="atelier-metric-bar" id="barStretch" style="width: 60%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="atelier-metric-row">
+                            <div class="atelier-metric-meta">
+                                <span class="atelier-metric-label">Topsheet Softness</span>
+                                <span class="atelier-metric-value" id="valSoftness">100%</span>
+                            </div>
+                            <div class="atelier-metric-track">
+                                <div class="atelier-metric-bar" id="barSoftness" style="width: 100%;"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Submit Button -->
-                    <div class="trial-submit-wrapper">
-                        <button type="submit" class="btn-outline-pill">Shop Essentials</button>
+                    <!-- Reassurance Badges -->
+                    <div class="atelier-reassurance">
+                        <div class="reassurance-item">
+                            <i class="ri-heart-line reassurance-icon"></i>
+                            <span>Pediatrician Approved</span>
+                        </div>
+                        <div class="reassurance-item">
+                            <i class="ri-leaf-line reassurance-icon"></i>
+                            <span>Totally Chlorine Free</span>
+                        </div>
+                        <div class="reassurance-item">
+                            <i class="ri-shield-check-line reassurance-icon"></i>
+                            <span>Hypoallergenic Certified</span>
+                        </div>
                     </div>
 
-                </form>
+                </div>
+
             </div>
-
         </div>
     </section>
 
@@ -294,99 +465,130 @@
          GSAP ScrollTrigger pinned scrub timeline
          ========================================================================== -->
     <section class="catnav-section" id="catnavSection">
+        <div class="catnav-stage" id="catnavStage">
 
-        <!-- Pinned stage — fixed during the scroll interaction -->
-        <div class="catnavStage" id="catnavStage">
-
-            <!-- LEFT: Category navigation list -->
-            <div class="catnavLeft" id="catnavLeft">
-                <nav class="catnavList" aria-label="Product categories">
-                    <button class="catnavItem active" data-index="0" aria-label="Newborn category">Newborn Care</button>
-                    <button class="catnavItem" data-index="1" aria-label="Active category">Active Fit</button>
-                    <button class="catnavItem" data-index="2" aria-label="Overnight category">Overnight Protection</button>
-                    <button class="catnavItem" data-index="3" aria-label="Sensitive category">Sensitive Skin</button>
-                    <button class="catnavItem" data-index="4" aria-label="Toddler category">Toddler Fit</button>
+            <!-- Left: Editorial nav list with progress tracks -->
+            <div class="catnav-left" id="catnavLeft">
+                <div class="catnav-nav-header">
+                    <span class="catnav-section-eyebrow">Variant Showcase</span>
+                    <h2 class="catnav-section-title">The Diaper Experience</h2>
+                </div>
+                <nav class="catnav-list" aria-label="Product categories">
+                    <button class="catnav-item active" data-index="0" aria-label="Newborn Care">
+                        <span class="catnav-item-num">01</span>
+                        <span class="catnav-item-label">Newborn Care</span>
+                        <div class="catnav-item-progress">
+                            <div class="catnav-item-progress-bar"></div>
+                        </div>
+                    </button>
+                    <button class="catnav-item" data-index="1" aria-label="Active Fit">
+                        <span class="catnav-item-num">02</span>
+                        <span class="catnav-item-label">Active Fit</span>
+                        <div class="catnav-item-progress">
+                            <div class="catnav-item-progress-bar"></div>
+                        </div>
+                    </button>
+                    <button class="catnav-item" data-index="2" aria-label="Overnight Protection">
+                        <span class="catnav-item-num">03</span>
+                        <span class="catnav-item-label">Overnight Protection</span>
+                        <div class="catnav-item-progress">
+                            <div class="catnav-item-progress-bar"></div>
+                        </div>
+                    </button>
+                    <button class="catnav-item" data-index="3" aria-label="Sensitive Skin">
+                        <span class="catnav-item-num">04</span>
+                        <span class="catnav-item-label">Sensitive Skin</span>
+                        <div class="catnav-item-progress">
+                            <div class="catnav-item-progress-bar"></div>
+                        </div>
+                    </button>
+                    <button class="catnav-item" data-index="4" aria-label="Toddler Comfort">
+                        <span class="catnav-item-num">05</span>
+                        <span class="catnav-item-label">Toddler Comfort</span>
+                        <div class="catnav-item-progress">
+                            <div class="catnav-item-progress-bar"></div>
+                        </div>
+                    </button>
                 </nav>
             </div>
 
-            <!-- RIGHT: Category content panels (stacked, cross-fade) -->
-            <div class="catnavRight" id="catnavRight">
+            <!-- Right: Immersive media viewport and details -->
+            <div class="catnav-right" id="catnavRight">
 
-                <div class="catnavPanel active" id="catnavPanel0" data-index="0">
-                    <div class="catnavPanelImg">
-                        <img src="assets/images/home-swiper-diaper-compress.webp_v=1778306352.png" alt="CloudCush TinyHug Newborn Diapers" loading="eager">
-                        <div class="catnavPanelOverlay"></div>
+                <!-- Panel 1: Newborn -->
+                <div class="catnav-panel active" id="catnavPanel0" data-index="0">
+                    <div class="catnav-panel-media">
+                        <img src="assets/images/home-swiper-diaper-compress.webp_v=1778306352.png" alt="CloudCush TinyHug Newborn Diapers" class="catnav-img" loading="eager">
+                        <div class="catnav-media-overlay"></div>
                     </div>
-                    <div class="catnavPanelContent">
-                        <span class="catnavPanelEyebrow">01 — Newborn Diapers</span>
-                        <h3 class="catnavPanelTitle">CloudCush<br>TinyHug Newborn</h3>
-                        <p class="catnavPanelDesc">Feather-soft protection custom tailored for your baby's delicate first months. Designed for maximum leak-proof comfort.</p>
-                        <a href="javascript:void(0);" class="catnavPanelCta">Shop Diapers</a>
+                    <div class="catnav-panel-content">
+                        <span class="catnav-panel-eyebrow">01 &mdash; First Touch</span>
+                        <h3 class="catnav-panel-title">CloudCush TinyHug</h3>
+                        <p class="catnav-panel-desc">Feather-soft, ultra-breathable protection custom tailored for your baby's delicate first months. Engineered to prevent rashes from day one.</p>
+                        <a href="product-details.php" class="catnav-panel-cta">Shop TinyHug</a>
                     </div>
                 </div>
 
-                <div class="catnavPanel" id="catnavPanel1" data-index="1">
-                    <div class="catnavPanelImg">
-                        <img src="assets/images/home-swiper-nursery-compress.webp_v=1778306352.png" alt="CloudCush FlexFit Active Baby Diapers" loading="lazy">
-                        <div class="catnavPanelOverlay"></div>
+                <!-- Panel 2: Active Fit -->
+                <div class="catnav-panel" id="catnavPanel1" data-index="1">
+                    <div class="catnav-panel-media">
+                        <img src="assets/images/home-swiper-nursery-compress.webp_v=1778306352.png" alt="CloudCush FlexFit Active Baby Diapers" class="catnav-img" loading="lazy">
+                        <div class="catnav-media-overlay"></div>
                     </div>
-                    <div class="catnavPanelContent">
-                        <span class="catnavPanelEyebrow">02 — Active Baby</span>
-                        <h3 class="catnavPanelTitle">CloudCush<br>FlexFit Active</h3>
-                        <p class="catnavPanelDesc">Stretchy 360-degree waistbands that move with your baby as they roll, crawl, and explore. Comfort that never slips.</p>
-                        <a href="javascript:void(0);" class="catnavPanelCta">Shop Diapers</a>
-                    </div>
-                </div>
-
-                <div class="catnavPanel" id="catnavPanel2" data-index="2">
-                    <div class="catnavPanelImg">
-                        <img src="assets/images/home-swiper-outing-accessories-compress.webp_v=1778306352.png" alt="CloudCush Overnight Protection Diapers" loading="lazy">
-                        <div class="catnavPanelOverlay"></div>
-                    </div>
-                    <div class="catnavPanelContent">
-                        <span class="catnavPanelEyebrow">03 — Overnight Protection</span>
-                        <h3 class="catnavPanelTitle">CloudCush<br>Overnight+ Dryness</h3>
-                        <p class="catnavPanelDesc">Advanced locks for 12-hour dryness. Keeps wetness away so your baby sleeps through the night, rash-free.</p>
-                        <a href="javascript:void(0);" class="catnavPanelCta">Shop Diapers</a>
+                    <div class="catnav-panel-content">
+                        <span class="catnav-panel-eyebrow">02 &mdash; Endless Motion</span>
+                        <h3 class="catnav-panel-title">CloudCush FlexFit</h3>
+                        <p class="catnav-panel-desc">Stretchy 360-degree waistbands that move with your baby as they roll, crawl, and explore. Leak-proof comfort that stays secure.</p>
+                        <a href="product-details.php" class="catnav-panel-cta">Shop FlexFit</a>
                     </div>
                 </div>
 
-                <div class="catnavPanel" id="catnavPanel3" data-index="3">
-                    <div class="catnavPanelImg">
-                        <img src="assets/images/home-swiper-play-compress.webp_v=1778306353.png" alt="CloudCush GentleCare Sensitive Skin Diapers" loading="lazy">
-                        <div class="catnavPanelOverlay"></div>
+                <!-- Panel 3: Overnight Protection -->
+                <div class="catnav-panel" id="catnavPanel2" data-index="2">
+                    <div class="catnav-panel-media">
+                        <img src="assets/images/home-swiper-outing-accessories-compress.webp_v=1778306352.png" alt="CloudCush Overnight Protection Diapers" class="catnav-img" loading="lazy">
+                        <div class="catnav-media-overlay"></div>
                     </div>
-                    <div class="catnavPanelContent">
-                        <span class="catnavPanelEyebrow">04 — Sensitive Skin</span>
-                        <h3 class="catnavPanelTitle">CloudCush<br>GentleCare Diapers</h3>
-                        <p class="catnavPanelDesc">Hypoallergenic organic cotton layer designed to prevent irritation. Certified protection for baby's sensitive skin.</p>
-                        <a href="javascript:void(0);" class="catnavPanelCta">Shop Diapers</a>
-                    </div>
-                </div>
-
-                <div class="catnavPanel" id="catnavPanel4" data-index="4">
-                    <div class="catnavPanelImg">
-                        <img src="assets/images/home-swiper-Travel_Gear.png_v=1775026754.png" alt="CloudCush PureComfort Toddler Diapers" loading="lazy">
-                        <div class="catnavPanelOverlay"></div>
-                    </div>
-                    <div class="catnavPanelContent">
-                        <span class="catnavPanelEyebrow">05 — Toddler Fit</span>
-                        <h3 class="catnavPanelTitle">CloudCush<br>PureComfort Airflow</h3>
-                        <p class="catnavPanelDesc">Maximum airflow comfort designed for active toddlers. Super thin yet ultra-absorbent, making play days worry-free.</p>
-                        <a href="javascript:void(0);" class="catnavPanelCta">Shop Diapers</a>
+                    <div class="catnav-panel-content">
+                        <span class="catnav-panel-eyebrow">03 &mdash; Peaceful Sleep</span>
+                        <h3 class="catnav-panel-title">CloudCush Overnight+</h3>
+                        <p class="catnav-panel-desc">Advanced absorbent locks for 12-hour dry protection. Keeps wetness away so your baby sleeps through the night completely rash-free.</p>
+                        <a href="product-details.php" class="catnav-panel-cta">Shop Overnight+</a>
                     </div>
                 </div>
 
-            </div><!-- /.catnavRight -->
+                <!-- Panel 4: Sensitive Skin -->
+                <div class="catnav-panel" id="catnavPanel3" data-index="3">
+                    <div class="catnav-panel-media">
+                        <img src="assets/images/home-swiper-play-compress.webp_v=1778306353.png" alt="CloudCush GentleCare Sensitive Skin Diapers" class="catnav-img" loading="lazy">
+                        <div class="catnav-media-overlay"></div>
+                    </div>
+                    <div class="catnav-panel-content">
+                        <span class="catnav-panel-eyebrow">04 &mdash; Skin Integrity</span>
+                        <h3 class="catnav-panel-title">CloudCush GentleCare</h3>
+                        <p class="catnav-panel-desc">Hypoallergenic organic cotton top sheet designed to soothe. Dermatologist-tested, totally chlorine-free protection for hypersensitive skin.</p>
+                        <a href="product-details.php" class="catnav-panel-cta">Shop GentleCare</a>
+                    </div>
+                </div>
 
-            <!-- Progress bar (thin horizontal line at bottom) -->
-            <div class="catnavProgress" id="catnavProgress">
-                <div class="catnavProgressBar" id="catnavProgressBar"></div>
+                <!-- Panel 5: Toddler Comfort -->
+                <div class="catnav-panel" id="catnavPanel4" data-index="4">
+                    <div class="catnav-panel-media">
+                        <img src="assets/images/home-swiper-Travel_Gear.png_v=1775026754.png" alt="CloudCush PureComfort Toddler Diapers" class="catnav-img" loading="lazy">
+                        <div class="catnav-media-overlay"></div>
+                    </div>
+                    <div class="catnav-panel-content">
+                        <span class="catnav-panel-eyebrow">05 &mdash; Active Growth</span>
+                        <h3 class="catnav-panel-title">PureComfort Airflow</h3>
+                        <p class="catnav-panel-desc">Maximum airflow comfort designed for active toddlers. Super thin yet ultra-absorbent, making play days worry-free and light.</p>
+                        <a href="product-details.php" class="catnav-panel-cta">Shop PureComfort</a>
+                    </div>
+                </div>
+
             </div>
 
-        </div><!-- /.catnavStage -->
-
-    </section><!-- /#catnavSection -->
+        </div>
+    </section>
 
     <!-- =========================================================
          CORE COLLECTION — Premium Carousel
@@ -416,127 +618,134 @@
 
                     <!-- Card 1: Diaper ─────────────────────────────────── -->
                     <div class="collection-card" data-cc-index="0">
-
-                        <!-- Image: fills top 58%, expands to 100% on hover via GSAP -->
-                        <div class="collection-image-wrap">
-                            <img src="assets/images/home-swiper-diaper-compress.webp_v=1778306352.png"
-                                alt="CloudCush AirSoft" class="collection-image" loading="lazy">
-                        </div>
-
-                        <!-- Info block: badge (below image) + rating + title + desc + price -->
-                        <div class="collection-info">
-                            <div class="collection-badge">
-                                <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
-                                    <circle cx="26" cy="26" r="25" fill="#17a697" />
-                                    <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
-                                    <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
-                                    <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
-                                    <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
-                                    <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
-                                </svg>
+                        <a href="product-details.php" class="collection-card-link-wrapper">
+                            <!-- Image: fills top 58%, expands to 100% on hover via GSAP -->
+                            <div class="collection-image-wrap">
+                                <img src="assets/images/home-swiper-diaper-compress.webp_v=1778306352.png"
+                                    alt="CloudCush AirSoft" class="collection-image" loading="lazy">
                             </div>
-                            <div class="collection-rating">
-                                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                                <span class="review-count">(42)</span>
+
+                            <!-- Info block: badge (below image) + rating + title + desc + price -->
+                            <div class="collection-info">
+                                <div class="collection-badge">
+                                    <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
+                                        <circle cx="26" cy="26" r="25" fill="#17a697" />
+                                        <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
+                                        <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
+                                        <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
+                                        <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
+                                        <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
+                                    </svg>
+                                </div>
+                                <div class="collection-rating">
+                                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <span class="review-count">(42)</span>
+                                </div>
+                                <h3 class="collection-product-title">CloudCush AirSoft</h3>
+                                <p class="collection-desc">Feather-soft protection for newborns and active babies.</p>
+                                <p class="collection-price">₹899</p>
                             </div>
-                            <h3 class="collection-product-title">CloudCush AirSoft</h3>
-                            <p class="collection-desc">Feather-soft protection for newborns and active babies.</p>
-                            <p class="collection-price">₹899</p>
-                        </div>
+                        </a>
 
                         <!-- CTA: absolute overlay at card bottom, revealed on hover -->
                         <div class="collection-cta-wrap">
-                            <a href="javascript:void(0);" class="collection-cta-btn">Choose options &middot; ₹899</a>
+                            <a href="product-details.php" class="collection-cta-btn">View Product</a>
                         </div>
                     </div>
 
                     <!-- Card 2: Wipes ──────────────────────────────────── -->
                     <div class="collection-card" data-cc-index="1">
-                        <div class="collection-image-wrap">
-                            <img src="assets/images/home-swiper-wipes-compress.webp_v=1778306354.png"
-                                alt="CloudCush GentleCare" class="collection-image" loading="lazy">
-                        </div>
-                        <div class="collection-info">
-                            <div class="collection-badge">
-                                <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
-                                    <circle cx="26" cy="26" r="25" fill="#17a697" />
-                                    <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
-                                    <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
-                                    <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
-                                    <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
-                                    <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
-                                </svg>
+                        <a href="product-details.php" class="collection-card-link-wrapper">
+                            <div class="collection-image-wrap">
+                                <img src="assets/images/home-swiper-wipes-compress.webp_v=1778306354.png"
+                                    alt="CloudCush GentleCare" class="collection-image" loading="lazy">
                             </div>
-                            <div class="collection-rating">
-                                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                                <span class="review-count">(11)</span>
+                            <div class="collection-info">
+                                <div class="collection-badge">
+                                    <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
+                                        <circle cx="26" cy="26" r="25" fill="#17a697" />
+                                        <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
+                                        <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
+                                        <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
+                                        <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
+                                        <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
+                                    </svg>
+                                </div>
+                                <div class="collection-rating">
+                                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <span class="review-count">(11)</span>
+                                </div>
+                                <h3 class="collection-product-title">CloudCush GentleCare</h3>
+                                <p class="collection-desc">Hypoallergenic organic diaper for rash-free days.</p>
+                                <p class="collection-price">₹599</p>
                             </div>
-                            <h3 class="collection-product-title">CloudCush GentleCare</h3>
-                            <p class="collection-desc">Hypoallergenic organic diaper for rash-free days.</p>
-                            <p class="collection-price">₹599</p>
-                        </div>
+                        </a>
                         <div class="collection-cta-wrap">
-                            <a href="javascript:void(0);" class="collection-cta-btn">Choose options &middot; ₹599</a>
+                            <a href="product-details.php" class="collection-cta-btn">View Product</a>
                         </div>
                     </div>
 
                     <!-- Card 3: Carrier ────────────────────────────────── -->
                     <div class="collection-card" data-cc-index="2">
-                        <div class="collection-image-wrap">
-                            <img src="assets/images/home-swiper-Travel_Gear.png_v=1775026754.png"
-                                alt="CloudCush Overnight+" class="collection-image" loading="lazy">
-                        </div>
-                        <div class="collection-info">
-                            <div class="collection-badge">
-                                <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
-                                    <circle cx="26" cy="26" r="25" fill="#17a697" />
-                                    <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
-                                    <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
-                                    <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
-                                    <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
-                                    <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
-                                </svg>
+                        <a href="product-details.php" class="collection-card-link-wrapper">
+                            <div class="collection-image-wrap">
+                                <img src="assets/images/home-swiper-Travel_Gear.png_v=1775026754.png"
+                                    alt="CloudCush Overnight+" class="collection-image" loading="lazy">
                             </div>
-                            <div class="collection-rating">
-                                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                                <span class="review-count">(76)</span>
+                            <div class="collection-info">
+                                <div class="collection-badge">
+                                    <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
+                                        <circle cx="26" cy="26" r="25" fill="#17a697" />
+                                        <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
+                                        <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
+                                        <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
+                                        <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
+                                        <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
+                                    </svg>
+                                </div>
+                                <div class="collection-rating">
+                                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <span class="review-count">(76)</span>
+                                </div>
+                                <h3 class="collection-product-title">CloudCush Overnight+</h3>
+                                <p class="collection-desc">12-hour leak-proof dryness for peaceful sleep nights.</p>
+                                <p class="collection-price">₹1,299</p>
                             </div>
-                            <h3 class="collection-product-title">CloudCush Overnight+</h3>
-                            <p class="collection-desc">12-hour leak-proof dryness for peaceful sleep nights.</p>
-                            <p class="collection-price">₹1,299</p>
-                        </div>
+                        </a>
                         <div class="collection-cta-wrap">
-                            <a href="javascript:void(0);" class="collection-cta-btn">Choose options &middot; ₹1,299</a>
+                            <a href="product-details.php" class="collection-cta-btn">View Product</a>
                         </div>
                     </div>
 
                     <!-- Card 4: Nursery ────────────────────────────────── -->
                     <div class="collection-card" data-cc-index="3">
-                        <div class="collection-image-wrap">
-                            <img src="assets/images/home-swiper-nursery-compress.webp_v=1778306352.png"
-                                alt="CloudCush DryEase" class="collection-image" loading="lazy">
-                        </div>
-                        <div class="collection-info">
-                            <div class="collection-badge">
-                                <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
-                                    <circle cx="26" cy="26" r="25" fill="#17a697" />
-                                    <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
-                                    <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
-                                    <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
-                                    <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
-                                    <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
-                                </svg>
+                        <a href="product-details.php" class="collection-card-link-wrapper">
+                            <div class="collection-image-wrap">
+                                <img src="assets/images/home-swiper-nursery-compress.webp_v=1778306352.png"
+                                    alt="CloudCush DryEase" class="collection-image" loading="lazy">
                             </div>
-                            <div class="collection-rating">
-                                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                                <span class="review-count">(29)</span>
+                            <div class="collection-info">
+                                <div class="collection-badge">
+                                    <svg class="oeko-badge-svg" viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" aria-label="OEKO-TEX Standard 100">
+                                        <circle cx="26" cy="26" r="25" fill="#17a697" />
+                                        <text x="26" y="20" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="7" font-weight="700" fill="#fff" letter-spacing="0.5">OEKO</text>
+                                        <text x="26" y="29" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="5.5" font-weight="400" fill="rgba(255,255,255,0.85)" letter-spacing="0.3">TEX&#174;</text>
+                                        <line x1="10" y1="32" x2="42" y2="32" stroke="rgba(255,255,255,0.4)" stroke-width="0.8" />
+                                        <text x="26" y="39" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">STANDARD</text>
+                                        <text x="26" y="45.5" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="4.5" font-weight="500" fill="rgba(255,255,255,0.75)" letter-spacing="0.5">100</text>
+                                    </svg>
+                                </div>
+                                <div class="collection-rating">
+                                    <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                                    <span class="review-count">(29)</span>
+                                </div>
+                                <h3 class="collection-product-title">CloudCush DryEase</h3>
+                                <p class="collection-desc">Super thin airflow comfort tailored for active toddlers.</p>
+                                <p class="collection-price">₹399</p>
                             </div>
-                            <h3 class="collection-product-title">CloudCush DryEase</h3>
-                            <p class="collection-desc">Super thin airflow comfort tailored for active toddlers.</p>
-                            <p class="collection-price">₹399</p>
-                        </div>
+                        </a>
                         <div class="collection-cta-wrap">
-                            <a href="javascript:void(0);" class="collection-cta-btn">Choose options &middot; ₹399</a>
+                            <a href="product-details.php" class="collection-cta-btn">View Product</a>
                         </div>
                     </div>
 
@@ -754,6 +963,140 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         THE JOURNAL — Luxury Editorial Blog Slider
+         ========================================================================== -->
+    <section class="blog-carousel-section" id="blogCarouselSection" aria-label="The Journal - Editorial Blog">
+        <div class="blog-carousel-container">
+            <!-- Header row with editorial titles & navigation buttons -->
+            <div class="blog-carousel-header">
+                <div class="blog-carousel-title-group">
+                    <span class="blog-carousel-eyebrow">The Journal</span>
+                    <h2 class="blog-carousel-title">Parenting, Science &amp; Softness</h2>
+                    <p class="blog-carousel-subtitle">Curated writings on baby care, sleep guides, and pediatrician tips.</p>
+                </div>
+                <div class="blog-carousel-nav">
+                    <button class="blog-nav-btn prev-btn" aria-label="Previous Post">
+                        <i class="ri-arrow-left-line"></i>
+                    </button>
+                    <button class="blog-nav-btn next-btn" aria-label="Next Post">
+                        <i class="ri-arrow-right-line"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Carousel Viewport -->
+            <div class="blog-carousel-viewport" id="blogCarouselViewport">
+                <div class="blog-carousel-track" id="blogCarouselTrack">
+
+                    <!-- Blog Card 1 -->
+                    <article class="blog-carousel-card">
+                        <a href="blog-details.php" class="blog-card-anchor">
+                            <div class="blog-card-media">
+                                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&auto=format&fit=crop&q=80" alt="The Science of Touch" class="blog-card-img" loading="lazy">
+                                <div class="blog-card-overlay">
+                                    <span class="blog-card-read-tag">Read Article <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                            <div class="blog-card-details">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-category">Pediatric Care</span>
+                                    <span class="blog-card-dot">&bull;</span>
+                                    <span class="blog-card-read">5 Min Read</span>
+                                </div>
+                                <h3 class="blog-card-title">The Science of Touch: Skin Integrity in the Newborn Phase</h3>
+                                <p class="blog-card-excerpt">How physical touch, cotton-like softness, and totally chlorine-free materials interact to shape early developmental pathways and prevent diaper rashes.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-date">June 04, 2026</span>
+                                    <span class="blog-card-cta">Read More <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- Blog Card 2 -->
+                    <article class="blog-carousel-card">
+                        <a href="blog-details.php" class="blog-card-anchor">
+                            <div class="blog-card-media">
+                                <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80" alt="Cozy Sleep Routines" class="blog-card-img" loading="lazy">
+                                <div class="blog-card-overlay">
+                                    <span class="blog-card-read-tag">Read Story <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                            <div class="blog-card-details">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-category">Sleep Guides</span>
+                                    <span class="blog-card-dot">&bull;</span>
+                                    <span class="blog-card-read">4 Min Read</span>
+                                </div>
+                                <h3 class="blog-card-title">Cozy Sleep: Structuring Your Baby's Night Routine</h3>
+                                <p class="blog-card-excerpt">From room temperature to calming sensory cues, explore our dermatologically safe evening wind-down rituals.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-date">June 02, 2026</span>
+                                    <span class="blog-card-cta">Read More <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- Blog Card 3 -->
+                    <article class="blog-carousel-card">
+                        <a href="blog-details.php" class="blog-card-anchor">
+                            <div class="blog-card-media">
+                                <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&auto=format&fit=crop&q=80" alt="Tackling Diaper Rash" class="blog-card-img" loading="lazy">
+                                <div class="blog-card-overlay">
+                                    <span class="blog-card-read-tag">Read Article <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                            <div class="blog-card-details">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-category">Care Tips</span>
+                                    <span class="blog-card-dot">&bull;</span>
+                                    <span class="blog-card-read">5 Min Read</span>
+                                </div>
+                                <h3 class="blog-card-title">Tackling Diaper Rash: A Modern Parent's Checklist</h3>
+                                <p class="blog-card-excerpt">Our simple dermatologist-backed guide to managing skin health during diaper changes and growth milestones.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-date">May 28, 2026</span>
+                                    <span class="blog-card-cta">Read More <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- Blog Card 4 -->
+                    <article class="blog-carousel-card">
+                        <a href="blog-details.php" class="blog-card-anchor">
+                            <div class="blog-card-media">
+                                <img src="https://images.unsplash.com/photo-1484981138541-3d074aa97716?w=600&auto=format&fit=crop&q=80" alt="TCF Wood Pulp" class="blog-card-img" loading="lazy">
+                                <div class="blog-card-overlay">
+                                    <span class="blog-card-read-tag">Read Article <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                            <div class="blog-card-details">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-category">Product Insights</span>
+                                    <span class="blog-card-dot">&bull;</span>
+                                    <span class="blog-card-read">6 Min Read</span>
+                                </div>
+                                <h3 class="blog-card-title">The Totally Chlorine-Free (TCF) Difference</h3>
+                                <p class="blog-card-excerpt">Why we rejected conventional bleach methods to protect delicate skin barriers and promote environmental health.</p>
+                                <div class="blog-card-footer">
+                                    <span class="blog-card-date">May 15, 2026</span>
+                                    <span class="blog-card-cta">Read More <i class="ri-arrow-right-line"></i></span>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Dot indicators -->
+            <div class="blog-carousel-dots"></div>
         </div>
     </section>
 </main>

@@ -18,9 +18,9 @@
 
       <!-- LEFT: Desktop Links -->
       <nav class="nav-col-left">
-        <a href="blog.php" class="nav-link underline-hover">Care &amp; Parenting</a>
-        <a href="javascript:void(0);" class="nav-link underline-hover" id="navShopAll">Shop All</a>
-        <a href="javascript:void(0);" class="nav-link underline-hover" id="navGifting">Gifting</a>
+        <a href="javascript:void(0);" class="nav-link underline-hover" id="navShopAll">Shop</a>
+        <a href="about.php" class="nav-link underline-hover">Why CloudCush</a>
+        <a href="diaper-guide.php" class="nav-link underline-hover">Care Guide</a>
       </nav>
 
       <!-- CENTER: Brand Logo -->
@@ -32,19 +32,8 @@
 
       <!-- RIGHT: Desktop Links & Actions -->
       <nav class="nav-col-right">
-        <div class="discover-nav-wrapper">
-          <a href="javascript:void(0);" class="nav-link underline-hover" id="navDiscover">Discover</a>
-
-          <!-- Discover Dropdown Menu -->
-          <div class="discover-menu" id="discoverMenu">
-            <ul class="discover-links-list">
-              <li><a href="about.php">Why CloudCush™</a></li>
-              <li><a href="blog.php">The Journal</a></li>
-              <li><a href="diaper-guide.php">Diaper Guide</a></li>
-              <li><a href="faq.php">FAQs</a></li>
-            </ul>
-          </div>
-        </div>
+        <a href="blog.php" class="nav-link underline-hover">Journal</a>
+        <a href="faq.php" class="nav-link underline-hover">FAQ</a>
         <div class="nav-icons">
           <a href="javascript:void(0);" class="icon-btn" aria-label="Search"><i class="ri-search-line"></i></a>
           <a href="javascript:void(0);" class="icon-btn" aria-label="Account"><i class="ri-user-line"></i></a>
@@ -77,11 +66,11 @@
           <div class="mega-menu-col">
             <h4 class="mega-menu-title">Growth Stages</h4>
             <ul class="mega-menu-links">
-              <li><a href="diaper.php?age=0-3">0–3 Months</a></li>
-              <li><a href="diaper.php?age=3-6">3–6 Months</a></li>
-              <li><a href="diaper.php?age=6-12">6–12 Months</a></li>
-              <li><a href="diaper.php?age=1-2">1–2 Years</a></li>
-              <li><a href="diaper.php?age=2-4">2–4 Years</a></li>
+              <li><a href="products.php?age=0-3">0–3 Months</a></li>
+              <li><a href="products.php?age=3-6">3–6 Months</a></li>
+              <li><a href="products.php?age=6-12">6–12 Months</a></li>
+              <li><a href="products.php?age=1-2">1–2 Years</a></li>
+              <li><a href="products.php?age=2-4">2–4 Years</a></li>
             </ul>
           </div>
 
@@ -89,11 +78,11 @@
           <div class="mega-menu-col">
             <h4 class="mega-menu-title">Diaper Types</h4>
             <ul class="mega-menu-links">
-              <li><a href="diaper.php?type=overnight">Overnight Diapers</a></li>
-              <li><a href="diaper.php?type=rash-free">Rash-Free Diapers</a></li>
-              <li><a href="diaper.php?type=everyday">Ultra Soft Diapers</a></li>
-              <li><a href="diaper.php?type=active">Active Baby Diapers</a></li>
-              <li><a href="diaper.php?type=sensitive">Sensitive Skin Diapers</a></li>
+              <li><a href="products.php?type=overnight">Overnight Diapers</a></li>
+              <li><a href="products.php?type=rash-free">Rash-Free Diapers</a></li>
+              <li><a href="products.php?type=everyday">Ultra Soft Diapers</a></li>
+              <li><a href="products.php?type=active">Active Baby Diapers</a></li>
+              <li><a href="products.php?type=sensitive">Sensitive Skin Diapers</a></li>
             </ul>
           </div>
 
@@ -101,11 +90,11 @@
           <div class="mega-menu-col">
             <h4 class="mega-menu-title">Collections</h4>
             <ul class="mega-menu-links">
-              <li><a href="diaper.php">New Arrivals</a></li>
-              <li><a href="diaper.php">Best Sellers</a></li>
-              <li><a href="diaper.php">Premium Range</a></li>
-              <li><a href="diaper.php?type=everyday">Everyday Comfort</a></li>
-              <li><a href="diaper.php">Summer Care</a></li>
+              <li><a href="products.php">New Arrivals</a></li>
+              <li><a href="products.php">Best Sellers</a></li>
+              <li><a href="products.php">Premium Range</a></li>
+              <li><a href="products.php?type=everyday">Everyday Comfort</a></li>
+              <li><a href="products.php">Summer Care</a></li>
             </ul>
           </div>
 
@@ -113,16 +102,16 @@
           <div class="mega-menu-col">
             <h4 class="mega-menu-title">Parent Essentials</h4>
             <ul class="mega-menu-links">
-              <li><a href="diaper.php">Combo Packs</a></li>
-              <li><a href="diaper.php">Monthly Packs</a></li>
-              <li><a href="diaper.php">Trial Packs</a></li>
-              <li><a href="diaper.php">Travel Packs</a></li>
+              <li><a href="products.php">Combo Packs</a></li>
+              <li><a href="products.php">Monthly Packs</a></li>
+              <li><a href="products.php">Single Packs</a></li>
+              <li><a href="products.php">Travel Packs</a></li>
             </ul>
           </div>
 
           <!-- Bottom Link -->
           <div class="mega-menu-bottom-link">
-            <a href="diaper.php" class="mega-explore-link">Explore All Products <i class="ri-arrow-right-line"></i></a>
+            <a href="products.php" class="mega-explore-link">Explore All Products <i class="ri-arrow-right-line"></i></a>
           </div>
 
         </div>
@@ -158,46 +147,6 @@
 
       </div>
     </div>
-
-    <!-- Gifting Mega Menu Dropdown -->
-    <div class="gifting-menu" id="giftingMenu">
-      <div class="container gifting-menu-container">
-
-        <!-- Card 1: Newborn Starter Box -->
-        <a href="javascript:void(0);" class="gifting-card">
-          <div class="gifting-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1522850959076-3f4770c18413?w=600&auto=format&fit=crop&q=60" alt="Newborn Starter Box">
-          </div>
-          <div class="gifting-card-info">
-            <h3 class="gifting-card-title">Newborn Starter Box</h3>
-            <p class="gifting-card-desc">Soft everyday essentials for a baby’s first months.</p>
-          </div>
-        </a>
-
-        <!-- Card 2: CloudCush Monthly Pack -->
-        <a href="javascript:void(0);" class="gifting-card">
-          <div class="gifting-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=60" alt="CloudCush Monthly Pack">
-          </div>
-          <div class="gifting-card-info">
-            <h3 class="gifting-card-title">CloudCush Monthly Pack</h3>
-            <p class="gifting-card-desc">Premium diaper comfort for everyday parenting.</p>
-          </div>
-        </a>
-
-        <!-- Card 3: Overnight Care Bundle -->
-        <a href="javascript:void(0);" class="gifting-card">
-          <div class="gifting-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1697751946618-d04ad612cb78?w=600&auto=format&fit=crop&q=60" alt="Overnight Care Bundle">
-          </div>
-          <div class="gifting-card-info">
-            <h3 class="gifting-card-title">Overnight Care Bundle</h3>
-            <p class="gifting-card-desc">Extra absorbent comfort for peaceful nights.</p>
-          </div>
-        </a>
-
-      </div>
-    </div>
   </header>
 
   <!-- Mobile Side Panel Backdrop -->
@@ -210,124 +159,84 @@
       <i class="ri-close-line"></i>
     </button>
     <nav class="mobile-menu-list">
+      <div class="mobile-menu-item has-submenu">
+        <button class="mobile-nav-link mobile-submenu-toggle">
+          Shop <i class="ri-arrow-down-s-line"></i>
+        </button>
+        <div class="mobile-submenu">
+          <div class="mobile-submenu-inner">
+
+            <!-- Accordion Category 1: Growth Stages -->
+            <div class="mobile-submenu-group">
+              <button class="mobile-submenu-title">Growth Stages <i class="ri-add-line"></i></button>
+              <ul class="mobile-submenu-links">
+                <li><a href="products.php?age=0-3">0–3 Months</a></li>
+                <li><a href="products.php?age=3-6">3–6 Months</a></li>
+                <li><a href="products.php?age=6-12">6–12 Months</a></li>
+                <li><a href="products.php?age=1-2">1–2 Years</a></li>
+                <li><a href="products.php?age=2-4">2–4 Years</a></li>
+              </ul>
+            </div>
+
+            <!-- Accordion Category 2: Diaper Types -->
+            <div class="mobile-submenu-group">
+              <button class="mobile-submenu-title">Diaper Types <i class="ri-add-line"></i></button>
+              <ul class="mobile-submenu-links">
+                <li><a href="products.php?type=overnight">Overnight Diapers</a></li>
+                <li><a href="products.php?type=rash-free">Rash-Free Diapers</a></li>
+                <li><a href="products.php?type=everyday">Ultra Soft Diapers</a></li>
+                <li><a href="products.php?type=active">Active Baby Diapers</a></li>
+                <li><a href="products.php?type=sensitive">Sensitive Skin Diapers</a></li>
+              </ul>
+            </div>
+
+            <!-- Accordion Category 3: Collections -->
+            <div class="mobile-submenu-group">
+              <button class="mobile-submenu-title">Collections <i class="ri-add-line"></i></button>
+              <ul class="mobile-submenu-links">
+                <li><a href="products.php">New Arrivals</a></li>
+                <li><a href="products.php">Best Sellers</a></li>
+                <li><a href="products.php">Premium Range</a></li>
+                <li><a href="products.php?type=everyday">Everyday Comfort</a></li>
+                <li><a href="products.php">Summer Care</a></li>
+              </ul>
+            </div>
+
+            <!-- Accordion Category 4: Parent Essentials -->
+            <div class="mobile-submenu-group">
+              <button class="mobile-submenu-title">Parent Essentials <i class="ri-add-line"></i></button>
+              <ul class="mobile-submenu-links">
+                <li><a href="products.php">Combo Packs</a></li>
+                <li><a href="products.php">Monthly Packs</a></li>
+                <li><a href="products.php">Single Packs</a></li>
+                <li><a href="products.php">Travel Packs</a></li>
+              </ul>
+            </div>
+
+            <div class="mobile-submenu-bottom">
+              <a href="products.php" class="mobile-explore-link">Explore All Products <i class="ri-arrow-right-line"></i></a>
+            </div>
+
+          </div><!-- /.mobile-submenu-inner -->
+        </div>
+      </div>
+
       <div class="mobile-menu-item">
-        <a href="blog.php" class="mobile-nav-link">Care &amp; Parenting</a>
+        <a href="about.php" class="mobile-nav-link">Why CloudCush</a>
       </div>
 
-      <div class="mobile-menu-item has-submenu">
-        <button class="mobile-nav-link mobile-submenu-toggle">
-          Shop All <i class="ri-arrow-down-s-line"></i>
-        </button>
-        <div class="mobile-submenu">
-          <div class="mobile-submenu-inner">
-
-          <!-- Accordion Category 1: Growth Stages -->
-          <div class="mobile-submenu-group">
-            <button class="mobile-submenu-title">Growth Stages <i class="ri-add-line"></i></button>
-            <ul class="mobile-submenu-links">
-              <li><a href="diaper.php?age=0-3">0–3 Months</a></li>
-              <li><a href="diaper.php?age=3-6">3–6 Months</a></li>
-              <li><a href="diaper.php?age=6-12">6–12 Months</a></li>
-              <li><a href="diaper.php?age=1-2">1–2 Years</a></li>
-              <li><a href="diaper.php?age=2-4">2–4 Years</a></li>
-            </ul>
-          </div>
-
-          <!-- Accordion Category 2: Diaper Types -->
-          <div class="mobile-submenu-group">
-            <button class="mobile-submenu-title">Diaper Types <i class="ri-add-line"></i></button>
-            <ul class="mobile-submenu-links">
-              <li><a href="diaper.php?type=overnight">Overnight Diapers</a></li>
-              <li><a href="diaper.php?type=rash-free">Rash-Free Diapers</a></li>
-              <li><a href="diaper.php?type=everyday">Ultra Soft Diapers</a></li>
-              <li><a href="diaper.php?type=active">Active Baby Diapers</a></li>
-              <li><a href="diaper.php?type=sensitive">Sensitive Skin Diapers</a></li>
-            </ul>
-          </div>
-
-          <!-- Accordion Category 3: Collections -->
-          <div class="mobile-submenu-group">
-            <button class="mobile-submenu-title">Collections <i class="ri-add-line"></i></button>
-            <ul class="mobile-submenu-links">
-              <li><a href="diaper.php">New Arrivals</a></li>
-              <li><a href="diaper.php">Best Sellers</a></li>
-              <li><a href="diaper.php">Premium Range</a></li>
-              <li><a href="diaper.php?type=everyday">Everyday Comfort</a></li>
-              <li><a href="diaper.php">Summer Care</a></li>
-            </ul>
-          </div>
-
-          <!-- Accordion Category 4: Parent Essentials -->
-          <div class="mobile-submenu-group">
-            <button class="mobile-submenu-title">Parent Essentials <i class="ri-add-line"></i></button>
-            <ul class="mobile-submenu-links">
-              <li><a href="diaper.php">Combo Packs</a></li>
-              <li><a href="diaper.php">Monthly Packs</a></li>
-              <li><a href="diaper.php">Trial Packs</a></li>
-              <li><a href="diaper.php">Travel Packs</a></li>
-            </ul>
-          </div>
-
-          <div class="mobile-submenu-bottom">
-            <a href="diaper.php" class="mobile-explore-link">Explore All Products <i class="ri-arrow-right-line"></i></a>
-          </div>
-
-          </div><!-- /.mobile-submenu-inner -->
-        </div>
+      <div class="mobile-menu-item">
+        <a href="diaper-guide.php" class="mobile-nav-link">Care Guide</a>
       </div>
 
-      <div class="mobile-menu-item has-submenu">
-        <button class="mobile-nav-link mobile-submenu-toggle">
-          Gifting <i class="ri-arrow-down-s-line"></i>
-        </button>
-        <div class="mobile-submenu">
-          <div class="mobile-submenu-inner">
-
-          <!-- Mobile Card 1 -->
-          <a href="javascript:void(0);" class="mobile-gifting-card">
-            <img src="https://images.unsplash.com/photo-1522850959076-3f4770c18413?w=300&auto=format&fit=crop&q=60" alt="Newborn Starter Box">
-            <div class="mobile-gifting-info">
-              <h4 class="mobile-gifting-title">Newborn Starter Box</h4>
-              <p class="mobile-gifting-desc">Soft everyday essentials for baby's first months.</p>
-            </div>
-          </a>
-
-          <!-- Mobile Card 2 -->
-          <a href="javascript:void(0);" class="mobile-gifting-card">
-            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=300&auto=format&fit=crop&q=60" alt="CloudCush Monthly Pack">
-            <div class="mobile-gifting-info">
-              <h4 class="mobile-gifting-title">CloudCush Monthly Pack</h4>
-              <p class="mobile-gifting-desc">Premium diaper comfort for everyday parenting.</p>
-            </div>
-          </a>
-
-          <!-- Mobile Card 3 -->
-          <a href="javascript:void(0);" class="mobile-gifting-card">
-            <img src="https://images.unsplash.com/photo-1697751946618-d04ad612cb78?w=300&auto=format&fit=crop&q=60" alt="Overnight Care Bundle">
-            <div class="mobile-gifting-info">
-              <h4 class="mobile-gifting-title">Overnight Care Bundle</h4>
-              <p class="mobile-gifting-desc">Extra absorbent comfort for peaceful nights.</p>
-            </div>
-          </a>
-
-          </div><!-- /.mobile-submenu-inner -->
-        </div>
+      <div class="mobile-menu-item">
+        <a href="blog.php" class="mobile-nav-link">Journal</a>
       </div>
-      <div class="mobile-menu-item has-submenu">
-        <button class="mobile-nav-link mobile-submenu-toggle">
-          Discover <i class="ri-arrow-down-s-line"></i>
-        </button>
-        <div class="mobile-submenu">
-          <div class="mobile-submenu-inner">
-          <ul class="mobile-discover-links">
-            <li><a href="about.php">Why CloudCush™</a></li>
-            <li><a href="blog.php">The Journal</a></li>
-            <li><a href="diaper-guide.php">Diaper Guide</a></li>
-            <li><a href="faq.php">FAQs</a></li>
-          </ul>
-          </div><!-- /.mobile-submenu-inner -->
-        </div>
+
+      <div class="mobile-menu-item">
+        <a href="faq.php" class="mobile-nav-link">FAQ</a>
       </div>
+
       <div class="mobile-menu-item">
         <a href="javascript:void(0);" class="mobile-nav-link">Account</a>
       </div>

@@ -227,7 +227,7 @@
         Experience the softest protection, completely free from chlorine and harsh chemical additives.
       </p>
       <div class="cta-actions">
-        <a href="diaper.php" class="btn-pill btn-pill-primary">Shop Diapers</a>
+        <a href="products.php" class="btn-pill btn-pill-primary">Shop Diapers</a>
         <a href="about.php" class="btn-pill">Our Philosophy</a>
       </div>
     </div>

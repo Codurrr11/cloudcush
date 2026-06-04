@@ -18,4 +18,9 @@
   <!-- Modular CSS Connection (Relative path for XAMPP Compatibility) -->
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+
+  <?php if (!empty($use_diaper_showcase)): ?>
+  <!-- 3D Diaper Showcase Styles (isolated, only on pages that use the showcase) -->
+  <link rel="stylesheet" href="assets/css/diaper-showcase.css">
+  <?php endif; ?>
 </head>

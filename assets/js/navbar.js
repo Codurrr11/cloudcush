@@ -2,7 +2,6 @@
 window.initNavbar = () => {
   const menuToggle = document.getElementById("mobile-menu-toggle");
   const mobileMenu = document.getElementById("mobile-nav-menu");
-
   const backdrop = document.getElementById("mobile-nav-backdrop");
 
   // --- MOBILE MENU OPEN / CLOSE HELPERS ---
@@ -20,6 +19,7 @@ window.initNavbar = () => {
     if (backdrop) backdrop.classList.remove("is-active");
     if (window.lenis) window.lenis.start();
     document.body.style.overflow = "";
+    
     // Collapse all open submenus when panel closes
     mobileMenu
       .querySelectorAll(".mobile-submenu.is-active")
@@ -51,7 +51,6 @@ window.initNavbar = () => {
     }
 
     // Dedicated close button
-
     const closeBtn = document.getElementById("mobile-menu-close");
     if (closeBtn) {
       closeBtn.addEventListener("click", closeMobileMenu);
@@ -60,7 +59,7 @@ window.initNavbar = () => {
     // Dismiss panel on plain nav link clicks (not toggles)
     mobileMenu
       .querySelectorAll(
-        ".mobile-nav-link:not(.mobile-submenu-toggle), .mobile-submenu-links a, .mobile-discover-links a, .mobile-submenu-bottom a, .mobile-gifting-card",
+        ".mobile-nav-link:not(.mobile-submenu-toggle), .mobile-submenu-links a, .mobile-discover-links a, .mobile-submenu-bottom a",
       )
       .forEach((link) => {
         link.addEventListener("click", closeMobileMenu);
@@ -92,9 +91,7 @@ window.initNavbar = () => {
   });
 
   // --- MOBILE INNER ACCORDION (sub-group titles, one open at a time per parent) ---
-  const accordionGroupTitles = document.querySelectorAll(
-    ".mobile-submenu-title",
-  );
+  const accordionGroupTitles = document.querySelectorAll(".mobile-submenu-title");
   accordionGroupTitles.forEach((title) => {
     title.addEventListener("click", (e) => {
       e.preventDefault();
@@ -121,6 +118,7 @@ window.initNavbar = () => {
     });
   });
 
+  // --- DESKTOP SHOP MEGA MENU LOGIC ---
   const navShopAll = document.getElementById("navShopAll");
   const megaMenu = document.getElementById("megaMenu");
 
@@ -186,142 +184,6 @@ window.initNavbar = () => {
     });
 
     megaMenu.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(closeMenu, 150);
-    });
-  }
-
-  // --- DESKTOP GIFTING MENU LOGIC ---
-  const navGifting = document.getElementById("navGifting");
-  const giftingMenu = document.getElementById("giftingMenu");
-
-  if (navGifting && giftingMenu) {
-    let closeTimeout;
-
-    const openMenu = () => {
-      clearTimeout(closeTimeout);
-      navGifting.classList.add("is-active");
-
-      // Prevent overlapping GSAP tweens
-      gsap.killTweensOf(giftingMenu);
-      giftingMenu.style.display = "block";
-
-      // Animate panel reveal (Apple-style smooth ease)
-      gsap.fromTo(
-        giftingMenu,
-        { opacity: 0, y: -15, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" },
-      );
-
-      // Stagger Gifting cards reveal slightly
-      const cards = giftingMenu.querySelectorAll(".gifting-card");
-      gsap.fromTo(
-        cards,
-        { opacity: 0, y: 12 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.35,
-          stagger: 0.05,
-          ease: "power2.out",
-          delay: 0.05,
-        },
-      );
-    };
-
-    const closeMenu = () => {
-      gsap.killTweensOf(giftingMenu);
-      gsap.to(giftingMenu, {
-        opacity: 0,
-        y: -10,
-        scale: 0.98,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          giftingMenu.style.display = "none";
-          navGifting.classList.remove("is-active");
-        },
-      });
-    };
-
-    // Desktop hover bindings with hover intent delay
-    navGifting.addEventListener("mouseenter", openMenu);
-    navGifting.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(closeMenu, 150);
-    });
-
-    giftingMenu.addEventListener("mouseenter", () => {
-      clearTimeout(closeTimeout);
-    });
-
-    giftingMenu.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(closeMenu, 150);
-    });
-  }
-
-  // --- DESKTOP DISCOVER MENU LOGIC ---
-  const navDiscover = document.getElementById("navDiscover");
-  const discoverMenu = document.getElementById("discoverMenu");
-
-  if (navDiscover && discoverMenu) {
-    let closeTimeout;
-
-    const openMenu = () => {
-      clearTimeout(closeTimeout);
-      navDiscover.classList.add("is-active");
-
-      // Prevent overlapping GSAP tweens
-      gsap.killTweensOf(discoverMenu);
-      discoverMenu.style.display = "block";
-
-      // Animate panel reveal (Apple-style smooth ease)
-      gsap.fromTo(
-        discoverMenu,
-        { opacity: 0, y: -10, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" },
-      );
-
-      // Stagger links reveal slightly
-      const links = discoverMenu.querySelectorAll(".discover-links-list li");
-      gsap.fromTo(
-        links,
-        { opacity: 0, y: 8 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.35,
-          stagger: 0.05,
-          ease: "power2.out",
-          delay: 0.06,
-        },
-      );
-    };
-
-    const closeMenu = () => {
-      gsap.killTweensOf(discoverMenu);
-      gsap.to(discoverMenu, {
-        opacity: 0,
-        y: -10,
-        scale: 0.98,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          discoverMenu.style.display = "none";
-          navDiscover.classList.remove("is-active");
-        },
-      });
-    };
-
-    // Desktop hover bindings with hover intent delay
-    navDiscover.addEventListener("mouseenter", openMenu);
-    navDiscover.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(closeMenu, 150);
-    });
-
-    discoverMenu.addEventListener("mouseenter", () => {
-      clearTimeout(closeTimeout);
-    });
-
-    discoverMenu.addEventListener("mouseleave", () => {
       closeTimeout = setTimeout(closeMenu, 150);
     });
   }

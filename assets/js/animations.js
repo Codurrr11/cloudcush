@@ -203,41 +203,163 @@ window.initAnimations = () => {
   // ---------------------------------------------------------------------------
   // TRIAL
   // ---------------------------------------------------------------------------
-  if (document.querySelector(".trial-section")) {
-    gsap.set(".trial-title", { y: 50, opacity: 0 });
-    gsap.set(".trial-desc", { y: 30, opacity: 0 });
-    gsap.set(".trial-form-group", { y: 30, opacity: 0 });
-    gsap.set(".trial-submit-wrapper", { y: 30, opacity: 0 });
-
-    const trialTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".trial-section",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
+  // ---------------------------------------------------------------------------
+  // INTERACTIVE DIAPER SELECTOR & FIT EXPLORER
+  // --------------------------------------------------------------------------  // ---------------------------------------------------------------------------
+  // PREMIUM SIZING & SENSATION ATELIER
+  // ---------------------------------------------------------------------------
+  if (document.querySelector("#diaperSelectorSection")) {
+    const variantData = {
+      newborn: {
+        name: "CloudCush TinyHug",
+        absorbency: 80,
+        stretch: 60,
+        softness: 100,
+        defaultWeight: "s",
+        watermark: "TINYHUG"
       },
+      activefit: {
+        name: "CloudCush FlexFit",
+        absorbency: 80,
+        stretch: 100,
+        softness: 80,
+        defaultWeight: "m",
+        watermark: "FLEXFIT"
+      },
+      overnight: {
+        name: "CloudCush Overnight+",
+        absorbency: 100,
+        stretch: 80,
+        softness: 80,
+        defaultWeight: "xl",
+        watermark: "OVERNIGHT+"
+      }
+    };
+
+    const weightMappings = {
+      xs: { variant: "newborn", size: "Size XS (<3 kg)", name: "CloudCush TinyHug", percent: 0 },
+      s:  { variant: "newborn", size: "Size S (3-5 kg)", name: "CloudCush TinyHug", percent: 25 },
+      m:  { variant: "activefit", size: "Size M (5-8 kg)", name: "CloudCush FlexFit", percent: 50 },
+      l:  { variant: "activefit", size: "Size L (8-11 kg)", name: "CloudCush FlexFit", percent: 75 },
+      xl: { variant: "overnight", size: "Size XL (11+ kg)", name: "CloudCush Overnight+", percent: 100 }
+    };
+
+    let activeVariantId = "newborn";
+    let activeWeightId = "s";
+
+    // Text Counter Animation Helper
+    const animateNumber = (id, targetVal) => {
+      const el = document.querySelector(id);
+      if (!el) return;
+      const currentVal = parseInt(el.innerText) || 0;
+      const obj = { value: currentVal };
+      gsap.to(obj, {
+        value: targetVal,
+        duration: 0.8,
+        ease: "power2.out",
+        onUpdate: () => {
+          el.innerText = Math.round(obj.value) + "%";
+        }
+      });
+    };
+
+    // Dynamic Sensation Metrics Animator
+    const updateMetrics = (absorbency, stretch, softness) => {
+      // 1. Animate Bars
+      gsap.to("#barAbsorbency", { width: absorbency + "%", duration: 0.8, ease: "power3.out" });
+      gsap.to("#barStretch", { width: stretch + "%", duration: 0.8, ease: "power3.out" });
+      gsap.to("#barSoftness", { width: softness + "%", duration: 0.8, ease: "power3.out" });
+
+      // 2. Animate Numbers
+      animateNumber("#valAbsorbency", absorbency);
+      animateNumber("#valStretch", stretch);
+      animateNumber("#valSoftness", softness);
+    };
+
+    // Weight Selection Slider Handler
+    const selectWeight = (weightId, triggerTabSwitch = true) => {
+      activeWeightId = weightId;
+      const weightInfo = weightMappings[weightId];
+      if (!weightInfo) return;
+
+      // Update active state class on points
+      document.querySelectorAll(".weight-point").forEach(point => {
+        point.classList.toggle("active", point.getAttribute("data-weight") === weightId);
+      });
+
+      // Animate Slider Ring & Progress Bar
+      gsap.to("#weightThreadRing", { left: weightInfo.percent + "%", duration: 0.6, ease: "power3.out" });
+      gsap.to("#weightThreadProgress", { width: weightInfo.percent + "%", duration: 0.6, ease: "power3.out" });
+
+      // Update Rec Details
+      document.querySelector("#recDiaperName").innerText = weightInfo.name;
+      document.querySelector("#recDiaperSize").innerText = weightInfo.size;
+
+      // Swap variant stage tabs if needed
+      if (triggerTabSwitch) {
+        switchVariant(weightInfo.variant, false);
+      }
+    };
+
+    // Variant Stage Tabs Switcher
+    const switchVariant = (variantId, fromTabClick = false) => {
+      activeVariantId = variantId;
+      const data = variantData[variantId];
+      if (!data) return;
+
+      // 1. Update Active button state
+      document.querySelectorAll(".atelier-stage-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-tab") === variantId);
+      });
+
+      // 2. Crossfade Active Visuals with scale-in reveal
+      document.querySelectorAll(".atelier-variant").forEach(variant => {
+        const isCurrent = variant.getAttribute("data-variant") === variantId;
+        if (isCurrent) {
+          variant.classList.add("active");
+          gsap.fromTo(variant, 
+            { opacity: 0, scale: 0.92, y: 10 }, 
+            { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power3.out", overwrite: "auto" }
+          );
+        } else {
+          variant.classList.remove("active");
+          gsap.to(variant, { opacity: 0, duration: 0.3, overwrite: "auto" });
+        }
+      });
+
+      // 3. Editorial Watermark Transition
+      const watermark = document.querySelector("#recWatermark");
+      if (watermark) {
+        gsap.to(watermark, { opacity: 0, y: 15, duration: 0.25, ease: "power2.in", onComplete: () => {
+          watermark.innerText = data.watermark;
+          gsap.fromTo(watermark, { y: -15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" });
+        }});
+      }
+
+      // 4. Update Metrics
+      updateMetrics(data.absorbency, data.stretch, data.softness);
+
+      // 5. Select default weight for active stage if tab clicked directly
+      if (fromTabClick) {
+        selectWeight(data.defaultWeight, false);
+      }
+    };
+
+    // Bind Stage Button Click Handlers
+    document.querySelectorAll(".atelier-stage-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const tabId = btn.getAttribute("data-tab");
+        switchVariant(tabId, true);
+      });
     });
-    trialTl
-      .to(".trial-title", {
-        y: 0,
-        opacity: 1,
-        duration: 1.1,
-        ease: "power3.out",
-      })
-      .to(
-        ".trial-desc",
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.8",
-      )
-      .to(
-        ".trial-form-group",
-        { y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power3.out" },
-        "-=0.7",
-      )
-      .to(
-        ".trial-submit-wrapper",
-        { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
-        "-=0.6",
-      );
+
+    // Bind Weight Thread Point Click Handlers
+    document.querySelectorAll(".weight-point").forEach(point => {
+      point.addEventListener("click", () => {
+        const weightId = point.getAttribute("data-weight");
+        selectWeight(weightId, true);
+      });
+    });
   }
 
   // ===========================================================================
@@ -418,16 +540,14 @@ window.initAnimations = () => {
 
   const catnavSection = document.querySelector("#catnavSection");
   if (catnavSection) {
-    const catnavItems = document.querySelectorAll(".catnavItem");
-    const catnavPanels = document.querySelectorAll(".catnavPanel");
-    const catnavProgBar = document.querySelector("#catnavProgressBar");
+    const catnavItems = document.querySelectorAll(".catnav-item");
+    const catnavPanels = document.querySelectorAll(".catnav-panel");
 
     if (catnavItems.length && catnavPanels.length) {
       const TOTAL_TABS = catnavItems.length; // 5
       let activeTabIdx = 0;
-      let isTransitioning = false;
 
-      // ── Cross-fade panel switch ───────────────────────────────────────────────
+      // ── Cross-fade panel switch (Desktop & Mobile) ─────────────────────────────
       const switchTab = (toIndex) => {
         if (toIndex === activeTabIdx) return;
 
@@ -439,7 +559,7 @@ window.initAnimations = () => {
           item.classList.toggle("active", i === toIndex);
         });
 
-        // Cross-fade panels
+        // Cross-fade panels with premium easing & staggered elements
         const fromPanel = catnavPanels[fromIndex];
         const toPanel = catnavPanels[toIndex];
 
@@ -460,29 +580,72 @@ window.initAnimations = () => {
         if (toPanel) {
           toPanel.classList.add("active");
           toPanel.style.pointerEvents = "auto";
-          // Fade in new panel — slight y lift for premium feel
+
+          // Zoom image slightly on enter for premium parallax feel
+          const toImg = toPanel.querySelector(".catnav-img");
+          if (toImg) {
+            gsap.fromTo(
+              toImg,
+              { scale: 1.15 },
+              { scale: 1, duration: 1.6, ease: "power3.out", overwrite: true }
+            );
+          }
+
+          // Fade in new panel
           gsap.fromTo(
             toPanel,
             { opacity: 0 },
             {
               opacity: 1,
               duration: 0.7,
-              ease: "power2.inOut",
+              ease: "power2.out",
               overwrite: true,
-            },
+            }
           );
+
+          // Slide in floating content card elements staggered
+          const toContent = toPanel.querySelector(".catnav-panel-content");
+          if (toContent) {
+            gsap.fromTo(
+              toContent,
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                ease: "power3.out",
+                overwrite: true,
+              }
+            );
+          }
         }
       };
 
-      // ── Initial state ────────────────────────────────────────────────────────
+      // ── Initial State ────────────────────────────────────────────────────────
       catnavPanels.forEach((panel, i) => {
         gsap.set(panel, { opacity: i === 0 ? 1 : 0 });
         panel.style.pointerEvents = i === 0 ? "auto" : "none";
-        if (i !== 0) panel.classList.remove("active");
+        if (i === 0) {
+          panel.classList.add("active");
+          // Ensure first image is scale(1)
+          const img = panel.querySelector(".catnav-img");
+          if (img) gsap.set(img, { scale: 1 });
+          const contentCard = panel.querySelector(".catnav-panel-content");
+          if (contentCard) gsap.set(contentCard, { y: 0, opacity: 1 });
+        } else {
+          panel.classList.remove("active");
+        }
       });
-      if (catnavProgBar) gsap.set(catnavProgBar, { width: "0%" });
 
-      // ── Desktop: pinned scrub ScrollTrigger ──────────────────────────────────
+      // Clear all progress bars
+      catnavItems.forEach((item, i) => {
+        const bar = item.querySelector(".catnav-item-progress-bar");
+        if (bar) {
+          gsap.set(bar, { width: i === 0 ? "100%" : "0%" });
+        }
+      });
+
+      // ── Desktop: Pinned scrub ScrollTrigger ──────────────────────────────────
       mm.add("(min-width: 769px)", () => {
         let catnavST = null;
 
@@ -492,38 +655,47 @@ window.initAnimations = () => {
           end: "+=500%", // 5 tabs × 100vh = 500vh pinned scroll
           pin: true,
           pinSpacing: true,
-          scrub: 1.2, // smooth, cinematic scrub
+          scrub: 1.2,
           anticipatePin: 1,
           invalidateOnRefresh: true,
 
           onUpdate: (self) => {
             const progress = self.progress; // 0 → 1
+            const sectionProgress = progress * TOTAL_TABS; // 0 → 5
 
             // Map progress to tab index: 5 equal zones
-            // Clamp so last tab holds at progress = 1.0
             let targetIndex = Math.min(
               TOTAL_TABS - 1,
-              Math.floor(progress * TOTAL_TABS),
+              Math.floor(progress * TOTAL_TABS)
             );
 
             if (targetIndex !== activeTabIdx) {
               switchTab(targetIndex);
             }
 
-            // Progress bar — direct width update (no GSAP for perf)
-            if (catnavProgBar) {
-              catnavProgBar.style.width = progress * 100 + "%";
-            }
+            // Fill progress bars dynamically based on section progress
+            catnavItems.forEach((item, idx) => {
+              const bar = item.querySelector(".catnav-item-progress-bar");
+              if (bar) {
+                if (idx < targetIndex) {
+                  bar.style.width = "100%";
+                } else if (idx > targetIndex) {
+                  bar.style.width = "0%";
+                } else {
+                  // Active item progress bar scrubs from 0% to 100%
+                  const currentSectionProg = (sectionProgress - idx) * 100;
+                  bar.style.width = Math.max(0, Math.min(100, currentSectionProg)) + "%";
+                }
+              }
+            });
           },
         });
 
-        // ── Nav item click → smooth scroll to that tab's scroll position ────────
-        // Uses Lenis if available (window.lenis), falls back to native scrollTo.
+        // Nav item click → smooth scroll to scroll position
         catnavItems.forEach((item, i) => {
           item.addEventListener("click", () => {
             if (!catnavST) return;
 
-            // Target the middle of that tab's scroll zone for clean activation
             const targetProgress = (i + 0.3) / TOTAL_TABS;
             const rawScroll =
               catnavST.start + (catnavST.end - catnavST.start) * targetProgress;
@@ -540,9 +712,15 @@ window.initAnimations = () => {
         });
 
         return () => {
-          // Reset on breakpoint exit
+          // Reset desktop scroll animations on resize
+          if (catnavST) {
+            catnavST.kill();
+            catnavST = null;
+          }
           catnavItems.forEach((item, i) => {
             item.classList.toggle("active", i === 0);
+            const bar = item.querySelector(".catnav-item-progress-bar");
+            if (bar) bar.style.width = i === 0 ? "100%" : "0%";
           });
           catnavPanels.forEach((panel, i) => {
             gsap.set(panel, { clearProps: "opacity" });
@@ -550,9 +728,88 @@ window.initAnimations = () => {
             panel.style.pointerEvents = i === 0 ? "auto" : "none";
           });
           activeTabIdx = 0;
-          if (catnavProgBar) catnavProgBar.style.width = "0%";
         };
-      }); // end desktop mm for catnav
+      }); // end desktop mm
+
+      // ── Mobile/Tablet: Unpinned click + touch swipe transitions ─────────────
+      mm.add("(max-width: 768px)", () => {
+        // Tab click centering + panel switch
+        catnavItems.forEach((item, i) => {
+          item.addEventListener("click", () => {
+            switchTab(i);
+
+            // Center active item horizontally in the list
+            const container = document.querySelector(".catnav-list");
+            if (container) {
+              const offsetLeft = item.offsetLeft;
+              const width = item.offsetWidth;
+              const containerWidth = container.offsetWidth;
+              container.scrollTo({
+                left: offsetLeft - containerWidth / 2 + width / 2,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Swipe detector on the right panel
+        const catnavRight = document.querySelector("#catnavRight");
+        if (catnavRight) {
+          let touchStartX = 0;
+          let touchEndX = 0;
+
+          const handleSwipe = () => {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+              if (diff > 0) {
+                // Swipe Left -> Next tab
+                if (activeTabIdx < TOTAL_TABS - 1) {
+                  const targetIdx = activeTabIdx + 1;
+                  const nextItem = catnavItems[targetIdx];
+                  if (nextItem) nextItem.click();
+                }
+              } else {
+                // Swipe Right -> Prev tab
+                if (activeTabIdx > 0) {
+                  const targetIdx = activeTabIdx - 1;
+                  const prevItem = catnavItems[targetIdx];
+                  if (prevItem) prevItem.click();
+                }
+              }
+            }
+          };
+
+          catnavRight.addEventListener(
+            "touchstart",
+            (e) => {
+              touchStartX = e.changedTouches[0].screenX;
+            },
+            { passive: true }
+          );
+
+          catnavRight.addEventListener(
+            "touchend",
+            (e) => {
+              touchEndX = e.changedTouches[0].screenX;
+              handleSwipe();
+            },
+            { passive: true }
+          );
+        }
+
+        return () => {
+          // Reset mobile handlers
+          catnavItems.forEach((item, i) => {
+            item.classList.toggle("active", i === 0);
+          });
+          catnavPanels.forEach((panel, i) => {
+            panel.classList.toggle("active", i === 0);
+          });
+          activeTabIdx = 0;
+        };
+      }); // end mobile mm
     }
   }
 
@@ -767,12 +1024,17 @@ window.initAnimations = () => {
 
       // ── GSAP Hover Reveal — image expands to fill card, CTA appears ─────────────
       // Architecture:
-      //   - .collection-image-wrap  → GSAP height: '58%' → '100%'  (fill card)
-      //   - .collection-image       → GSAP scale: 1.06 → 1.0       (de-zoom)
-      //   - .collection-info        → GSAP opacity: 1 → 0           (hide text)
-      //   - .collection-cta-wrap    → GSAP opacity: 0→1, y: 20→0   (reveal pill)
+      //   - .collection-image-wrap  → height: '58%' → '100%'    (fills card)
+      //   - .collection-image       → scale: 1.06 → 1.0         (de-zoom)
+      //   - .collection-info        → opacity: 1 → 0            (hide text)
+      //   - .collection-cta-wrap    → opacity: 0→1, y: 20→0     (reveal pill)
+      //   - .collection-card        → scale: 1.0 → 1.015        (premium lift)
       //
-      // Only on non-touch devices. Touch: CSS forces CTA always visible (mobile).
+      // pointer-events on ctaWrap is managed BOTH by CSS :hover AND by GSAP
+      // onStart/onComplete callbacks — dual approach ensures correctness at any
+      // screen width (1080p, 1440p, 1920p, 2560px ultra-wide).
+      //
+      // Only on non-touch devices. Touch: CSS forces CTA always visible.
       const isTouchDevice = () =>
         "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
@@ -783,46 +1045,27 @@ window.initAnimations = () => {
           const info = card.querySelector(".collection-info");
           const ctaWrap = card.querySelector(".collection-cta-wrap");
 
-          // ── Hover IN ──────────────────────────────────────────────────────────
-          const hoverIn = gsap
-            .timeline({ paused: true })
-            .to(
-              imgWrap,
-              { height: "100%", duration: 0.6, ease: "power3.out" },
-              0,
-            )
-            .to(img, { scale: 1.0, duration: 0.6, ease: "power3.out" }, 0)
-            .to(info, { opacity: 0, duration: 0.25, ease: "power2.in" }, 0)
-            .to(
-              ctaWrap,
-              { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
-              0.18,
-            );
+          if (!imgWrap || !img || !info || !ctaWrap) return;
 
-          // ── Hover OUT ─────────────────────────────────────────────────────────
-          const hoverOut = gsap
-            .timeline({ paused: true })
-            .to(
-              ctaWrap,
-              { opacity: 0, y: 20, duration: 0.3, ease: "power2.in" },
-              0,
-            )
-            .to(info, { opacity: 1, duration: 0.35, ease: "power2.out" }, 0.08)
-            .to(
-              imgWrap,
-              { height: "58%", duration: 0.55, ease: "power3.out" },
-              0.05,
-            )
-            .to(img, { scale: 1.06, duration: 0.55, ease: "power3.out" }, 0.05);
+          // ── Premium Reversible Hover Timeline ──────────────────────────────────
+          const hoverTl = gsap.timeline({
+            paused: true,
+            defaults: { duration: 0.55, ease: "power3.out" }
+          });
+
+          hoverTl
+            .to(imgWrap, { height: "100%", ease: "power3.inOut" }, 0)
+            .to(img, { scale: 1.0, ease: "power3.inOut" }, 0)
+            .to(card, { scale: 1.015, ease: "power3.out" }, 0)
+            .to(info, { opacity: 0, y: -12, duration: 0.28, ease: "power2.in" }, 0)
+            .to(ctaWrap, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.12);
 
           card.addEventListener("mouseenter", () => {
-            hoverOut.pause();
-            hoverIn.restart();
+            hoverTl.play();
           });
 
           card.addEventListener("mouseleave", () => {
-            hoverIn.pause();
-            hoverOut.restart();
+            hoverTl.reverse();
           });
         });
       }

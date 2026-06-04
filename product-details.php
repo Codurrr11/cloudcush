@@ -38,7 +38,7 @@
         <nav class="breadcrumb-product" aria-label="Breadcrumb">
           <a href="./">Home</a>
           <span>/</span>
-          <a href="diaper.php">Diapers</a>
+          <a href="products.php">Diapers</a>
           <span>/</span>
           <span>CloudCush Overnight+</span>
         </nav>
