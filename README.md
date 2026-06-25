@@ -1,40 +1,14 @@
-# CloudCush 👶
+# CloudCush
 
-A luxury babycare brand website designed for modern parenting comfort. CloudCush combines a beautiful, editorial-grade frontend experience with a robust admin control panel for dynamic content management.
+[![PHP](https://img.shields.io/badge/PHP-%5E8.0-777BB4?style=flat-square&logo=php)](https://php.net)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=flat-square&logo=mysql)](https://mysql.com)
+[![CSS3](https://img.shields.io/badge/CSS3-Vanilla-1572B6?style=flat-square&logo=css3)](https://w3.org)
 
-## 🌟 Key Features
+CloudCush is a luxury babycare brand website designed with an editorial-grade aesthetic and powered by a robust administrative control panel for full dynamic content control.
 
-* **Premium Frontend:** Editorial typography, custom GSAP entrance animations, dynamic sizing calculator, and smooth Lenis scrolling.
-* **Admin Dashboard:** Control panel to update homepage sections, diaper guides, blog posts, testimonials, products, and inventory.
-* **Authentication:** Secure login and registration portals for both administrators and customers.
+## 🛠️ Tech Stack
 
-## 🛠️ Technology Stack
-
-* **Backend:** PHP (OOP & PDO)
+* **Backend:** PHP (OOP & PDO connection layer)
 * **Database:** MySQL
-* **Frontend:** HTML5, Vanilla CSS3 (Custom design system & fluid typography)
+* **Frontend:** HTML5, Vanilla CSS3, JavaScript
 * **Libraries:** GSAP 3 (ScrollTrigger), Lenis Kinetic Smooth Scroll, SweetAlert2, Remix Icons
-
-## 🚀 Setup & Local Installation
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/your-username/cloudcush.git
-   ```
-2. **Move to Server Directory:**
-   Place the `cloudcush` folder in your local server's document root (e.g., `C:\xampp\htdocs\`).
-3. **Set Up the Database:**
-   * Open phpMyAdmin (`http://localhost/phpmyadmin`).
-   * Create a database named `cloudcush_db`.
-   * Import the `cloudcush_db.sql` database file.
-4. **Configure Connection:**
-   Verify database credentials inside [admin/config/database.php](file:///c:/xampp/htdocs/cloudcush/admin/config/database.php).
-5. **Start Web Server:**
-   Start Apache & MySQL from the XAMPP Control Panel and visit `http://localhost/cloudcush`.
-
-## 🔐 Administrative Control Panel
-
-The admin dashboard is located at `/admin` (e.g., `http://localhost/cloudcush/admin`). It allows you to:
-* **Manage Content:** Dynamically add or edit products, blogs, FAQs, and testimonials.
-* **Update Assets:** Upload and configure banners, images, and media assets.
-* **Database Synchronization:** Real-time updates directly reflected on the customer-facing frontend.
