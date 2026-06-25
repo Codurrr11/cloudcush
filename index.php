@@ -7,7 +7,6 @@ require_once __DIR__ . '/admin/config/reviews-helper.php';
 require_once __DIR__ . '/admin/config/home-helper.php';
 require_once __DIR__ . '/admin/config/products-helper.php';
 require_once __DIR__ . '/admin/config/blogs-helper.php';
-require_once __DIR__ . '/admin/config/guide-helper.php';
 
 try {
     $db   = getDBConnection();
@@ -39,7 +38,6 @@ $homeSections    = getHomeSections();
 $atelierVariants = getHomeAtelierVariants();
 $carePlanPerks   = getHomeCarePlanPerks();
 $catnavPanels    = getHomeCatnavPanels();
-$layers          = getGuideLayers();
 
 // ─── Fallback content ────────────────────────────────────────────────────────
 // Used only when admin has not yet saved a value for that field.
@@ -130,7 +128,8 @@ function getHomeSectionData(string $key, array $sections, array $fallbacks): arr
  *   4. Empty string                       → returned as empty (caller should guard with !empty)
  */
 if (!function_exists('resolveAssetUrl')) {
-    function resolveAssetUrl($url) {
+    function resolveAssetUrl($url)
+    {
         if (is_array($url)) {
             return array_map('resolveAssetUrl', $url);
         }
@@ -607,61 +606,67 @@ $heroData = getHomeSectionData('hero', $homeSections, $fallbackHome);
     </section>
 
 
-    <!-- 4. PINNED VISUAL STORY SECTION (APPLE-STYLE LAYER STORY) -->
-    <section class="visual-story-section" id="visualStorySection">
-        <div class="container visual-story-grid">
+    <!-- ==========================================================================
+         CATEGORY NAV SECTION — Pinned scroll with 5 tabs
+         ========================================================================== -->
+    <section class="catnav-section" id="catnavSection">
+        <?php $catnavHeader = getHomeSectionData('catnav_header', $homeSections, $fallbackHome); ?>
+        <div class="catnav-stage" id="catnavStage">
 
-            <!-- Left: Sticky Diaper Image Layering -->
-            <div class="visual-story-sticky">
-                <div class="sticky-media-inner">
-          
-                    <?php 
-                    $layerIndex = 0;
-                    foreach ($layers as $l): 
-                    ?>
-                        <?php if (!empty($l['image_url'])): ?>
-                            <div class="visual-story-image <?= $layerIndex === 0 ? 'active' : '' ?>" data-story="<?= $layerIndex + 1 ?>">
-                                <img src="<?= htmlspecialchars(resolveAssetUrl($l['image_url'])) ?>" alt="<?= htmlspecialchars($l['title']) ?>">
-                                <span class="media-caption"><?= htmlspecialchars($l['caption']) ?></span>
-                            </div>
-                        <?php endif; ?>
-                    <?php 
-                        $layerIndex++;
-                    endforeach; 
-                    ?>
-
+            <!-- Left: Editorial nav list with progress tracks -->
+            <div class="catnav-left" id="catnavLeft">
+                <div class="catnav-nav-header">
+                    <span class="catnav-section-eyebrow"><?php echo htmlspecialchars($catnavHeader['section_subtitle'] ?? '') ?></span>
+                    <h2 class="catnav-section-title"><?php echo htmlspecialchars($catnavHeader['section_title'] ?? '') ?></h2>
                 </div>
+                <nav class="catnav-list" aria-label="Product categories">
+                    <?php
+                    $cIdx = 0;
+                    foreach ($catnavPanels as $p):
+                        $activeClass = ($cIdx === 0) ? 'active' : '';
+                    ?>
+                        <button class="catnav-item <?php echo $activeClass ?>" data-index="<?php echo $cIdx ?>" aria-label="<?php echo htmlspecialchars($p['label'] ?? '') ?>">
+                            <span class="catnav-item-num">0<?php echo ($cIdx + 1) ?></span>
+                            <span class="catnav-item-label"><?php echo htmlspecialchars($p['label'] ?? '') ?></span>
+                            <div class="catnav-item-progress">
+                                <div class="catnav-item-progress-bar"></div>
+                            </div>
+                        </button>
+                    <?php
+                        $cIdx++;
+                    endforeach;
+                    ?>
+                </nav>
             </div>
 
-            <!-- Right: Scrolling Explanatory Blocks -->
-            <div class="visual-story-scrollable">
+            <!-- Right: Immersive media viewport and details -->
+            <div class="catnav-right" id="catnavRight">
 
-                <?php 
-                $layerIndex = 0;
-                foreach ($layers as $l): 
+                <?php
+                $cIdx = 0;
+                foreach ($catnavPanels as $p):
+                    $activeClass = ($cIdx === 0) ? 'active' : '';
                 ?>
-                    <!-- Block <?= $layerIndex + 1 ?> -->
-                    <div class="visual-story-block" data-story="<?= $layerIndex + 1 ?>">
-                        <span class="story-badge"><?= htmlspecialchars($l['badge']) ?></span>
-                        <h3 class="story-title"><?= htmlspecialchars($l['title']) ?></h3>
-                        <div class="story-desc">
-                            <?= strip_tags($l['description'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
+                    <div class="catnav-panel <?php echo $activeClass ?>" id="catnavPanel<?php echo $cIdx ?>" data-index="<?php echo $cIdx ?>">
+                        <div class="catnav-panel-media">
+                            <?php $panelImg = resolveAssetUrl($p['image_url'] ?? ''); ?>
+                            <?php if (! empty($panelImg)): ?>
+                                <img src="<?php echo htmlspecialchars($panelImg) ?>" alt="<?php echo htmlspecialchars($p['title'] ?? '') ?>" class="catnav-img" loading="<?php echo ($cIdx === 0) ? 'eager' : 'lazy' ?>">
+                            <?php endif; ?>
+                            <div class="catnav-media-overlay"></div>
                         </div>
-            
-                        <?php 
-                        if (!empty($l['specs'])): 
-                            $specsArr = array_map('trim', explode(',', $l['specs']));
-                        ?>
-                            <div class="story-specs">
-                                <?php foreach ($specsArr as $spec): ?>
-                                    <span><?= htmlspecialchars($spec) ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
+                        <div class="catnav-panel-content">
+                            <span class="catnav-panel-eyebrow"><?php echo htmlspecialchars($p['eyebrow'] ?? '') ?></span>
+                            <h3 class="catnav-panel-title"><?php echo htmlspecialchars($p['title'] ?? '') ?></h3>
+                            <div class="catnav-panel-desc"><?php echo $p['description'] ?? '' ?></div>
+                            <?php if (! empty($p['btn_text'])): ?>
+                                <a href="<?php echo htmlspecialchars($p['btn_url'] ?? '') ?>" class="catnav-panel-cta"><?php echo htmlspecialchars($p['btn_text']) ?></a>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                <?php 
-                    $layerIndex++;
-                endforeach; 
+                <?php
+                    $cIdx++;
+                endforeach;
                 ?>
 
             </div>
