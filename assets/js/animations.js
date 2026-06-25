@@ -135,12 +135,16 @@ window.initAnimations = () => {
 
   if (document.querySelector(".hero")) {
     mm.add("(min-width: 769px)", () => {
+      // Pin hero section while the user scrolls past it.
+      // anticipatePin avoids the brief jump that can occur when Lenis
+      // hands off scroll position to GSAP's scrub.
       ScrollTrigger.create({
         trigger: ".hero",
         start: "top 110px",
         end: "bottom 110px",
         pin: true,
         pinSpacing: false,
+        anticipatePin: 1,
         invalidateOnRefresh: true,
       });
     });
@@ -209,7 +213,7 @@ window.initAnimations = () => {
   // PREMIUM SIZING & SENSATION ATELIER
   // ---------------------------------------------------------------------------
   if (document.querySelector("#diaperSelectorSection")) {
-    const variantData = {
+    let variantData = {
       newborn: {
         name: "CloudCush TinyHug",
         absorbency: 80,
@@ -236,12 +240,24 @@ window.initAnimations = () => {
       }
     };
 
+    if (window.homepageAtelierData && Array.isArray(window.homepageAtelierData)) {
+      window.homepageAtelierData.forEach(v => {
+        if (variantData[v.key]) {
+          variantData[v.key].name = v.variant_name;
+          variantData[v.key].absorbency = parseInt(v.val_absorbency) || 0;
+          variantData[v.key].stretch = parseInt(v.val_stretch) || 0;
+          variantData[v.key].softness = parseInt(v.val_softness) || 0;
+          variantData[v.key].watermark = (v.key === 'newborn' ? 'TINYHUG' : (v.key === 'activefit' ? 'FLEXFIT' : 'OVERNIGHT+'));
+        }
+      });
+    }
+
     const weightMappings = {
-      xs: { variant: "newborn", size: "Size XS (<3 kg)", name: "CloudCush TinyHug", percent: 0 },
-      s:  { variant: "newborn", size: "Size S (3-5 kg)", name: "CloudCush TinyHug", percent: 25 },
-      m:  { variant: "activefit", size: "Size M (5-8 kg)", name: "CloudCush FlexFit", percent: 50 },
-      l:  { variant: "activefit", size: "Size L (8-11 kg)", name: "CloudCush FlexFit", percent: 75 },
-      xl: { variant: "overnight", size: "Size XL (11+ kg)", name: "CloudCush Overnight+", percent: 100 }
+      xs: { variant: "newborn", size: "Size XS (<3 kg)", name: variantData.newborn.name, percent: 0 },
+      s:  { variant: "newborn", size: "Size S (3-5 kg)", name: variantData.newborn.name, percent: 25 },
+      m:  { variant: "activefit", size: "Size M (5-8 kg)", name: variantData.activefit.name, percent: 50 },
+      l:  { variant: "activefit", size: "Size L (8-11 kg)", name: variantData.activefit.name, percent: 75 },
+      xl: { variant: "overnight", size: "Size XL (11+ kg)", name: variantData.overnight.name, percent: 100 }
     };
 
     let activeVariantId = "newborn";
@@ -960,6 +976,10 @@ window.initAnimations = () => {
       const onPointerDown = (e) => {
         isDragging = true;
         dragStartX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+        // ── FIX: sync dragCurrentX to dragStartX so that on a clean tap
+        // (no pointermove fired), the delta stays 0 and the ghost-click
+        // guard below never incorrectly fires preventDefault on anchor clicks.
+        dragCurrentX = dragStartX;
         trackBaseX = gsap.getProperty(ccTrack, "x");
         gsap.killTweensOf(ccTrack);
         ccViewport.style.cursor = "grabbing";
@@ -970,6 +990,10 @@ window.initAnimations = () => {
         dragCurrentX =
           e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
         const delta = dragCurrentX - dragStartX;
+        // Only mark as a real drag when movement exceeds 5px threshold
+        if (Math.abs(delta) > 5) {
+          hasDragged = true;
+        }
         gsap.set(ccTrack, { x: trackBaseX + delta });
       };
 
@@ -984,15 +1008,18 @@ window.initAnimations = () => {
         const delta = finalX - dragStartX;
 
         if (Math.abs(delta) > DRAG_THRESHOLD) {
+          // hasDragged already set in pointermove; slide to target
           if (delta < 0 && ccIndex < maxIndex()) {
             goToSlide(ccIndex + 1, 0.5);
           } else if (delta > 0 && ccIndex > 0) {
             goToSlide(ccIndex - 1, 0.5);
           } else {
             goToSlide(ccIndex, 0.4); // snap back
+            hasDragged = false; // didn't slide — allow click
           }
         } else {
           goToSlide(ccIndex, 0.4); // snap back
+          hasDragged = false; // micro-movement — allow click
         }
       };
 
@@ -1010,13 +1037,19 @@ window.initAnimations = () => {
       });
       ccViewport.addEventListener("touchend", onPointerUp);
 
-      // Prevent link clicks after drag
+      // Block anchor navigation ONLY when the pointer genuinely dragged.
+      // hasDragged is set true only when pointermove fires with meaningful
+      // movement, and is reset to false after each pointerup.
+      // This ensures a clean tap ALWAYS fires the anchor click immediately.
+      let hasDragged = false;
+
       ccViewport.addEventListener(
         "click",
         (e) => {
-          if (Math.abs(dragCurrentX - dragStartX) > 8) {
+          if (hasDragged) {
             e.preventDefault();
             e.stopPropagation();
+            hasDragged = false; // reset after suppressing
           }
         },
         true,
@@ -1046,6 +1079,12 @@ window.initAnimations = () => {
           const ctaWrap = card.querySelector(".collection-cta-wrap");
 
           if (!imgWrap || !img || !info || !ctaWrap) return;
+
+          // ── FIX: Ensure the CTA anchor is always pointer-interactive.
+          // CSS default is pointer-events:none until :hover fires, but on a fast
+          // first click the :hover state may not have propagated yet. Forcing
+          // auto here means the anchor inside ctaWrap is always clickable.
+          ctaWrap.style.pointerEvents = "auto";
 
           // ── Premium Reversible Hover Timeline ──────────────────────────────────
           const hoverTl = gsap.timeline({
@@ -1132,6 +1171,13 @@ window.initAnimations = () => {
     }
 
     // ── 1. Section Entrance Animation ────────────────────────────────────────
+    // Set initial hidden states for entrance elements before any animation
+    if (philEyebrow) gsap.set(philEyebrow, { opacity: 0, y: 30 });
+    if (philBody)    gsap.set(philBody,    { opacity: 0, y: 40 });
+    if (philCta)     gsap.set(philCta,     { opacity: 0, y: 20 });
+    if (philBgImg)   gsap.set(philBgImg,   { scale: 1.08 });
+    if (philOverlay) gsap.set(philOverlay, { opacity: 0 });
+
     const philEntranceTl = gsap.timeline({
       scrollTrigger: {
         trigger: philSection,
@@ -1193,6 +1239,7 @@ window.initAnimations = () => {
           pin: true,
           scrub: 1.0,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
@@ -1965,30 +2012,54 @@ window.initAnimations = () => {
     // 1. Setup Typing Effect (Pure JS loop for absolute robustness)
     const typingTextEl = document.querySelector(".typing-text");
     if (typingTextEl) {
-      const brandText = "Cloudcush";
-      let index = 0;
+      // Defaults used when admin hasn't set a value or value is empty
+      const defaults = ["Cloudcush", "comfort designed for tiny humans."];
+      const raw = window.footerTypingTexts || [];
+      // For each slot: use the admin value if non-empty, otherwise use the default
+      const texts = defaults.map((def, i) => (raw[i] && raw[i].trim()) ? raw[i].trim() : def);
+
+      let phraseIndex = 0;
+      let charIndex = 0;
       let isDeleting = false;
 
+      // Parent h2 — toggle compact class for the longer tagline phrase
+      const brandHeading = typingTextEl.closest(".footer-huge-brand");
+
+      const applyPhraseStyle = (idx) => {
+        if (!brandHeading) return;
+        if (idx === 0) {
+          brandHeading.classList.remove("footer-huge-brand--tagline");
+        } else {
+          brandHeading.classList.add("footer-huge-brand--tagline");
+        }
+      };
+
+      applyPhraseStyle(phraseIndex);
+
       const typeLoop = () => {
-        const currentText = brandText.substring(0, index);
-        typingTextEl.textContent = currentText;
+        const currentText = texts[phraseIndex];
+        const display = currentText.substring(0, charIndex);
+        typingTextEl.textContent = display;
 
         let speed = 220; // Typing speed
 
         if (isDeleting) {
           speed = 80; // Deleting speed
-          index--;
+          charIndex--;
         } else {
-          index++;
+          charIndex++;
         }
 
-        if (!isDeleting && index > brandText.length) {
+        if (!isDeleting && charIndex > currentText.length) {
           isDeleting = true;
           speed = 2000; // Pause when fully typed
-        } else if (isDeleting && index < 0) {
+        } else if (isDeleting && charIndex < 0) {
           isDeleting = false;
-          index = 0;
+          charIndex = 0;
+          phraseIndex = (phraseIndex + 1) % texts.length;
           speed = 600; // Pause when fully erased
+          // Switch font size right as the new phrase begins
+          applyPhraseStyle(phraseIndex);
         }
 
         setTimeout(typeLoop, speed);

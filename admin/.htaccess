@@ -1,0 +1,14 @@
+# admin/.htaccess
+# Disable directory listing
+Options -Indexes
+
+# Prevent access to system and configuration files directly
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(sql|json|yaml|md|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

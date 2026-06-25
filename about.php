@@ -1,21 +1,108 @@
+<?php
+require_once __DIR__ . '/admin/config/database.php';
+require_once __DIR__ . '/admin/config/reviews-helper.php';
+require_once __DIR__ . '/admin/config/about-helper.php';
+
+// Fetch about page sections
+$aboutSections = getAboutSections();
+
+// Define fallbacks for each section in case database doesn't hold data
+$fallbackAbout = [
+    'hero' => [
+        'section_title' => 'Thoughtfully Designed<br>for Modern Parenting.',
+        'section_subtitle' => 'About CloudCush'
+    ],
+    'story_1' => [
+        'section_title' => 'Crafted in Kota, Rajasthan.',
+        'section_subtitle' => '01 / THE ORIGIN'
+    ],
+    'story_2' => [
+        'section_title' => 'TCF Certified Safety.',
+        'section_subtitle' => '02 / THE PLEDGE'
+    ],
+    'story_3' => [
+        'section_title' => 'For Modern Indian Families.',
+        'section_subtitle' => '03 / THE FUTURE'
+    ],
+    'philosophy' => [
+        'section_title' => '"We believe parenting should feel softer, calmer, and more thoughtful — one comfortable moment at a time."',
+        'section_subtitle' => 'Our Philosophy'
+    ],
+    'cta' => [
+        'section_title' => 'Made for Better Baby Days.',
+        'section_subtitle' => ''
+    ],
+    'features_header' => [
+        'section_subtitle' => 'Features',
+        'section_title' => 'Thoughtful Protection, Reimagined.'
+    ],
+    'about_faq_header' => [
+        'section_subtitle' => 'Got Questions?',
+        'section_title' => 'Frequently Asked Questions'
+    ]
+];
+
+// Helper to resolve section data safely
+function getAboutSectionData(string $key, array $sections, array $fallbacks): array {
+    $sec = $sections[$key] ?? [];
+    $fallback = $fallbacks[$key] ?? [];
+    
+    // Only resolve fallbacks for titles/subtitles. All other fields return empty string if not in DB.
+    return [
+        'section_title'    => !empty($sec['section_title'])    ? $sec['section_title']    : ($fallback['section_title'] ?? ''),
+        'section_subtitle' => !empty($sec['section_subtitle']) ? $sec['section_subtitle'] : ($fallback['section_subtitle'] ?? ''),
+        'content'          => !empty($sec['content'])          ? $sec['content']          : '',
+        'accent_text'      => !empty($sec['accent_text'])      ? $sec['accent_text']      : '',
+        'image_url'        => !empty($sec['image_url'])        ? $sec['image_url']        : '',
+        'btn_text_1'       => !empty($sec['btn_text_1'])       ? $sec['btn_text_1']       : '',
+        'btn_url_1'        => !empty($sec['btn_url_1'])        ? $sec['btn_url_1']        : '',
+        'btn_text_2'       => !empty($sec['btn_text_2'])       ? $sec['btn_text_2']       : '',
+        'btn_url_2'        => !empty($sec['btn_url_2'])        ? $sec['btn_url_2']        : ''
+    ];
+}
+
+try {
+    $db = getDBConnection();
+    $stmt = $db->prepare("SELECT * FROM reviews WHERE status = 'active' ORDER BY created_at DESC");
+    $stmt->execute();
+    $activeReviews = $stmt->fetchAll();
+} catch (Exception $e) {
+    error_log("Failed to fetch reviews: " . $e->getMessage());
+    $activeReviews = [];
+}
+
+// Fetch active FAQs for the FAQ block
+try {
+    $activeFaqs = getAboutFaqs();
+} catch (Exception $e) {
+    error_log("Failed to fetch FAQs: " . $e->getMessage());
+    $activeFaqs = [];
+}
+
+// FAQs are loaded strictly from the database
+
+
+?>
 <?php include 'includes/head.php'; ?>
 
 <?php include 'includes/header.php'; ?>
 
+
 <main class="about-page">
 
+  <?php $hero = getAboutSectionData('hero', $aboutSections, $fallbackAbout); ?>
   <!-- 1. HERO BANNER SECTION -->
   <section class="about-hero">
     <div class="about-hero-bg"></div>
     <div class="about-hero-overlay"></div>
     <div class="about-hero-content">
-      <span class="about-hero-label">About CloudCush</span>
-      <h1 class="about-hero-title">Thoughtfully Designed<br>for Modern Parenting.</h1>
-      <p class="about-hero-subtext">
-        From peaceful nights to active days, CloudCush creates premium diapering essentials made for growing babies and modern Indian families.
-      </p>
+      <span class="about-hero-label"><?= htmlspecialchars($hero['section_subtitle']) ?></span>
+      <h1 class="about-hero-title"><?= strip_tags($hero['section_title'], '<br>') ?></h1>
+      <div class="about-hero-subtext">
+        <?= strip_tags($hero['content'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
+      </div>
       <div class="about-hero-actions">
-        <a href="javascript:void(0);" class="btn-pill btn-pill-primary">Explore Collection</a>
+        <a href="products.php" class="btn-pill btn-pill-primary">Explore Collection</a>
         <a href="javascript:void(0);" class="btn-pill cta-scroll-philosophy">Our Philosophy</a>
       </div>
     </div>
@@ -38,61 +125,68 @@
     </div>
   </div>
 
+  <!-- New About Section: Brand Intro/Vision -->
+  <section class="about-vision-section">
+    <div class="about-vision-container">
+      <div class="about-vision-grid">
+        <!-- Left Column: Copy -->
+        <div class="about-vision-content">
+          <span class="vision-eyebrow">ABOUT US</span>
+          <h2 class="vision-title">Every day is a new beginning. We make it softer.</h2>
+          <div class="vision-text-wrap">
+            <p class="vision-lead">
+              We believe that early childhood is a sacred phase. Our mission is to create a nurturing, safe environment for your baby with products that represent the absolute pinnacle of material science and skin comfort.
+            </p>
+            <p class="vision-body">
+              By rejecting harsh chemical bleaching, fragrance additives, and plastic-heavy fillers, CloudCush offers a cleaner alternative that respects your child's delicate skin barrier. Every fabric selection, seam design, and fit adjustment is refined iteratively alongside pediatric dermatologists.
+            </p>
+          </div>
+        </div>
+        <!-- Right Column: Visual Showcase -->
+        <div class="about-vision-visual">
+          <div class="vision-image-wrapper">
+            <img src="https://images.unsplash.com/photo-1522845015757-58b2acd497c7?auto=format&fit=crop&w=800&q=80" alt="CloudCush Baby Comfort" class="vision-main-img" loading="lazy">
+            <div class="vision-badge-floating">
+              <span class="badge-number">100%</span>
+              <span class="badge-label">Hypoallergenic</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 3. PINNED HORIZONTAL STORYTELLING STRIP -->
   <section class="horizontal-story-section">
     <div class="horizontal-story-container">
       <div class="horizontal-story-track">
         
-        <!-- Story Card 1 -->
-        <div class="story-card">
-          <div class="story-card-img-wrap">
-            <img class="story-card-img" src="https://images.unsplash.com/photo-1484981138541-3d074aa97716?w=800&auto=format&fit=crop&q=80" alt="CloudCush Origins" loading="lazy">
-          </div>
-          <div class="story-card-content">
-            <span class="story-card-label">01 / THE ORIGIN</span>
-            <h3 class="story-card-title">Crafted in Kota, Rajasthan.</h3>
-            <p class="story-card-desc">
-              CloudCush was born out of a simple realization: modern Indian parents shouldn't have to compromise between skin safety and absolute absorbency. Inspired by the soft, breathable climate of Kota, we set out to build a specialized babycare brand.
-            </p>
-            <div class="story-card-accent">
-              Bringing featherlight, skin-friendly protection to newborn diapering.
+        <?php 
+        for ($i = 1; $i <= 3; $i++): 
+            $story = getAboutSectionData('story_' . $i, $aboutSections, $fallbackAbout);
+        ?>
+          <!-- Story Card <?= $i ?> -->
+          <div class="story-card">
+            <?php if (!empty($story['image_url'])): ?>
+              <div class="story-card-img-wrap">
+                <img class="story-card-img" src="<?= htmlspecialchars(resolveAssetUrl($story['image_url'])) ?>" alt="<?= htmlspecialchars(strip_tags($story['section_title'])) ?>" loading="lazy">
+              </div>
+            <?php endif; ?>
+            <div class="story-card-content">
+              <span class="story-card-label"><?= htmlspecialchars($story['section_subtitle']) ?></span>
+              <h3 class="story-card-title"><?= htmlspecialchars($story['section_title']) ?></h3>
+              <div class="story-card-desc">
+                <?= strip_tags($story['content'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
+              </div>
+              <button type="button" class="story-read-more-btn" aria-expanded="false">Read More</button>
+              <?php if (!empty($story['accent_text'])): ?>
+                <div class="story-card-accent">
+                  <?= htmlspecialchars($story['accent_text']) ?>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
-        </div>
-
-        <!-- Story Card 2 -->
-        <div class="story-card">
-          <div class="story-card-img-wrap">
-            <img class="story-card-img" src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80" alt="TCF Wood Pulp Safety" loading="lazy">
-          </div>
-          <div class="story-card-content">
-            <span class="story-card-label">02 / THE PLEDGE</span>
-            <h3 class="story-card-title">TCF Certified Safety.</h3>
-            <p class="story-card-desc">
-              We reject harsh chemicals. Every CloudCush diaper is crafted using certified Totally Chlorine-Free (TCF) wood pulp, organic cotton-like fibers, and zero chemical fragrances, making them completely safe for delicate skin.
-            </p>
-            <div class="story-card-accent">
-              Zero chlorine. Zero parabens. Pure skin integrity from day one.
-            </div>
-          </div>
-        </div>
-
-        <!-- Story Card 3 -->
-        <div class="story-card">
-          <div class="story-card-img-wrap">
-            <img class="story-card-img" src="https://images.unsplash.com/photo-1515488042361-404e9250afef?w=800&auto=format&fit=crop&q=80" alt="Modern Indian Parenting" loading="lazy">
-          </div>
-          <div class="story-card-content">
-            <span class="story-card-label">03 / THE FUTURE</span>
-            <h3 class="story-card-title">For Modern Indian Families.</h3>
-            <p class="story-card-desc">
-              Parenthood is a collection of fleeting milestones. We help premium urban families enjoy every step of the way by offering high-performance dryness, flexible active fit diaper cuts, and stress-free monthly delivery options.
-            </p>
-            <div class="story-card-accent">
-              Designed for sensitive newborn skin and active toddlers.
-            </div>
-          </div>
-        </div>
+        <?php endfor; ?>
 
       </div>
     </div>
@@ -102,79 +196,32 @@
   <section class="why-choose-section">
     <div class="container">
       
+      <?php $featuresHeader = getAboutSectionData('features_header', $aboutSections, $fallbackAbout); ?>
       <div class="why-choose-header">
-        <span class="why-choose-label">Features</span>
-        <h2 class="why-choose-title">Thoughtful Protection, Reimagined.</h2>
+        <span class="why-choose-label"><?= htmlspecialchars($featuresHeader['section_subtitle']) ?></span>
+        <h2 class="why-choose-title"><?= htmlspecialchars($featuresHeader['section_title']) ?></h2>
       </div>
 
+      <?php 
+      $dynamicFeatures = getAboutFeatures();
+      if (empty($dynamicFeatures)) {
+          $dynamicFeatures = [];
+      }
+
+      ?>
+
       <div class="why-choose-grid">
-        
-        <!-- Feature 1 -->
-        <div class="why-card">
-          <div class="why-icon-wrap">
-            <i class="ri-shield-cross-line"></i>
+        <?php foreach ($dynamicFeatures as $feat): ?>
+          <div class="why-card">
+            <div class="why-icon-wrap">
+              <i class="<?= htmlspecialchars($feat['icon_class'] ?? 'ri-checkbox-circle-line') ?>"></i>
+            </div>
+            <h3 class="why-card-title"><?= htmlspecialchars($feat['title']) ?></h3>
+            <div class="why-card-desc">
+              <?= strip_tags($feat['description'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
+            </div>
           </div>
-          <h3 class="why-card-title">Rash-Free Comfort</h3>
-          <p class="why-card-desc">
-            Hypoallergenic materials free from chlorine, parabens, and harsh chemicals to keep baby’s delicate skin fully protected.
-          </p>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="why-card">
-          <div class="why-icon-wrap">
-            <i class="ri-moon-line"></i>
-          </div>
-          <h3 class="why-card-title">Overnight Protection</h3>
-          <p class="why-card-desc">
-            Advanced multi-layer core locks wetness away instantly, providing up to 12 hours of dry, peaceful sleep.
-          </p>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="why-card">
-          <div class="why-icon-wrap">
-            <i class="ri-windy-line"></i>
-          </div>
-          <h3 class="why-card-title">Breathable Softness</h3>
-          <p class="why-card-desc">
-            Micro-porous backsheets allow fresh air to circulate freely, keeping baby's skin fresh and sweat-free.
-          </p>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="why-card">
-          <div class="why-icon-wrap">
-            <i class="ri-run-line"></i>
-          </div>
-          <h3 class="why-card-title">Flexible Active Fit</h3>
-          <p class="why-card-desc">
-            Super-stretchy waistbands adapt dynamically to your baby's movements without leaving tight marks or chafing.
-          </p>
-        </div>
-
-        <!-- Feature 5 -->
-        <div class="why-card">
-          <div class="why-icon-wrap">
-            <i class="ri-leaf-line"></i>
-          </div>
-          <h3 class="why-card-title">Skin-Friendly Materials</h3>
-          <p class="why-card-desc">
-            Silky-soft organic cotton-like fibers that deliver featherlight softness to soothe sensitive newborn skin.
-          </p>
-        </div>
-
-        <!-- Feature 6 -->
-        <div class="why-card">
-          <div class="why-icon-wrap">
-            <i class="ri-quill-pen-line"></i>
-          </div>
-          <h3 class="why-card-title">Thoughtfully Designed</h3>
-          <p class="why-card-desc">
-            Wetness indicators and modern visual accents to help new parents manage diapering transitions with ease.
-          </p>
-        </div>
-
+        <?php endforeach; ?>
       </div>
 
     </div>
@@ -219,22 +266,25 @@
     </div>
   </section>
 
+  <?php $phil = getAboutSectionData('philosophy', $aboutSections, $fallbackAbout); ?>
   <!-- 6. LAYERED PHILOSOPHY SECTION -->
   <section class="philosophy-layered-section">
     <div class="philosophy-grid">
       
       <!-- Left Column: Storytelling quote -->
       <div class="philosophy-left">
-        <span class="philosophy-quote-label">Our Philosophy</span>
+        <span class="philosophy-quote-label"><?= htmlspecialchars($phil['section_subtitle']) ?></span>
         <h2 class="philosophy-huge-text">
-          "We believe parenting should feel softer, calmer, and more thoughtful — one comfortable moment at a time."
+          <?= strip_tags($phil['section_title'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
         </h2>
       </div>
 
       <!-- Right Column: Parallax Image visual -->
-      <div class="philosophy-right-visual">
-        <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=1000&auto=format&fit=crop&q=80" alt="CloudCush Baby and Parent Lifestyle" loading="lazy">
-      </div>
+      <?php if (!empty($phil['image_url'])): ?>
+        <div class="philosophy-right-visual">
+          <img src="<?= htmlspecialchars(resolveAssetUrl($phil['image_url'])) ?>" alt="CloudCush Baby and Parent Lifestyle" loading="lazy">
+        </div>
+      <?php endif; ?>
 
     </div>
   </section>
@@ -253,195 +303,108 @@
       <!-- Carousel Viewport -->
       <div class="mom-carousel-viewport" id="momCarouselViewport">
         <div class="mom-carousel-track" id="momCarouselTrack">
-
-          <!-- Card 1: Video Testimonial -->
-          <div class="mom-card mom-card-video" data-index="0">
-            <div class="mom-media-wrap">
-              <video class="mom-video" autoplay loop muted playsinline loading="lazy">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-mother-holding-her-baby-cuddled-in-a-white-blanket-41487-large.mp4" type="video/mp4">
-              </video>
-              <div class="mom-media-overlay"></div>
-            </div>
-            <div class="mom-card-content">
-              <div class="mom-rating">
-                <span class="mom-stars">★★★★★</span>
-              </div>
-              <p class="mom-quote">"The softest diaper ever! My baby slept 12 hours straight without leaks."</p>
-              <div class="mom-author">
-                <span class="mom-name">Aanya S.</span>
-                <span class="mom-role">Verified Parent • Bengaluru • AirSoft Diaper</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 2: Image Testimonial -->
-          <div class="mom-card mom-card-image" data-index="1">
-            <div class="mom-media-wrap">
-              <img src="https://images.unsplash.com/photo-1660757731651-4be68ea4c9d1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzh8fHJldmlldyUyMHBhcmVudHN8ZW58MHwxfDB8fHww" alt="Priya and Baby" class="mom-img" loading="lazy">
-              <div class="mom-media-overlay"></div>
-            </div>
-            <div class="mom-card-content">
-              <div class="mom-rating">
-                <span class="mom-stars">★★★★★</span>
-              </div>
-              <p class="mom-quote">"Unbelievably gentle on sensitive skin. Zero redness or diaper rash since switching."</p>
-              <div class="mom-author">
-                <span class="mom-name">Priya M.</span>
-                <span class="mom-role">Verified Mom • Jaipur • GentleCare Diapers</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 3: Text-Only Testimonial -->
-          <div class="mom-card mom-card-text" data-index="2">
-            <div class="mom-card-content">
-              <div class="mom-quote-icon">“</div>
-              <div class="mom-rating">
-                <span class="mom-stars">★★★★★</span>
-              </div>
-              <p class="mom-quote">"I was skeptical about the subscription but it's so convenient. Never having to run to the store at midnight is a lifesaver."</p>
-              <div class="mom-author">
-                <span class="mom-name">Aarav G.</span>
-                <span class="mom-role">Verified Dad • Delhi • AirSoft Diaper Subscription</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 4: Video Testimonial -->
-          <div class="mom-card mom-card-video" data-index="3">
-            <div class="mom-media-wrap">
-              <video class="mom-video" autoplay loop muted playsinline loading="lazy">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-newborn-baby-yawning-41481-large.mp4" type="video/mp4">
-              </video>
-              <div class="mom-media-overlay"></div>
-            </div>
-            <div class="mom-card-content">
-              <div class="mom-rating">
-                <span class="mom-stars">★★★★★</span>
-              </div>
-              <p class="mom-quote">"The flexible fit is real. Keeps my active baby comfortable all day long."</p>
-              <div class="mom-author">
-                <span class="mom-name">Meera K.</span>
-                <span class="mom-role">Verified Mom • Pune • FlexFit Active</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 5: Image Testimonial -->
-          <div class="mom-card mom-card-image" data-index="4">
-            <div class="mom-media-wrap">
-              <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80" alt="Nursery Room" class="mom-img" loading="lazy">
-              <div class="mom-media-overlay"></div>
-            </div>
-            <div class="mom-card-content">
-              <div class="mom-rating">
-                <span class="mom-stars">★★★★★</span>
-              </div>
-              <p class="mom-quote">"Super soft, dry, and extremely breathable. Complete peace of mind for overnight sleep."</p>
-              <div class="mom-author">
-                <span class="mom-name">Kavya R.</span>
-                <span class="mom-role">Verified Parent • Kota • Overnight+ Diapers</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Card 6: Text-Only Testimonial -->
-          <div class="mom-card mom-card-text" data-index="5">
-            <div class="mom-card-content">
-              <div class="mom-quote-icon">“</div>
-              <div class="mom-rating">
-                <span class="mom-stars">★★★★★</span>
-              </div>
-              <p class="mom-quote">"CloudCush's customer support is amazing. They helped me adjust my diaper sizes seamlessly."</p>
-              <div class="mom-author">
-                <span class="mom-name">Neha V.</span>
-                <span class="mom-role">Verified Mom • Ahmedabad • Customer Care</span>
-              </div>
-            </div>
-          </div>
-
+          <?php 
+          $idx = 0;
+          foreach ($activeReviews as $rev): 
+              $mediaTypeClass = 'mom-card-' . $rev['media_type'];
+          ?>
+              <?php if ($rev['media_type'] === 'video'): ?>
+                  <!-- Video Testimonial -->
+                  <div class="mom-card <?= $mediaTypeClass ?>" data-index="<?= $idx ?>">
+                      <div class="mom-media-wrap">
+                          <video class="mom-video" autoplay loop muted playsinline loading="lazy">
+                              <source src="<?= htmlspecialchars(resolveAssetUrl($rev['media_url'])) ?>" type="video/mp4">
+                          </video>
+                          <div class="mom-media-overlay"></div>
+                      </div>
+                      <div class="mom-card-content">
+                          <div class="mom-rating">
+                              <span class="mom-stars"><?= str_repeat('★', $rev['rating']) ?></span>
+                          </div>
+                          <p class="mom-quote">"<?= strip_tags($rev['quote'], '<strong><b><i><em><u><br>') ?>"</p>
+                          <div class="mom-author">
+                              <span class="mom-name"><?= htmlspecialchars($rev['name']) ?></span>
+                              <span class="mom-role"><?= htmlspecialchars($rev['role'] ?? '') ?></span>
+                          </div>
+                      </div>
+                  </div>
+              <?php elseif ($rev['media_type'] === 'image'): ?>
+                  <!-- Image Testimonial -->
+                  <div class="mom-card <?= $mediaTypeClass ?>" data-index="<?= $idx ?>">
+                      <div class="mom-media-wrap">
+                          <img src="<?= htmlspecialchars(resolveAssetUrl($rev['media_url'])) ?>" alt="<?= htmlspecialchars($rev['name']) ?>" class="mom-img" loading="lazy">
+                          <div class="mom-media-overlay"></div>
+                      </div>
+                      <div class="mom-card-content">
+                          <div class="mom-rating">
+                              <span class="mom-stars"><?= str_repeat('★', $rev['rating']) ?></span>
+                          </div>
+                          <p class="mom-quote">"<?= strip_tags($rev['quote'], '<strong><b><i><em><u><br>') ?>"</p>
+                          <div class="mom-author">
+                              <span class="mom-name"><?= htmlspecialchars($rev['name']) ?></span>
+                              <span class="mom-role"><?= htmlspecialchars($rev['role'] ?? '') ?></span>
+                          </div>
+                      </div>
+                  </div>
+              <?php else: ?>
+                  <!-- Text-Only Testimonial -->
+                  <div class="mom-card <?= $mediaTypeClass ?>" data-index="<?= $idx ?>">
+                      <div class="mom-card-content">
+                          <div class="mom-quote-icon">“</div>
+                          <div class="mom-rating">
+                              <span class="mom-stars"><?= str_repeat('★', $rev['rating']) ?></span>
+                          </div>
+                          <p class="mom-quote">"<?= strip_tags($rev['quote'], '<strong><b><i><em><u><br>') ?>"</p>
+                          <div class="mom-author">
+                              <span class="mom-name"><?= htmlspecialchars($rev['name']) ?></span>
+                              <span class="mom-role"><?= htmlspecialchars($rev['role'] ?? '') ?></span>
+                          </div>
+                      </div>
+                  </div>
+              <?php endif; ?>
+          <?php 
+              $idx++;
+          endforeach; 
+          ?>
         </div>
       </div>
-
     </div>
   </section>
+
 
   <!-- 8. FAQ SECTION -->
   <section class="faq-section">
     <div class="container">
       
+      <?php $faqHeader = getAboutSectionData('about_faq_header', $aboutSections, $fallbackAbout); ?>
       <div class="faq-header">
-        <span class="faq-label">Got Questions?</span>
-        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <span class="faq-label"><?= htmlspecialchars($faqHeader['section_subtitle']) ?></span>
+        <h2 class="faq-title"><?= htmlspecialchars($faqHeader['section_title']) ?></h2>
       </div>
 
       <div class="faq-container">
         <div class="faq-accordion-group">
           
-          <!-- FAQ 1 -->
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span class="faq-question">Are CloudCush diapers safe for sensitive skin?</span>
-              <span class="faq-icon-box"><i class="ri-add-line"></i></span>
-            </button>
-            <div class="faq-panel">
-              <div class="faq-panel-inner">
-                Yes, absolutely. CloudCush diapers are crafted using certified elemental chlorine-free (TCF), hypoallergenic, and dermatologically tested materials. They contain no chemical fragrances, parabens, or latex, making them ideal for even the most sensitive newborn skin.
+          <?php 
+          $faqIndex = 1;
+          foreach ($activeFaqs as $faq): 
+          ?>
+            <!-- FAQ <?= $faqIndex ?> -->
+            <div class="faq-item">
+              <button class="faq-trigger" aria-expanded="false">
+                <span class="faq-question"><?= htmlspecialchars($faq['question']) ?></span>
+                <span class="faq-icon-box"><i class="ri-add-line"></i></span>
+              </button>
+              <div class="faq-panel">
+                <div class="faq-panel-inner">
+                  <?= strip_tags($faq['answer'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
+                </div>
               </div>
             </div>
-          </div>
-
-          <!-- FAQ 2 -->
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span class="faq-question">How long does overnight protection last?</span>
-              <span class="faq-icon-box"><i class="ri-add-line"></i></span>
-            </button>
-            <div class="faq-panel">
-              <div class="faq-panel-inner">
-                CloudCush diapers feature an advanced quick-dry core that locks in moisture instantly and provides up to 12 hours of continuous dryness. This ensures your baby remains comfortable and dry throughout the night, reducing sleep interruptions.
-              </div>
-            </div>
-          </div>
-
-          <!-- FAQ 3 -->
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span class="faq-question">Which diaper is best for newborns?</span>
-              <span class="faq-icon-box"><i class="ri-add-line"></i></span>
-            </button>
-            <div class="faq-panel">
-              <div class="faq-panel-inner">
-                Our CloudCush TinyHug Newborn Diapers are specifically customized for babies weighing under 5 kg. They feature a soft umbilical cord cutout and a wetness indicator to help new parents know exactly when it’s time for a change.
-              </div>
-            </div>
-          </div>
-
-          <!-- FAQ 4 -->
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span class="faq-question">Are CloudCush diapers breathable?</span>
-              <span class="faq-icon-box"><i class="ri-add-line"></i></span>
-            </button>
-            <div class="faq-panel">
-              <div class="faq-panel-inner">
-                Yes. Our backsheet is designed with micro-pores that allow heat and humidity to escape while keeping wetness locked inside. This continuous airflow prevents diaper sweat and helps keep skin rash-free.
-              </div>
-            </div>
-          </div>
-
-          <!-- FAQ 5 -->
-          <div class="faq-item">
-            <button class="faq-trigger" aria-expanded="false">
-              <span class="faq-question">Do you deliver across India?</span>
-              <span class="faq-icon-box"><i class="ri-add-line"></i></span>
-            </button>
-            <div class="faq-panel">
-              <div class="faq-panel-inner">
-                Yes, we offer free shipping on all orders and subscriptions to major cities and towns across India. Standard delivery typically takes 3 to 5 business days.
-              </div>
-            </div>
-          </div>
+          <?php 
+              $faqIndex++;
+          endforeach; 
+          ?>
 
         </div>
       </div>
@@ -449,18 +412,23 @@
     </div>
   </section>
 
+  <?php $cta = getAboutSectionData('cta', $aboutSections, $fallbackAbout); ?>
   <!-- 9. FINAL CTA SECTION -->
   <section class="about-cta-section">
     <div class="about-cta-bg"></div>
     <div class="about-cta-overlay"></div>
     <div class="about-cta-content">
-      <h2 class="about-cta-title">Made for Better Baby Days.</h2>
-      <p class="about-cta-desc">
-        Experience the softest, safest diapering comfort designed for modern urban families.
-      </p>
+      <h2 class="about-cta-title"><?= htmlspecialchars($cta['section_title']) ?></h2>
+      <div class="about-cta-desc">
+        <?= strip_tags($cta['content'], '<strong><b><i><em><u><br><p><ul><li><a>') ?>
+      </div>
       <div class="about-cta-actions">
-        <a href="javascript:void(0);" class="btn-pill btn-pill-primary">Shop Collection</a>
-        <a href="javascript:void(0);" class="btn-pill">Explore Diaper Guide</a>
+        <?php if (!empty($cta['btn_text_1'])): ?>
+          <a href="<?= htmlspecialchars($cta['btn_url_1']) ?>" class="btn-pill btn-pill-primary"><?= htmlspecialchars($cta['btn_text_1']) ?></a>
+        <?php endif; ?>
+        <?php if (!empty($cta['btn_text_2'])): ?>
+          <a href="<?= htmlspecialchars($cta['btn_url_2']) ?>" class="btn-pill"><?= htmlspecialchars($cta['btn_text_2']) ?></a>
+        <?php endif; ?>
       </div>
     </div>
   </section>

@@ -1,4 +1,39 @@
-<?php include 'includes/head.php'; ?>
+<?php
+// Establish database connection and load helper
+require_once __DIR__ . '/admin/config/database.php';
+require_once __DIR__ . '/admin/config/blogs-helper.php';
+
+$search   = trim($_GET['search']   ?? '');
+$category = trim($_GET['category'] ?? '');
+$curPage  = max(1, (int)($_GET['page'] ?? 1));
+$perPage  = 7; // Max items per page in grid
+
+// We only want published articles for the frontend
+$result = getBlogs([
+    'search'   => $search,
+    'category' => $category,
+    'status'   => 'active',
+    'page'     => $curPage,
+    'per_page' => $perPage
+]);
+
+$blogs      = $result['data'];
+$totalPages = $result['total_pages'];
+$totalCount = $result['total'];
+
+// Extract the first article as featured if we are on the first page and not filtering
+$featuredBlog = null;
+$gridBlogs    = $blogs;
+
+if ($curPage === 1 && empty($search) && empty($category) && !empty($blogs)) {
+    $featuredBlog = array_shift($gridBlogs);
+}
+
+// Fetch all available categories for the filtering tabs
+$allCategories = getBlogCategories();
+
+include 'includes/head.php';
+?>
 
 <?php include 'includes/header.php'; ?>
 
@@ -28,48 +63,88 @@
     </div>
   </div>
 
-  <!-- 3. FEATURED STORY SECTION -->
-  <section class="blog-featured-section">
+  <!-- Search & Category Filters -->
+  <section class="blog-filters-section" style="margin-top: 3.5rem;">
     <div class="container">
-      <div class="blog-featured-layout">
+      <!-- Search Form -->
+      <form action="" method="GET" class="blog-search-bar">
+        <i class="ri-search-line blog-search-icon"></i>
+        <input type="text" name="search" class="blog-search-input" 
+               placeholder="Search articles, topics, keywords..." 
+               value="<?= htmlspecialchars($search) ?>">
+        <?php if ($category): ?>
+          <input type="hidden" name="category" value="<?= htmlspecialchars($category) ?>">
+        <?php endif; ?>
+      </form>
 
-        <!-- Large Editorial Image Wrap -->
-        <div class="blog-featured-img-wrap">
-          <img class="blog-featured-img" src="https://images.unsplash.com/photo-1519689680058-324335c77eba?w=1200&auto=format&fit=crop&q=80" alt="The Science of Touch" loading="lazy">
-          <div class="blog-featured-img-overlay"></div>
-          <span class="blog-featured-badge">Featured Article</span>
-        </div>
-
-        <!-- Overlapping Content Block -->
-        <div class="blog-featured-content">
-          <div class="blog-featured-meta">
-            <span class="blog-post-tag">Pediatric Care</span>
-            <span class="blog-post-dot">•</span>
-            <span class="blog-post-read">5 Min Read</span>
-          </div>
-          <h2 class="blog-featured-title">
-            <a href="blog-details.php">The Science of Touch: Skin Integrity in the Newborn Phase</a>
-          </h2>
-          <p class="blog-featured-desc">
-            How physical touch, cotton-like softness, and totally chlorine-free materials interact to shape early developmental pathways and prevent diaper rashes.
-          </p>
-          <div class="blog-featured-author">
-            <div class="author-avatar-wrap">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80" alt="Dr. Sarah Varma">
-            </div>
-            <div class="author-info">
-              <span class="author-name">Dr. Sarah Varma</span>
-              <span class="author-role">Pediatric Dermatologist</span>
-            </div>
-          </div>
-          <a href="blog-details.php" class="btn-text-arrow">
-            Read Editorial <i class="ri-arrow-right-line"></i>
+      <!-- Category Tabs -->
+      <div class="blog-categories-tabs">
+        <a href="blog.php<?= $search ? '?search=' . urlencode($search) : '' ?>" 
+           class="blog-category-btn <?= empty($category) ? 'active' : '' ?>">
+           All Stories
+        </a>
+        <?php foreach ($allCategories as $cat): ?>
+          <a href="blog.php?category=<?= urlencode($cat) ?><?= $search ? '&search=' . urlencode($search) : '' ?>" 
+             class="blog-category-btn <?= $category === $cat ? 'active' : '' ?>">
+             <?= htmlspecialchars($cat) ?>
           </a>
-        </div>
-
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
+
+  <!-- 3. FEATURED STORY SECTION -->
+  <?php if ($featuredBlog): ?>
+    <section class="blog-featured-section">
+      <div class="container">
+        <div class="blog-featured-layout">
+
+          <!-- Large Editorial Image Wrap -->
+          <div class="blog-featured-img-wrap">
+            <?php if ($featuredBlog['thumbnail']): ?>
+              <img class="blog-featured-img" src="<?= htmlspecialchars(resolveAssetUrl($featuredBlog['thumbnail'])) ?>" alt="<?= htmlspecialchars($featuredBlog['title']) ?>" loading="lazy">
+            <?php else: ?>
+              <div class="d-flex align-items-center justify-content-center bg-light w-100 h-100" style="min-height: 400px; color: #94a3b8;">
+                <i class="ri-image-line" style="font-size: 3rem;"></i>
+              </div>
+            <?php endif; ?>
+            <div class="blog-featured-img-overlay"></div>
+            <span class="blog-featured-badge">Featured Article</span>
+          </div>
+
+          <!-- Overlapping Content Block -->
+          <div class="blog-featured-content">
+            <div class="blog-featured-meta">
+              <span class="blog-post-tag"><?= htmlspecialchars($featuredBlog['category']) ?></span>
+              <span class="blog-post-dot">•</span>
+              <span class="blog-post-read"><?= (int)$featuredBlog['read_time'] ?> Min Read</span>
+            </div>
+            <h2 class="blog-featured-title">
+              <a href="blog-details.php?slug=<?= urlencode($featuredBlog['slug']) ?>"><?= htmlspecialchars($featuredBlog['title']) ?></a>
+            </h2>
+            <p class="blog-featured-desc">
+              <?= htmlspecialchars($featuredBlog['short_description'] ?: substr(strip_tags($featuredBlog['content']), 0, 180) . '...') ?>
+            </p>
+            <div class="blog-featured-author">
+              <div class="author-avatar-wrap">
+                <span class="d-flex align-items-center justify-content-center bg-secondary text-white fw-bold rounded-circle" style="width: 40px; height: 40px; font-size: 1.1rem; font-family: var(--font-heading);">
+                  <?= strtoupper(substr($featuredBlog['author_name'] ?? 'C', 0, 1)) ?>
+                </span>
+              </div>
+              <div class="author-info">
+                <span class="author-name"><?= htmlspecialchars($featuredBlog['author_name'] ?? 'CloudCush Editorial') ?></span>
+                <span class="author-role"><?= htmlspecialchars($featuredBlog['author_role'] ?? 'Contributor') ?></span>
+              </div>
+            </div>
+            <a href="blog-details.php?slug=<?= urlencode($featuredBlog['slug']) ?>" class="btn-text-arrow">
+              Read Editorial <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  <?php endif; ?>
 
   <!-- 4. CREATIVE EDITORIAL GRID -->
   <section class="blog-grid-section">
@@ -80,106 +155,121 @@
         <h2 class="blog-grid-title">Insights for Modern Parenting</h2>
       </div>
 
-      <div class="blog-creative-grid">
-
-        <!-- Card 1: Standard Card -->
-        <article class="blog-card">
-          <a href="blog-details.php" class="blog-card-link-wrapper">
-            <div class="blog-card-img-wrap">
-              <img class="blog-card-img" src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80" alt="Cozy Sleep Routines" loading="lazy">
-              <div class="blog-card-overlay">
-                <span class="blog-card-btn-pill">Read Story</span>
+      <?php if (empty($gridBlogs) && !$featuredBlog): ?>
+        <!-- Empty State -->
+        <div class="blog-empty-state">
+          <i class="ri-book-open-line blog-empty-icon"></i>
+          <h3 class="blog-empty-title">No Articles Found</h3>
+          <p class="blog-empty-desc">
+            We couldn't find any articles matching your search criteria. Try selecting another category or clear filters.
+          </p>
+          <a href="blog.php" class="blog-category-btn active" style="margin-top: 15px; display: inline-block;">Clear Filters</a>
+        </div>
+      <?php else: ?>
+        <div class="blog-creative-grid">
+          <?php 
+          $itemIndex = 0;
+          foreach ($gridBlogs as $b): 
+              // Inject the stylish typographic quote at the 2nd slot (index 1) to match original layout
+              if ($itemIndex === 1):
+          ?>
+            <article class="blog-card card-typographic">
+              <div class="blog-card-content">
+                <div class="quote-icon"><i class="ri-double-quotes-l"></i></div>
+                <p class="quote-text">
+                  "Parenthood is not about perfection. It is about presence, softness, and creating safe, rash-free spaces for baby's natural milestones."
+                </p>
+                <div class="quote-author-wrap">
+                  <span class="quote-author-name">Anjali Verma</span>
+                  <span class="quote-author-role">Childhood Development Consultant</span>
+                </div>
+                <span class="quote-card-tag">Philosophy</span>
               </div>
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-tag">Sleep Guides</span>
-                <span class="blog-card-dot">•</span>
-                <span class="blog-card-read">4 Min Read</span>
-              </div>
-              <h3 class="blog-card-title">Cozy Sleep: Structuring Your Baby's Night Routine</h3>
-              <p class="blog-card-desc">
-                From room temperature to calming sensory cues, explore our dermatologically safe evening wind-down rituals.
-              </p>
-            </div>
-          </a>
-        </article>
+            </article>
+          <?php 
+              endif; 
+          ?>
 
-        <!-- Card 2: Typographic Quote Block (No Image) -->
-        <article class="blog-card card-typographic">
-          <div class="blog-card-content">
-            <div class="quote-icon"><i class="ri-double-quotes-l"></i></div>
-            <p class="quote-text">
-              "Parenthood is not about perfection. It is about presence, softness, and creating safe, rash-free spaces for baby's natural milestones."
-            </p>
-            <div class="quote-author-wrap">
-              <span class="quote-author-name">Anjali Verma</span>
-              <span class="quote-author-role">Childhood Development Consultant</span>
-            </div>
-            <span class="quote-card-tag">Philosophy</span>
+            <!-- Blog Card -->
+            <article class="blog-card">
+              <a href="blog-details.php?slug=<?= urlencode($b['slug']) ?>" class="blog-card-link-wrapper">
+                <div class="blog-card-img-wrap">
+                  <?php if ($b['thumbnail']): ?>
+                    <img class="blog-card-img" src="<?= htmlspecialchars(resolveAssetUrl($b['thumbnail'])) ?>" alt="<?= htmlspecialchars($b['title']) ?>" loading="lazy">
+                  <?php else: ?>
+                    <div class="d-flex align-items-center justify-content-center bg-light w-100 h-100" style="min-height: 240px; color: #cbd5e1;">
+                      <i class="ri-image-line" style="font-size: 2.5rem;"></i>
+                    </div>
+                  <?php endif; ?>
+                  <div class="blog-card-overlay">
+                    <span class="blog-card-btn-pill">Read Story</span>
+                  </div>
+                </div>
+                <div class="blog-card-content">
+                  <div class="blog-card-meta">
+                    <span class="blog-card-tag"><?= htmlspecialchars($b['category']) ?></span>
+                    <span class="blog-card-dot">•</span>
+                    <span class="blog-card-read"><?= (int)$b['read_time'] ?> Min Read</span>
+                  </div>
+                  <h3 class="blog-card-title"><?= htmlspecialchars($b['title']) ?></h3>
+                  <p class="blog-card-desc">
+                    <?= htmlspecialchars($b['short_description'] ?: substr(strip_tags($b['content']), 0, 120) . '...') ?>
+                  </p>
+                </div>
+              </a>
+            </article>
+
+          <?php 
+              $itemIndex++;
+          endforeach;
+
+          // If the grid had only 1 item, append the typographic quote card at the end so it's always visible
+          if ($itemIndex === 1):
+          ?>
+            <article class="blog-card card-typographic">
+              <div class="blog-card-content">
+                <div class="quote-icon"><i class="ri-double-quotes-l"></i></div>
+                <p class="quote-text">
+                  "Parenthood is not about perfection. It is about presence, softness, and creating safe, rash-free spaces for baby's natural milestones."
+                </p>
+                <div class="quote-author-wrap">
+                  <span class="quote-author-name">Anjali Verma</span>
+                  <span class="quote-author-role">Childhood Development Consultant</span>
+                </div>
+                <span class="quote-card-tag">Philosophy</span>
+              </div>
+            </article>
+          <?php endif; ?>
+        </div>
+
+        <!-- Pagination -->
+        <?php if ($totalPages > 1): ?>
+          <?php
+          $baseUrl = "blog.php?search=" . urlencode($search) . "&category=" . urlencode($category);
+          ?>
+          <div class="pagination">
+            <a href="<?= $baseUrl ?>&page=<?= max(1, $curPage - 1) ?>" 
+               class="pagination-btn <?= $curPage <= 1 ? 'disabled' : '' ?>" 
+               aria-label="Previous Page" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+              <i class="ri-arrow-left-s-line"></i>
+            </a>
+
+            <?php for ($pNum = 1; $pNum <= $totalPages; $pNum++): ?>
+              <a href="<?= $baseUrl ?>&page=<?= $pNum ?>" 
+                 class="pagination-btn <?= $pNum === $curPage ? 'active' : '' ?>" 
+                 style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                <?= $pNum ?>
+              </a>
+            <?php endfor; ?>
+
+            <a href="<?= $baseUrl ?>&page=<?= min($totalPages, $curPage + 1) ?>" 
+               class="pagination-btn <?= $curPage >= $totalPages ? 'disabled' : '' ?>" 
+               aria-label="Next Page" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+              <i class="ri-arrow-right-s-line"></i>
+            </a>
           </div>
-        </article>
-
-        <!-- Card 3: Standard Card -->
-        <article class="blog-card">
-          <a href="blog-details.php" class="blog-card-link-wrapper">
-            <div class="blog-card-img-wrap">
-              <img class="blog-card-img" src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&auto=format&fit=crop&q=80" alt="Tackling Diaper Rash" loading="lazy">
-              <div class="blog-card-overlay">
-                <span class="blog-card-btn-pill">Read Article</span>
-              </div>
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-tag">Care Tips</span>
-                <span class="blog-card-dot">•</span>
-                <span class="blog-card-read">5 Min Read</span>
-              </div>
-              <h3 class="blog-card-title">Tackling Diaper Rash: A Modern Parent's Checklist</h3>
-              <p class="blog-card-desc">
-                Our simple dermatologist-backed guide to managing skin health during diaper changes and growth milestones.
-              </p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Card 4: Horizontal Card (Automatically styled as horizontal via CSS grid nth-child selector) -->
-        <article class="blog-card">
-          <a href="blog-details.php" class="blog-card-link-wrapper">
-            <div class="blog-card-img-wrap">
-              <img class="blog-card-img" src="https://images.unsplash.com/photo-1484981138541-3d074aa97716?w=600&auto=format&fit=crop&q=80" alt="TCF Wood Pulp" loading="lazy">
-              <div class="blog-card-overlay">
-                <span class="blog-card-btn-pill">Read Article</span>
-              </div>
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-tag">Product Insights</span>
-                <span class="blog-card-dot">•</span>
-                <span class="blog-card-read">6 Min Read</span>
-              </div>
-              <h3 class="blog-card-title">The Totally Chlorine-Free (TCF) Difference</h3>
-              <p class="blog-card-desc">
-                Why we rejected conventional bleach methods to protect delicate skin barriers and promote environmental health.
-              </p>
-            </div>
-          </a>
-        </article>
-      </div>
-
-      <!-- Pagination -->
-      <div class="pagination">
-        <button class="pagination-btn" disabled aria-label="Previous Page">
-          <i class="ri-arrow-left-s-line"></i>
-        </button>
-        <button class="pagination-btn active">1</button>
-        <button class="pagination-btn">2</button>
-        <button class="pagination-btn">3</button>
-        <span class="pagination-dots">...</span>
-        <button class="pagination-btn" aria-label="Next Page">
-          <i class="ri-arrow-right-s-line"></i>
-        </button>
-      </div>
+        <?php endif; ?>
+      <?php endif; ?>
 
     </div>
   </section>

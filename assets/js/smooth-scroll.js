@@ -17,14 +17,18 @@ window.initSmoothScroll = () => {
   // Lenis's smoothed position, causing scrub animations to stutter or freeze.
   lenis.on('scroll', ScrollTrigger.update);
 
-  // Tick Lenis inside GSAP's RAF loop for perfect sync
+  // Tick Lenis inside GSAP's RAF loop for perfect sync.
+  // Using time * 1000 converts GSAP's seconds-based ticker to milliseconds
+  // which is what Lenis.raf() expects.
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
 
-  // Disable GSAP's own lag smoothing — Lenis handles this
+  // Disable GSAP's own lag smoothing — Lenis handles timing exclusively.
+  // Keeping both active causes double-smoothing and jitter.
   gsap.ticker.lagSmoothing(0);
 
-  // Expose Lenis globally
+  // Expose Lenis globally so other modules (main.js, animations.js) can
+  // call lenis.scrollTo() for programmatic scrolling.
   window.lenis = lenis;
 };

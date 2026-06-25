@@ -1,0 +1,30 @@
+# Disable directory listing
+Options -Indexes
+
+# Enable Rewrite Engine
+RewriteEngine On
+
+# 1. External Redirect: Redirect direct GET requests for *.php to clean URL (without .php)
+RewriteCond %{REQUEST_METHOD} GET
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Exclude existing directories and files from internal rewriting
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# 2. Internal Rewrite: Map extensionless URL to .php file if it exists
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# Prevent access to system and configuration files directly
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "\.(sql|json|yaml|md|txt)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

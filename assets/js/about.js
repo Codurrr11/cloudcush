@@ -96,6 +96,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 2.5 BRAND VISION SECTION ANIMATIONS
+  gsap.fromTo('.about-vision-content',
+    { opacity: 0, y: 45 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1.0,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.about-vision-section',
+        start: 'top 80%',
+        once: true
+      }
+    }
+  );
+
+  gsap.fromTo('.about-vision-visual',
+    { opacity: 0, scale: 0.95 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.about-vision-section',
+        start: 'top 80%',
+        once: true
+      }
+    }
+  );
+
   // 3. WHY CHOOSE CARDS STAGGER
   gsap.fromTo('.why-card',
     { opacity: 0, y: 40 },
@@ -185,5 +216,46 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   );
+
+  // 7. READ MORE TOGGLE & VISIBILITY DETECTOR
+  const readMoreBtns = document.querySelectorAll('.story-read-more-btn');
+  
+  const adjustReadMoreVisibility = () => {
+    const cards = document.querySelectorAll('.story-card');
+    cards.forEach(card => {
+      const desc = card.querySelector('.story-card-desc');
+      const btn = card.querySelector('.story-read-more-btn');
+      if (desc && btn) {
+        // Only run check if not currently expanded
+        if (!card.classList.contains('expanded')) {
+          if (desc.textContent.trim().length > 160) {
+            btn.style.display = 'inline-block';
+          } else {
+            btn.style.display = 'none';
+          }
+        }
+      }
+    });
+  };
+
+  readMoreBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.story-card');
+      if (card) {
+        const isExpanded = card.classList.toggle('expanded');
+        btn.textContent = isExpanded ? 'Read Less' : 'Read More';
+        btn.setAttribute('aria-expanded', isExpanded);
+        
+        // Refresh ScrollTrigger so that container widths/heights and pinning calculations update immediately
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+      }
+    });
+  });
+
+  // Run on load and on window resize to dynamically show/hide buttons
+  setTimeout(adjustReadMoreVisibility, 100); // slight timeout to ensure fonts/layouts are fully computed
+  window.addEventListener('resize', adjustReadMoreVisibility);
 });
 

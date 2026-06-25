@@ -19,7 +19,7 @@ window.initNavbar = () => {
     if (backdrop) backdrop.classList.remove("is-active");
     if (window.lenis) window.lenis.start();
     document.body.style.overflow = "";
-    
+
     // Collapse all open submenus when panel closes
     mobileMenu
       .querySelectorAll(".mobile-submenu.is-active")
@@ -117,76 +117,6 @@ window.initNavbar = () => {
       }
     });
   });
-
-  // --- DESKTOP SHOP MEGA MENU LOGIC ---
-  const navShopAll = document.getElementById("navShopAll");
-  const megaMenu = document.getElementById("megaMenu");
-
-  if (navShopAll && megaMenu) {
-    let closeTimeout;
-
-    const openMenu = () => {
-      clearTimeout(closeTimeout);
-      navShopAll.classList.add("is-active");
-
-      // Prevent overlapping GSAP tweens
-      gsap.killTweensOf(megaMenu);
-      megaMenu.style.display = "block";
-
-      // Animate panel reveal (Apple-style smooth ease)
-      gsap.fromTo(
-        megaMenu,
-        { opacity: 0, y: -15, scale: 0.98 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" },
-      );
-
-      // Stagger column content reveals slightly
-      const cols = megaMenu.querySelectorAll(
-        ".mega-menu-col, .mega-menu-bottom-link, .mega-card",
-      );
-      gsap.fromTo(
-        cols,
-        { opacity: 0, y: 12 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.35,
-          stagger: 0.03,
-          ease: "power2.out",
-          delay: 0.05,
-        },
-      );
-    };
-
-    const closeMenu = () => {
-      gsap.killTweensOf(megaMenu);
-      gsap.to(megaMenu, {
-        opacity: 0,
-        y: -10,
-        scale: 0.98,
-        duration: 0.3,
-        ease: "power2.in",
-        onComplete: () => {
-          megaMenu.style.display = "none";
-          navShopAll.classList.remove("is-active");
-        },
-      });
-    };
-
-    // Desktop hover bindings with hover intent delay
-    navShopAll.addEventListener("mouseenter", openMenu);
-    navShopAll.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(closeMenu, 150);
-    });
-
-    megaMenu.addEventListener("mouseenter", () => {
-      clearTimeout(closeTimeout);
-    });
-
-    megaMenu.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(closeMenu, 150);
-    });
-  }
 
   // Header Scroll compression triggers
   const header = document.querySelector(".site-header");

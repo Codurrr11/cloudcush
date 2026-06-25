@@ -1,0 +1,28 @@
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Local Environment & Server Configs
+.env
+.env.local
+.env.*.local
+*.log
+
+# Web Server & Cache
+error_log
+access_log
+.htaccess.backup
+
+# User Uploaded Assets (Ignore custom admin uploads, keeping directory structure)
+admin/assets/uploads/*
+!admin/assets/uploads/.gitkeep

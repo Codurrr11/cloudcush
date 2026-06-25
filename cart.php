@@ -58,11 +58,6 @@
               <span class="summary-value" id="cartSubtotal">₹0</span>
             </div>
 
-            <div class="summary-row">
-              <span class="summary-label">Estimated Shipping</span>
-              <span class="summary-value" id="cartShipping">Calculated next</span>
-            </div>
-
             <div class="summary-row discount-row" id="cartDiscountRow" style="display: none;">
               <span class="summary-label">Promo Discount</span>
               <span class="summary-value" id="cartDiscount">-₹0</span>
